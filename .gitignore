@@ -1,0 +1,17 @@
+# Python environment and cache
+/.venv/
+__pycache__/
+*.py[cod]
+/.env
+
+# Course dataset
+/测试数据loc-gowalla_totalCheckins.txt.gz
+/测试数据loc-gowalla_totalCheckins.txt/
+/loc-gowalla_totalCheckins.txt.gz
+Gowalla_totalCheckins.txt
+
+# Local output and course submission files
+/课程提交/
+*.log
+output/clean.tsv
+output/course-build/

@@ -1,0 +1,3775 @@
+{
+  "timestamp_utc": "2026-11-19T14:20:20.712250+00:00",
+  "mongo_version": "7.0.48",
+  "quality": {
+    "input_sha256": "4e02ea12586a1bfb986b468d78672ab256bab5e25559aca2cc23e1ecb55df1ea",
+    "input_count": 6442892,
+    "clean_count": 6442127,
+    "reject_count": 765,
+    "reason_counts": {
+      "BAD_STRUCT": 0,
+      "BAD_ID": 0,
+      "BAD_TIME": 0,
+      "BAD_COORD": 29,
+      "ZERO_COORD": 135,
+      "DUPLICATE": 601
+    },
+    "conflicting_keys": 0,
+    "user_count": 107069,
+    "location_count": 1280938,
+    "first_ts_utc": "2009-02-04T05:17:38Z",
+    "last_ts_utc": "2010-10-23T05:22:06Z",
+    "input_file": "Gowalla_totalCheckins.txt",
+    "rule_version": "1.1",
+    "clean_sha256": "4ca7d444fcbbc3c1badac2688e7a8f6b7c62018ef8d5d49b67643a788cc641e3",
+    "elapsed_seconds": 188.047
+  },
+  "import": {
+    "processed": 6442127,
+    "inserted": 5252127,
+    "already_present": 1190000,
+    "write_seconds": 544.966,
+    "rows_per_second": 11821.2,
+    "write_workers": 4,
+    "index_seconds": 45.506,
+    "index_size_bytes": 631275520,
+    "shard_counts": {
+      "shard1": 3230580,
+      "shard2": 3211547
+    }
+  },
+  "distribution": {
+    "ns": "gowalla.checkins",
+    "shards": [
+      {
+        "shardName": "shard2",
+        "numOrphanedDocs": 0,
+        "numOwnedDocuments": 3211547,
+        "ownedSizeBytes": 391808734,
+        "orphanedSizeBytes": 0
+      },
+      {
+        "shardName": "shard1",
+        "numOrphanedDocs": 0,
+        "numOwnedDocuments": 3230580,
+        "ownedSizeBytes": 394130760,
+        "orphanedSizeBytes": 0
+      }
+    ]
+  },
+  "plans": {
+    "trajectory": {
+      "queryPlanner": {
+        "mongosPlannerVersion": 1,
+        "winningPlan": {
+          "stage": "SINGLE_SHARD",
+          "shards": [
+            {
+              "shardName": "shard1",
+              "connectionString": "shard1/shard1:27011",
+              "serverInfo": {
+                "host": "88a078d2d674",
+                "port": 27011,
+                "version": "7.0.48",
+                "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
+              },
+              "namespace": "gowalla.checkins",
+              "indexFilterSet": false,
+              "parsedQuery": {
+                "user_id": {
+                  "$eq": 0
+                }
+              },
+              "queryHash": "6584F86E",
+              "planCacheKey": "82DC5FA0",
+              "optimizationTimeMillis": 0,
+              "maxIndexedOrSolutionsReached": false,
+              "maxIndexedAndSolutionsReached": false,
+              "maxScansToExplodeReached": false,
+              "winningPlan": {
+                "stage": "LIMIT",
+                "limitAmount": 201,
+                "inputStage": {
+                  "stage": "FETCH",
+                  "inputStage": {
+                    "stage": "IXSCAN",
+                    "keyPattern": {
+                      "user_id": 1,
+                      "ts": -1,
+                      "_id": -1
+                    },
+                    "indexName": "trajectory",
+                    "isMultiKey": false,
+                    "multiKeyPaths": {
+                      "user_id": [],
+                      "ts": [],
+                      "_id": []
+                    },
+                    "isUnique": false,
+                    "isSparse": false,
+                    "isPartial": false,
+                    "indexVersion": 2,
+                    "direction": "forward",
+                    "indexBounds": {
+                      "user_id": [
+                        "[0, 0]"
+                      ],
+                      "ts": [
+                        "[MaxKey, MinKey]"
+                      ],
+                      "_id": [
+                        "[MaxKey, MinKey]"
+                      ]
+                    }
+                  }
+                }
+              },
+              "rejectedPlans": [
+                {
+                  "stage": "SORT",
+                  "sortPattern": {
+                    "ts": -1,
+                    "_id": -1
+                  },
+                  "memLimit": 104857600,
+                  "limitAmount": 201,
+                  "type": "simple",
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "filter": {
+                      "user_id": {
+                        "$eq": 0
+                      }
+                    },
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "keyPattern": {
+                        "user_id": "hashed"
+                      },
+                      "indexName": "user_id_hashed",
+                      "isMultiKey": false,
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "user_id": [
+                          "[4854801880128277513, 4854801880128277513]"
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "executionStats": {
+        "nReturned": 201,
+        "executionTimeMillis": 1,
+        "totalKeysExamined": 201,
+        "totalDocsExamined": 201,
+        "executionStages": {
+          "stage": "SINGLE_SHARD",
+          "nReturned": 201,
+          "executionTimeMillis": 1,
+          "totalKeysExamined": 201,
+          "totalDocsExamined": 201,
+          "totalChildMillis": 0,
+          "shards": [
+            {
+              "shardName": "shard1",
+              "executionSuccess": true,
+              "nReturned": 201,
+              "executionTimeMillis": 0,
+              "totalKeysExamined": 201,
+              "totalDocsExamined": 201,
+              "executionStages": {
+                "stage": "LIMIT",
+                "nReturned": 201,
+                "executionTimeMillisEstimate": 0,
+                "works": 202,
+                "advanced": 201,
+                "needTime": 0,
+                "needYield": 0,
+                "saveState": 0,
+                "restoreState": 0,
+                "isEOF": 1,
+                "limitAmount": 201,
+                "inputStage": {
+                  "stage": "FETCH",
+                  "nReturned": 201,
+                  "executionTimeMillisEstimate": 0,
+                  "works": 201,
+                  "advanced": 201,
+                  "needTime": 0,
+                  "needYield": 0,
+                  "saveState": 0,
+                  "restoreState": 0,
+                  "isEOF": 0,
+                  "docsExamined": 201,
+                  "alreadyHasObj": 0,
+                  "inputStage": {
+                    "stage": "IXSCAN",
+                    "nReturned": 201,
+                    "executionTimeMillisEstimate": 0,
+                    "works": 201,
+                    "advanced": 201,
+                    "needTime": 0,
+                    "needYield": 0,
+                    "saveState": 0,
+                    "restoreState": 0,
+                    "isEOF": 0,
+                    "keyPattern": {
+                      "user_id": 1,
+                      "ts": -1,
+                      "_id": -1
+                    },
+                    "indexName": "trajectory",
+                    "isMultiKey": false,
+                    "multiKeyPaths": {
+                      "user_id": [],
+                      "ts": [],
+                      "_id": []
+                    },
+                    "isUnique": false,
+                    "isSparse": false,
+                    "isPartial": false,
+                    "indexVersion": 2,
+                    "direction": "forward",
+                    "indexBounds": {
+                      "user_id": [
+                        "[0, 0]"
+                      ],
+                      "ts": [
+                        "[MaxKey, MinKey]"
+                      ],
+                      "_id": [
+                        "[MaxKey, MinKey]"
+                      ]
+                    },
+                    "keysExamined": 201,
+                    "seeks": 1,
+                    "dupsTested": 0,
+                    "dupsDropped": 0
+                  }
+                }
+              },
+              "allPlansExecution": [
+                {
+                  "nReturned": 101,
+                  "executionTimeMillisEstimate": 0,
+                  "totalKeysExamined": 101,
+                  "totalDocsExamined": 101,
+                  "score": 2.0002,
+                  "executionStages": {
+                    "stage": "LIMIT",
+                    "nReturned": 101,
+                    "executionTimeMillisEstimate": 0,
+                    "works": 101,
+                    "advanced": 101,
+                    "needTime": 0,
+                    "needYield": 0,
+                    "saveState": 0,
+                    "restoreState": 0,
+                    "isEOF": 0,
+                    "limitAmount": 201,
+                    "inputStage": {
+                      "stage": "FETCH",
+                      "nReturned": 101,
+                      "executionTimeMillisEstimate": 0,
+                      "works": 101,
+                      "advanced": 101,
+                      "needTime": 0,
+                      "needYield": 0,
+                      "saveState": 0,
+                      "restoreState": 0,
+                      "isEOF": 0,
+                      "docsExamined": 101,
+                      "alreadyHasObj": 0,
+                      "inputStage": {
+                        "stage": "IXSCAN",
+                        "nReturned": 101,
+                        "executionTimeMillisEstimate": 0,
+                        "works": 101,
+                        "advanced": 101,
+                        "needTime": 0,
+                        "needYield": 0,
+                        "saveState": 0,
+                        "restoreState": 0,
+                        "isEOF": 0,
+                        "keyPattern": {
+                          "user_id": 1,
+                          "ts": -1,
+                          "_id": -1
+                        },
+                        "indexName": "trajectory",
+                        "isMultiKey": false,
+                        "multiKeyPaths": {
+                          "user_id": [],
+                          "ts": [],
+                          "_id": []
+                        },
+                        "isUnique": false,
+                        "isSparse": false,
+                        "isPartial": false,
+                        "indexVersion": 2,
+                        "direction": "forward",
+                        "indexBounds": {
+                          "user_id": [
+                            "[0, 0]"
+                          ],
+                          "ts": [
+                            "[MaxKey, MinKey]"
+                          ],
+                          "_id": [
+                            "[MaxKey, MinKey]"
+                          ]
+                        },
+                        "keysExamined": 101,
+                        "seeks": 1,
+                        "dupsTested": 0,
+                        "dupsDropped": 0
+                      }
+                    }
+                  }
+                },
+                {
+                  "nReturned": 0,
+                  "executionTimeMillisEstimate": 0,
+                  "totalKeysExamined": 101,
+                  "totalDocsExamined": 101,
+                  "score": 1.0001,
+                  "executionStages": {
+                    "stage": "SORT",
+                    "nReturned": 0,
+                    "executionTimeMillisEstimate": 0,
+                    "works": 101,
+                    "advanced": 0,
+                    "needTime": 101,
+                    "needYield": 0,
+                    "saveState": 1,
+                    "restoreState": 0,
+                    "isEOF": 0,
+                    "sortPattern": {
+                      "ts": -1,
+                      "_id": -1
+                    },
+                    "memLimit": 104857600,
+                    "limitAmount": 201,
+                    "type": "simple",
+                    "totalDataSizeSorted": 0,
+                    "usedDisk": false,
+                    "spills": 0,
+                    "spilledDataStorageSize": 0,
+                    "inputStage": {
+                      "stage": "FETCH",
+                      "filter": {
+                        "user_id": {
+                          "$eq": 0
+                        }
+                      },
+                      "nReturned": 101,
+                      "executionTimeMillisEstimate": 0,
+                      "works": 101,
+                      "advanced": 101,
+                      "needTime": 0,
+                      "needYield": 0,
+                      "saveState": 1,
+                      "restoreState": 0,
+                      "isEOF": 0,
+                      "docsExamined": 101,
+                      "alreadyHasObj": 0,
+                      "inputStage": {
+                        "stage": "IXSCAN",
+                        "nReturned": 101,
+                        "executionTimeMillisEstimate": 0,
+                        "works": 101,
+                        "advanced": 101,
+                        "needTime": 0,
+                        "needYield": 0,
+                        "saveState": 1,
+                        "restoreState": 0,
+                        "isEOF": 0,
+                        "keyPattern": {
+                          "user_id": "hashed"
+                        },
+                        "indexName": "user_id_hashed",
+                        "isMultiKey": false,
+                        "isUnique": false,
+                        "isSparse": false,
+                        "isPartial": false,
+                        "indexVersion": 2,
+                        "direction": "forward",
+                        "indexBounds": {
+                          "user_id": [
+                            "[4854801880128277513, 4854801880128277513]"
+                          ]
+                        },
+                        "keysExamined": 101,
+                        "seeks": 1,
+                        "dupsTested": 0,
+                        "dupsDropped": 0
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "allPlansExecution": [
+          {
+            "shardName": "shard1",
+            "allPlans": [
+              {
+                "nReturned": 101,
+                "executionTimeMillisEstimate": 0,
+                "totalKeysExamined": 101,
+                "totalDocsExamined": 101,
+                "score": 2.0002,
+                "executionStages": {
+                  "stage": "LIMIT",
+                  "nReturned": 101,
+                  "executionTimeMillisEstimate": 0,
+                  "works": 101,
+                  "advanced": 101,
+                  "needTime": 0,
+                  "needYield": 0,
+                  "saveState": 0,
+                  "restoreState": 0,
+                  "isEOF": 0,
+                  "limitAmount": 201,
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "nReturned": 101,
+                    "executionTimeMillisEstimate": 0,
+                    "works": 101,
+                    "advanced": 101,
+                    "needTime": 0,
+                    "needYield": 0,
+                    "saveState": 0,
+                    "restoreState": 0,
+                    "isEOF": 0,
+                    "docsExamined": 101,
+                    "alreadyHasObj": 0,
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "nReturned": 101,
+                      "executionTimeMillisEstimate": 0,
+                      "works": 101,
+                      "advanced": 101,
+                      "needTime": 0,
+                      "needYield": 0,
+                      "saveState": 0,
+                      "restoreState": 0,
+                      "isEOF": 0,
+                      "keyPattern": {
+                        "user_id": 1,
+                        "ts": -1,
+                        "_id": -1
+                      },
+                      "indexName": "trajectory",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "user_id": [],
+                        "ts": [],
+                        "_id": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "user_id": [
+                          "[0, 0]"
+                        ],
+                        "ts": [
+                          "[MaxKey, MinKey]"
+                        ],
+                        "_id": [
+                          "[MaxKey, MinKey]"
+                        ]
+                      },
+                      "keysExamined": 101,
+                      "seeks": 1,
+                      "dupsTested": 0,
+                      "dupsDropped": 0
+                    }
+                  }
+                }
+              },
+              {
+                "nReturned": 0,
+                "executionTimeMillisEstimate": 0,
+                "totalKeysExamined": 101,
+                "totalDocsExamined": 101,
+                "score": 1.0001,
+                "executionStages": {
+                  "stage": "SORT",
+                  "nReturned": 0,
+                  "executionTimeMillisEstimate": 0,
+                  "works": 101,
+                  "advanced": 0,
+                  "needTime": 101,
+                  "needYield": 0,
+                  "saveState": 1,
+                  "restoreState": 0,
+                  "isEOF": 0,
+                  "sortPattern": {
+                    "ts": -1,
+                    "_id": -1
+                  },
+                  "memLimit": 104857600,
+                  "limitAmount": 201,
+                  "type": "simple",
+                  "totalDataSizeSorted": 0,
+                  "usedDisk": false,
+                  "spills": 0,
+                  "spilledDataStorageSize": 0,
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "filter": {
+                      "user_id": {
+                        "$eq": 0
+                      }
+                    },
+                    "nReturned": 101,
+                    "executionTimeMillisEstimate": 0,
+                    "works": 101,
+                    "advanced": 101,
+                    "needTime": 0,
+                    "needYield": 0,
+                    "saveState": 1,
+                    "restoreState": 0,
+                    "isEOF": 0,
+                    "docsExamined": 101,
+                    "alreadyHasObj": 0,
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "nReturned": 101,
+                      "executionTimeMillisEstimate": 0,
+                      "works": 101,
+                      "advanced": 101,
+                      "needTime": 0,
+                      "needYield": 0,
+                      "saveState": 1,
+                      "restoreState": 0,
+                      "isEOF": 0,
+                      "keyPattern": {
+                        "user_id": "hashed"
+                      },
+                      "indexName": "user_id_hashed",
+                      "isMultiKey": false,
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "user_id": [
+                          "[4854801880128277513, 4854801880128277513]"
+                        ]
+                      },
+                      "keysExamined": 101,
+                      "seeks": 1,
+                      "dupsTested": 0,
+                      "dupsDropped": 0
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "serverInfo": {
+        "host": "0d8d096639d1",
+        "port": 27017,
+        "version": "7.0.48",
+        "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
+      },
+      "serverParameters": {
+        "internalQueryFacetBufferSizeBytes": 104857600,
+        "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+        "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+        "internalDocumentSourceGroupMaxMemoryBytes": 104857600,
+        "internalQueryMaxBlockingSortMemoryUsageBytes": 104857600,
+        "internalQueryProhibitBlockingMergeOnMongoS": 0,
+        "internalQueryMaxAddToSetBytes": 104857600,
+        "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
+        "internalQueryFrameworkControl": "forceClassicEngine"
+      },
+      "command": {
+        "find": "checkins",
+        "filter": {
+          "user_id": 0
+        },
+        "sort": {
+          "ts": -1,
+          "_id": -1
+        },
+        "limit": 201,
+        "singleBatch": true,
+        "lsid": {
+          "id": {
+            "$binary": {
+              "base64": "53G7gGHiReyhH0LQ3yK4ww==",
+              "subType": "04"
+            }
+          }
+        },
+        "$clusterTime": {
+          "clusterTime": {
+            "$timestamp": {
+              "t": 1795097948,
+              "i": 1
+            }
+          },
+          "signature": {
+            "hash": {
+              "$binary": {
+                "base64": "AAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                "subType": "00"
+              }
+            },
+            "keyId": 0
+          }
+        },
+        "$db": "gowalla"
+      },
+      "ok": 1.0,
+      "$clusterTime": {
+        "clusterTime": {
+          "$timestamp": {
+            "t": 1795097948,
+            "i": 1
+          }
+        },
+        "signature": {
+          "hash": {
+            "$binary": {
+              "base64": "AAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+              "subType": "00"
+            }
+          },
+          "keyId": 0
+        }
+      },
+      "operationTime": {
+        "$timestamp": {
+          "t": 1795097948,
+          "i": 1
+        }
+      }
+    },
+    "region": {
+      "queryPlanner": {
+        "mongosPlannerVersion": 1,
+        "winningPlan": {
+          "stage": "SHARD_MERGE_SORT",
+          "shards": [
+            {
+              "shardName": "shard1",
+              "connectionString": "shard1/shard1:27011",
+              "serverInfo": {
+                "host": "88a078d2d674",
+                "port": 27011,
+                "version": "7.0.48",
+                "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
+              },
+              "namespace": "gowalla.checkins",
+              "indexFilterSet": false,
+              "parsedQuery": {
+                "$and": [
+                  {
+                    "ts": {
+                      "$lt": {
+                        "$date": "2010-10-19T23:55:28Z"
+                      }
+                    }
+                  },
+                  {
+                    "ts": {
+                      "$gte": {
+                        "$date": "2010-10-19T23:55:27Z"
+                      }
+                    }
+                  },
+                  {
+                    "loc": {
+                      "$geoWithin": {
+                        "$geometry": {
+                          "type": "Polygon",
+                          "coordinates": [
+                            [
+                              [
+                                -97.81,
+                                30.22
+                              ],
+                              [
+                                -97.74,
+                                30.22
+                              ],
+                              [
+                                -97.74,
+                                30.3
+                              ],
+                              [
+                                -97.81,
+                                30.3
+                              ],
+                              [
+                                -97.81,
+                                30.22
+                              ]
+                            ]
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "queryHash": "5BB4E242",
+              "planCacheKey": "B0C8A5FF",
+              "optimizationTimeMillis": 0,
+              "maxIndexedOrSolutionsReached": false,
+              "maxIndexedAndSolutionsReached": false,
+              "maxScansToExplodeReached": false,
+              "winningPlan": {
+                "stage": "SORT",
+                "sortPattern": {
+                  "ts": -1,
+                  "_id": -1
+                },
+                "memLimit": 104857600,
+                "limitAmount": 201,
+                "type": "simple",
+                "inputStage": {
+                  "stage": "SHARDING_FILTER",
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "filter": {
+                      "$and": [
+                        {
+                          "loc": {
+                            "$geoWithin": {
+                              "$geometry": {
+                                "type": "Polygon",
+                                "coordinates": [
+                                  [
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ]
+                                  ]
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$lt": {
+                              "$date": "2010-10-19T23:55:28Z"
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$gte": {
+                              "$date": "2010-10-19T23:55:27Z"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "keyPattern": {
+                        "loc": "2dsphere"
+                      },
+                      "indexName": "region",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "loc": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "loc": [
+                          "[-8773012074117726208, -8773012074117726208]",
+                          "[-8771886174210883584, -8771886174210883584]",
+                          "[-8771692660164395008, -8771692660164395008]",
+                          "[-8771688262117883904, -8771688262117883904]",
+                          "[-8771687987239976960, -8771687987239976960]",
+                          "[-8771687987239976959, -8771687849801023489]",
+                          "[-8771687849801023487, -8771687815441285121]",
+                          "[-8771687781081546752, -8771687781081546752]",
+                          "[-8771687678002331647, -8771687643642593281]",
+                          "[-8771687643642593280, -8771687643642593280]",
+                          "[-8771687643642593279, -8771687609282854913]",
+                          "[-8771687574923116543, -8771687437484163073]",
+                          "[-8771687437484163072, -8771687437484163072]",
+                          "[-8771687437484163071, -8771687300045209601]",
+                          "[-8771687300045209599, -8771687162606256129]",
+                          "[-8771687162606256128, -8771687162606256128]",
+                          "[-8771687162606256127, -8771686612850442241]",
+                          "[-8771686612850442239, -8771686475411488769]",
+                          "[-8771686475411488767, -8771686337972535297]",
+                          "[-8771686337972535296, -8771686337972535296]",
+                          "[-8771675067978350592, -8771675067978350592]",
+                          "[-8771663797984165888, -8771663797984165888]",
+                          "[-8771663591825735680, -8771663591825735680]",
+                          "[-8771663540286128128, -8771663540286128128]",
+                          "[-8771663527401226240, -8771663527401226240]",
+                          "[-8771663525253742591, -8771663523106258945]",
+                          "[-8771663523106258943, -8771663385667305473]",
+                          "[-8771663385667305471, -8771663248228352001]",
+                          "[-8771663248228352000, -8771663248228352000]",
+                          "[-8771662973350445056, -8771662973350445056]",
+                          "[-8771661873838817280, -8771661873838817280]",
+                          "[-8771657475792306176, -8771657475792306176]",
+                          "[-8771604699234172928, -8771604699234172928]",
+                          "[-8768508474490355712, -8768508474490355712]",
+                          "[-8765412249746538496, -8765412249746538496]",
+                          "[-8765359473188405248, -8765359473188405248]",
+                          "[-8765355075141894144, -8765355075141894144]",
+                          "[-8765353975630266368, -8765353975630266368]",
+                          "[-8765353700752359424, -8765353700752359424]",
+                          "[-8765353700752359423, -8765353563313405953]",
+                          "[-8765353563313405951, -8765353554723471361]",
+                          "[-8765353546133536768, -8765353546133536768]",
+                          "[-8765353494593929216, -8765353494593929216]",
+                          "[-8765341881002360832, -8765341881002360832]",
+                          "[-8765330336130269183, -8765329786374455297]",
+                          "[-8765329786374455296, -8765329786374455296]",
+                          "[-8765329786374455295, -8765329648935501825]",
+                          "[-8765329648935501823, -8765329511496548353]",
+                          "[-8765329511496548352, -8765329511496548352]",
+                          "[-8765329511496548351, -8765329374057594881]",
+                          "[-8765329339697856511, -8765329305338118145]",
+                          "[-8765329305338118144, -8765329305338118144]",
+                          "[-8765328686862827520, -8765328686862827520]",
+                          "[-8765324288816316416, -8765324288816316416]",
+                          "[-8765130774769827840, -8765130774769827840]",
+                          "[-8718968878589280256, -8718968878589280256]"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "rejectedPlans": []
+            },
+            {
+              "shardName": "shard2",
+              "connectionString": "shard2/shard2:27021",
+              "serverInfo": {
+                "host": "47a6e30f44e1",
+                "port": 27021,
+                "version": "7.0.48",
+                "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
+              },
+              "namespace": "gowalla.checkins",
+              "indexFilterSet": false,
+              "parsedQuery": {
+                "$and": [
+                  {
+                    "ts": {
+                      "$lt": {
+                        "$date": "2010-10-19T23:55:28Z"
+                      }
+                    }
+                  },
+                  {
+                    "ts": {
+                      "$gte": {
+                        "$date": "2010-10-19T23:55:27Z"
+                      }
+                    }
+                  },
+                  {
+                    "loc": {
+                      "$geoWithin": {
+                        "$geometry": {
+                          "type": "Polygon",
+                          "coordinates": [
+                            [
+                              [
+                                -97.81,
+                                30.22
+                              ],
+                              [
+                                -97.74,
+                                30.22
+                              ],
+                              [
+                                -97.74,
+                                30.3
+                              ],
+                              [
+                                -97.81,
+                                30.3
+                              ],
+                              [
+                                -97.81,
+                                30.22
+                              ]
+                            ]
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "queryHash": "5BB4E242",
+              "planCacheKey": "B0C8A5FF",
+              "optimizationTimeMillis": 0,
+              "maxIndexedOrSolutionsReached": false,
+              "maxIndexedAndSolutionsReached": false,
+              "maxScansToExplodeReached": false,
+              "winningPlan": {
+                "stage": "SORT",
+                "sortPattern": {
+                  "ts": -1,
+                  "_id": -1
+                },
+                "memLimit": 104857600,
+                "limitAmount": 201,
+                "type": "simple",
+                "inputStage": {
+                  "stage": "SHARDING_FILTER",
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "filter": {
+                      "$and": [
+                        {
+                          "loc": {
+                            "$geoWithin": {
+                              "$geometry": {
+                                "type": "Polygon",
+                                "coordinates": [
+                                  [
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ]
+                                  ]
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$lt": {
+                              "$date": "2010-10-19T23:55:28Z"
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$gte": {
+                              "$date": "2010-10-19T23:55:27Z"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "keyPattern": {
+                        "loc": "2dsphere"
+                      },
+                      "indexName": "region",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "loc": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "loc": [
+                          "[-8773012074117726208, -8773012074117726208]",
+                          "[-8771886174210883584, -8771886174210883584]",
+                          "[-8771692660164395008, -8771692660164395008]",
+                          "[-8771688262117883904, -8771688262117883904]",
+                          "[-8771687987239976960, -8771687987239976960]",
+                          "[-8771687987239976959, -8771687849801023489]",
+                          "[-8771687849801023487, -8771687815441285121]",
+                          "[-8771687781081546752, -8771687781081546752]",
+                          "[-8771687678002331647, -8771687643642593281]",
+                          "[-8771687643642593280, -8771687643642593280]",
+                          "[-8771687643642593279, -8771687609282854913]",
+                          "[-8771687574923116543, -8771687437484163073]",
+                          "[-8771687437484163072, -8771687437484163072]",
+                          "[-8771687437484163071, -8771687300045209601]",
+                          "[-8771687300045209599, -8771687162606256129]",
+                          "[-8771687162606256128, -8771687162606256128]",
+                          "[-8771687162606256127, -8771686612850442241]",
+                          "[-8771686612850442239, -8771686475411488769]",
+                          "[-8771686475411488767, -8771686337972535297]",
+                          "[-8771686337972535296, -8771686337972535296]",
+                          "[-8771675067978350592, -8771675067978350592]",
+                          "[-8771663797984165888, -8771663797984165888]",
+                          "[-8771663591825735680, -8771663591825735680]",
+                          "[-8771663540286128128, -8771663540286128128]",
+                          "[-8771663527401226240, -8771663527401226240]",
+                          "[-8771663525253742591, -8771663523106258945]",
+                          "[-8771663523106258943, -8771663385667305473]",
+                          "[-8771663385667305471, -8771663248228352001]",
+                          "[-8771663248228352000, -8771663248228352000]",
+                          "[-8771662973350445056, -8771662973350445056]",
+                          "[-8771661873838817280, -8771661873838817280]",
+                          "[-8771657475792306176, -8771657475792306176]",
+                          "[-8771604699234172928, -8771604699234172928]",
+                          "[-8768508474490355712, -8768508474490355712]",
+                          "[-8765412249746538496, -8765412249746538496]",
+                          "[-8765359473188405248, -8765359473188405248]",
+                          "[-8765355075141894144, -8765355075141894144]",
+                          "[-8765353975630266368, -8765353975630266368]",
+                          "[-8765353700752359424, -8765353700752359424]",
+                          "[-8765353700752359423, -8765353563313405953]",
+                          "[-8765353563313405951, -8765353554723471361]",
+                          "[-8765353546133536768, -8765353546133536768]",
+                          "[-8765353494593929216, -8765353494593929216]",
+                          "[-8765341881002360832, -8765341881002360832]",
+                          "[-8765330336130269183, -8765329786374455297]",
+                          "[-8765329786374455296, -8765329786374455296]",
+                          "[-8765329786374455295, -8765329648935501825]",
+                          "[-8765329648935501823, -8765329511496548353]",
+                          "[-8765329511496548352, -8765329511496548352]",
+                          "[-8765329511496548351, -8765329374057594881]",
+                          "[-8765329339697856511, -8765329305338118145]",
+                          "[-8765329305338118144, -8765329305338118144]",
+                          "[-8765328686862827520, -8765328686862827520]",
+                          "[-8765324288816316416, -8765324288816316416]",
+                          "[-8765130774769827840, -8765130774769827840]",
+                          "[-8718968878589280256, -8718968878589280256]"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "rejectedPlans": []
+            }
+          ]
+        }
+      },
+      "executionStats": {
+        "nReturned": 1,
+        "executionTimeMillis": 871,
+        "totalKeysExamined": 206300,
+        "totalDocsExamined": 206238,
+        "executionStages": {
+          "stage": "SHARD_MERGE_SORT",
+          "nReturned": 1,
+          "executionTimeMillis": 871,
+          "totalKeysExamined": 206300,
+          "totalDocsExamined": 206238,
+          "totalChildMillis": 1585,
+          "shards": [
+            {
+              "shardName": "shard1",
+              "executionSuccess": true,
+              "nReturned": 1,
+              "executionTimeMillis": 715,
+              "totalKeysExamined": 99413,
+              "totalDocsExamined": 99382,
+              "executionStages": {
+                "stage": "SORT",
+                "nReturned": 1,
+                "executionTimeMillisEstimate": 430,
+                "works": 99415,
+                "advanced": 1,
+                "needTime": 99413,
+                "needYield": 0,
+                "saveState": 99,
+                "restoreState": 99,
+                "isEOF": 1,
+                "sortPattern": {
+                  "ts": -1,
+                  "_id": -1
+                },
+                "memLimit": 104857600,
+                "limitAmount": 201,
+                "type": "simple",
+                "totalDataSizeSorted": 226,
+                "usedDisk": false,
+                "spills": 0,
+                "spilledDataStorageSize": 0,
+                "inputStage": {
+                  "stage": "SHARDING_FILTER",
+                  "nReturned": 1,
+                  "executionTimeMillisEstimate": 430,
+                  "works": 99413,
+                  "advanced": 1,
+                  "needTime": 99411,
+                  "needYield": 0,
+                  "saveState": 99,
+                  "restoreState": 99,
+                  "isEOF": 1,
+                  "chunkSkips": 0,
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "filter": {
+                      "$and": [
+                        {
+                          "loc": {
+                            "$geoWithin": {
+                              "$geometry": {
+                                "type": "Polygon",
+                                "coordinates": [
+                                  [
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ]
+                                  ]
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$lt": {
+                              "$date": "2010-10-19T23:55:28Z"
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$gte": {
+                              "$date": "2010-10-19T23:55:27Z"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "nReturned": 1,
+                    "executionTimeMillisEstimate": 430,
+                    "works": 99413,
+                    "advanced": 1,
+                    "needTime": 99411,
+                    "needYield": 0,
+                    "saveState": 99,
+                    "restoreState": 99,
+                    "isEOF": 1,
+                    "docsExamined": 99382,
+                    "alreadyHasObj": 0,
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "nReturned": 99382,
+                      "executionTimeMillisEstimate": 11,
+                      "works": 99413,
+                      "advanced": 99382,
+                      "needTime": 30,
+                      "needYield": 0,
+                      "saveState": 99,
+                      "restoreState": 99,
+                      "isEOF": 1,
+                      "keyPattern": {
+                        "loc": "2dsphere"
+                      },
+                      "indexName": "region",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "loc": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "loc": [
+                          "[-8773012074117726208, -8773012074117726208]",
+                          "[-8771886174210883584, -8771886174210883584]",
+                          "[-8771692660164395008, -8771692660164395008]",
+                          "[-8771688262117883904, -8771688262117883904]",
+                          "[-8771687987239976960, -8771687987239976960]",
+                          "[-8771687987239976959, -8771687849801023489]",
+                          "[-8771687849801023487, -8771687815441285121]",
+                          "[-8771687781081546752, -8771687781081546752]",
+                          "[-8771687678002331647, -8771687643642593281]",
+                          "[-8771687643642593280, -8771687643642593280]",
+                          "[-8771687643642593279, -8771687609282854913]",
+                          "[-8771687574923116543, -8771687437484163073]",
+                          "[-8771687437484163072, -8771687437484163072]",
+                          "[-8771687437484163071, -8771687300045209601]",
+                          "[-8771687300045209599, -8771687162606256129]",
+                          "[-8771687162606256128, -8771687162606256128]",
+                          "[-8771687162606256127, -8771686612850442241]",
+                          "[-8771686612850442239, -8771686475411488769]",
+                          "[-8771686475411488767, -8771686337972535297]",
+                          "[-8771686337972535296, -8771686337972535296]",
+                          "[-8771675067978350592, -8771675067978350592]",
+                          "[-8771663797984165888, -8771663797984165888]",
+                          "[-8771663591825735680, -8771663591825735680]",
+                          "[-8771663540286128128, -8771663540286128128]",
+                          "[-8771663527401226240, -8771663527401226240]",
+                          "[-8771663525253742591, -8771663523106258945]",
+                          "[-8771663523106258943, -8771663385667305473]",
+                          "[-8771663385667305471, -8771663248228352001]",
+                          "[-8771663248228352000, -8771663248228352000]",
+                          "[-8771662973350445056, -8771662973350445056]",
+                          "[-8771661873838817280, -8771661873838817280]",
+                          "[-8771657475792306176, -8771657475792306176]",
+                          "[-8771604699234172928, -8771604699234172928]",
+                          "[-8768508474490355712, -8768508474490355712]",
+                          "[-8765412249746538496, -8765412249746538496]",
+                          "[-8765359473188405248, -8765359473188405248]",
+                          "[-8765355075141894144, -8765355075141894144]",
+                          "[-8765353975630266368, -8765353975630266368]",
+                          "[-8765353700752359424, -8765353700752359424]",
+                          "[-8765353700752359423, -8765353563313405953]",
+                          "[-8765353563313405951, -8765353554723471361]",
+                          "[-8765353546133536768, -8765353546133536768]",
+                          "[-8765353494593929216, -8765353494593929216]",
+                          "[-8765341881002360832, -8765341881002360832]",
+                          "[-8765330336130269183, -8765329786374455297]",
+                          "[-8765329786374455296, -8765329786374455296]",
+                          "[-8765329786374455295, -8765329648935501825]",
+                          "[-8765329648935501823, -8765329511496548353]",
+                          "[-8765329511496548352, -8765329511496548352]",
+                          "[-8765329511496548351, -8765329374057594881]",
+                          "[-8765329339697856511, -8765329305338118145]",
+                          "[-8765329305338118144, -8765329305338118144]",
+                          "[-8765328686862827520, -8765328686862827520]",
+                          "[-8765324288816316416, -8765324288816316416]",
+                          "[-8765130774769827840, -8765130774769827840]",
+                          "[-8718968878589280256, -8718968878589280256]"
+                        ]
+                      },
+                      "keysExamined": 99413,
+                      "seeks": 31,
+                      "dupsTested": 0,
+                      "dupsDropped": 0
+                    }
+                  }
+                }
+              },
+              "allPlansExecution": []
+            },
+            {
+              "shardName": "shard2",
+              "executionSuccess": true,
+              "nReturned": 0,
+              "executionTimeMillis": 870,
+              "totalKeysExamined": 106887,
+              "totalDocsExamined": 106856,
+              "executionStages": {
+                "stage": "SORT",
+                "nReturned": 0,
+                "executionTimeMillisEstimate": 531,
+                "works": 106888,
+                "advanced": 0,
+                "needTime": 106887,
+                "needYield": 0,
+                "saveState": 108,
+                "restoreState": 108,
+                "isEOF": 1,
+                "sortPattern": {
+                  "ts": -1,
+                  "_id": -1
+                },
+                "memLimit": 104857600,
+                "limitAmount": 201,
+                "type": "simple",
+                "totalDataSizeSorted": 0,
+                "usedDisk": false,
+                "spills": 0,
+                "spilledDataStorageSize": 0,
+                "inputStage": {
+                  "stage": "SHARDING_FILTER",
+                  "nReturned": 0,
+                  "executionTimeMillisEstimate": 531,
+                  "works": 106887,
+                  "advanced": 0,
+                  "needTime": 106886,
+                  "needYield": 0,
+                  "saveState": 108,
+                  "restoreState": 108,
+                  "isEOF": 1,
+                  "chunkSkips": 0,
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "filter": {
+                      "$and": [
+                        {
+                          "loc": {
+                            "$geoWithin": {
+                              "$geometry": {
+                                "type": "Polygon",
+                                "coordinates": [
+                                  [
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ]
+                                  ]
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$lt": {
+                              "$date": "2010-10-19T23:55:28Z"
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$gte": {
+                              "$date": "2010-10-19T23:55:27Z"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "nReturned": 0,
+                    "executionTimeMillisEstimate": 531,
+                    "works": 106887,
+                    "advanced": 0,
+                    "needTime": 106886,
+                    "needYield": 0,
+                    "saveState": 108,
+                    "restoreState": 108,
+                    "isEOF": 1,
+                    "docsExamined": 106856,
+                    "alreadyHasObj": 0,
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "nReturned": 106856,
+                      "executionTimeMillisEstimate": 32,
+                      "works": 106887,
+                      "advanced": 106856,
+                      "needTime": 30,
+                      "needYield": 0,
+                      "saveState": 108,
+                      "restoreState": 108,
+                      "isEOF": 1,
+                      "keyPattern": {
+                        "loc": "2dsphere"
+                      },
+                      "indexName": "region",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "loc": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "loc": [
+                          "[-8773012074117726208, -8773012074117726208]",
+                          "[-8771886174210883584, -8771886174210883584]",
+                          "[-8771692660164395008, -8771692660164395008]",
+                          "[-8771688262117883904, -8771688262117883904]",
+                          "[-8771687987239976960, -8771687987239976960]",
+                          "[-8771687987239976959, -8771687849801023489]",
+                          "[-8771687849801023487, -8771687815441285121]",
+                          "[-8771687781081546752, -8771687781081546752]",
+                          "[-8771687678002331647, -8771687643642593281]",
+                          "[-8771687643642593280, -8771687643642593280]",
+                          "[-8771687643642593279, -8771687609282854913]",
+                          "[-8771687574923116543, -8771687437484163073]",
+                          "[-8771687437484163072, -8771687437484163072]",
+                          "[-8771687437484163071, -8771687300045209601]",
+                          "[-8771687300045209599, -8771687162606256129]",
+                          "[-8771687162606256128, -8771687162606256128]",
+                          "[-8771687162606256127, -8771686612850442241]",
+                          "[-8771686612850442239, -8771686475411488769]",
+                          "[-8771686475411488767, -8771686337972535297]",
+                          "[-8771686337972535296, -8771686337972535296]",
+                          "[-8771675067978350592, -8771675067978350592]",
+                          "[-8771663797984165888, -8771663797984165888]",
+                          "[-8771663591825735680, -8771663591825735680]",
+                          "[-8771663540286128128, -8771663540286128128]",
+                          "[-8771663527401226240, -8771663527401226240]",
+                          "[-8771663525253742591, -8771663523106258945]",
+                          "[-8771663523106258943, -8771663385667305473]",
+                          "[-8771663385667305471, -8771663248228352001]",
+                          "[-8771663248228352000, -8771663248228352000]",
+                          "[-8771662973350445056, -8771662973350445056]",
+                          "[-8771661873838817280, -8771661873838817280]",
+                          "[-8771657475792306176, -8771657475792306176]",
+                          "[-8771604699234172928, -8771604699234172928]",
+                          "[-8768508474490355712, -8768508474490355712]",
+                          "[-8765412249746538496, -8765412249746538496]",
+                          "[-8765359473188405248, -8765359473188405248]",
+                          "[-8765355075141894144, -8765355075141894144]",
+                          "[-8765353975630266368, -8765353975630266368]",
+                          "[-8765353700752359424, -8765353700752359424]",
+                          "[-8765353700752359423, -8765353563313405953]",
+                          "[-8765353563313405951, -8765353554723471361]",
+                          "[-8765353546133536768, -8765353546133536768]",
+                          "[-8765353494593929216, -8765353494593929216]",
+                          "[-8765341881002360832, -8765341881002360832]",
+                          "[-8765330336130269183, -8765329786374455297]",
+                          "[-8765329786374455296, -8765329786374455296]",
+                          "[-8765329786374455295, -8765329648935501825]",
+                          "[-8765329648935501823, -8765329511496548353]",
+                          "[-8765329511496548352, -8765329511496548352]",
+                          "[-8765329511496548351, -8765329374057594881]",
+                          "[-8765329339697856511, -8765329305338118145]",
+                          "[-8765329305338118144, -8765329305338118144]",
+                          "[-8765328686862827520, -8765328686862827520]",
+                          "[-8765324288816316416, -8765324288816316416]",
+                          "[-8765130774769827840, -8765130774769827840]",
+                          "[-8718968878589280256, -8718968878589280256]"
+                        ]
+                      },
+                      "keysExamined": 106887,
+                      "seeks": 31,
+                      "dupsTested": 0,
+                      "dupsDropped": 0
+                    }
+                  }
+                }
+              },
+              "allPlansExecution": []
+            }
+          ]
+        },
+        "allPlansExecution": [
+          {
+            "shardName": "shard1",
+            "allPlans": []
+          },
+          {
+            "shardName": "shard2",
+            "allPlans": []
+          }
+        ]
+      },
+      "serverInfo": {
+        "host": "0d8d096639d1",
+        "port": 27017,
+        "version": "7.0.48",
+        "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
+      },
+      "serverParameters": {
+        "internalQueryFacetBufferSizeBytes": 104857600,
+        "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+        "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+        "internalDocumentSourceGroupMaxMemoryBytes": 104857600,
+        "internalQueryMaxBlockingSortMemoryUsageBytes": 104857600,
+        "internalQueryProhibitBlockingMergeOnMongoS": 0,
+        "internalQueryMaxAddToSetBytes": 104857600,
+        "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
+        "internalQueryFrameworkControl": "forceClassicEngine"
+      },
+      "command": {
+        "find": "checkins",
+        "filter": {
+          "loc": {
+            "$geoWithin": {
+              "$geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                  [
+                    [
+                      -97.81,
+                      30.22
+                    ],
+                    [
+                      -97.74,
+                      30.22
+                    ],
+                    [
+                      -97.74,
+                      30.3
+                    ],
+                    [
+                      -97.81,
+                      30.3
+                    ],
+                    [
+                      -97.81,
+                      30.22
+                    ]
+                  ]
+                ]
+              }
+            }
+          },
+          "ts": {
+            "$gte": {
+              "$date": "2010-10-19T23:55:27Z"
+            },
+            "$lt": {
+              "$date": "2010-10-19T23:55:28Z"
+            }
+          }
+        },
+        "sort": {
+          "ts": -1,
+          "_id": -1
+        },
+        "limit": 201,
+        "singleBatch": true,
+        "lsid": {
+          "id": {
+            "$binary": {
+              "base64": "53G7gGHiReyhH0LQ3yK4ww==",
+              "subType": "04"
+            }
+          }
+        },
+        "$clusterTime": {
+          "clusterTime": {
+            "$timestamp": {
+              "t": 1795097948,
+              "i": 1
+            }
+          },
+          "signature": {
+            "hash": {
+              "$binary": {
+                "base64": "AAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                "subType": "00"
+              }
+            },
+            "keyId": 0
+          }
+        },
+        "$db": "gowalla"
+      },
+      "ok": 1.0,
+      "$clusterTime": {
+        "clusterTime": {
+          "$timestamp": {
+            "t": 1795097948,
+            "i": 1
+          }
+        },
+        "signature": {
+          "hash": {
+            "$binary": {
+              "base64": "AAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+              "subType": "00"
+            }
+          },
+          "keyId": 0
+        }
+      },
+      "operationTime": {
+        "$timestamp": {
+          "t": 1795097948,
+          "i": 1
+        }
+      }
+    }
+  },
+  "verified": {
+    "trajectory_counts": {
+      "0": 225,
+      "776": 2174
+    },
+    "region_contains_source_line_1": true,
+    "invalid_parameters_return_422": true,
+    "cross_query_cursor_rejected": true
+  },
+  "performance": {
+    "selection": "100 uniformly sampled clean file rows, seed 20261119",
+    "trajectory": {
+      "count": 100,
+      "errors": 0,
+      "p50_ms": 13.9305,
+      "p95_ms": 56.185,
+      "runs": [
+        {
+          "path": "/api/users/120/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.851,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/191/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 39.703,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/366/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.891,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/534/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 12.967,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/591/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 58.617,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/719/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 39.379,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/1234/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.508,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/1444/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 12.708,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/1516/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.614,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/1660/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 33.232,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/1695/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.143,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/1806/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.75,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/1986/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.833,
+          "status": 200,
+          "rows": 175
+        },
+        {
+          "path": "/api/users/2193/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.513,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/2629/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.385,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/3106/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.958,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/3171/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 12.974,
+          "status": 200,
+          "rows": 183
+        },
+        {
+          "path": "/api/users/3416/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 25.621,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/4883/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 31.441,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/5556/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 15.862,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/7557/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.609,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/8720/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 8.949,
+          "status": 200,
+          "rows": 100
+        },
+        {
+          "path": "/api/users/10222/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.065,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/10410/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.499,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/10570/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 19.562,
+          "status": 200,
+          "rows": 22
+        },
+        {
+          "path": "/api/users/12740/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.701,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/13356/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 62.104,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/14421/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 12.16,
+          "status": 200,
+          "rows": 95
+        },
+        {
+          "path": "/api/users/14428/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 15.066,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/14858/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.484,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/14938/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 28.809,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/14988/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.32,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/15216/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 9.053,
+          "status": 200,
+          "rows": 76
+        },
+        {
+          "path": "/api/users/16177/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 9.217,
+          "status": 200,
+          "rows": 100
+        },
+        {
+          "path": "/api/users/18218/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.673,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/18931/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 29.924,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/19470/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.703,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/19947/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 32.294,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/20405/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 29.76,
+          "status": 200,
+          "rows": 125
+        },
+        {
+          "path": "/api/users/22589/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 25.609,
+          "status": 200,
+          "rows": 75
+        },
+        {
+          "path": "/api/users/26502/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 10.786,
+          "status": 200,
+          "rows": 106
+        },
+        {
+          "path": "/api/users/27185/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 6.898,
+          "status": 200,
+          "rows": 25
+        },
+        {
+          "path": "/api/users/29242/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.794,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/29505/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.678,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/33007/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 11.4,
+          "status": 200,
+          "rows": 116
+        },
+        {
+          "path": "/api/users/34341/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 19.617,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/37996/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 29.797,
+          "status": 200,
+          "rows": 87
+        },
+        {
+          "path": "/api/users/38895/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 6.894,
+          "status": 200,
+          "rows": 5
+        },
+        {
+          "path": "/api/users/43110/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 23.354,
+          "status": 200,
+          "rows": 100
+        },
+        {
+          "path": "/api/users/46910/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 12.383,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/48587/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 6.557,
+          "status": 200,
+          "rows": 48
+        },
+        {
+          "path": "/api/users/48907/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 147.814,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/52106/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 22.587,
+          "status": 200,
+          "rows": 100
+        },
+        {
+          "path": "/api/users/52766/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 7.556,
+          "status": 200,
+          "rows": 50
+        },
+        {
+          "path": "/api/users/55597/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 19.039,
+          "status": 200,
+          "rows": 75
+        },
+        {
+          "path": "/api/users/56593/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 10.202,
+          "status": 200,
+          "rows": 75
+        },
+        {
+          "path": "/api/users/59643/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 18.706,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/65174/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 7.402,
+          "status": 200,
+          "rows": 25
+        },
+        {
+          "path": "/api/users/66923/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.73,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/71180/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 7.368,
+          "status": 200,
+          "rows": 14
+        },
+        {
+          "path": "/api/users/72558/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 56.185,
+          "status": 200,
+          "rows": 25
+        },
+        {
+          "path": "/api/users/72645/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 7.483,
+          "status": 200,
+          "rows": 20
+        },
+        {
+          "path": "/api/users/72751/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 32.057,
+          "status": 200,
+          "rows": 100
+        },
+        {
+          "path": "/api/users/73440/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.937,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/75087/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 31.304,
+          "status": 200,
+          "rows": 79
+        },
+        {
+          "path": "/api/users/75528/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 7.639,
+          "status": 200,
+          "rows": 50
+        },
+        {
+          "path": "/api/users/81277/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 20.711,
+          "status": 200,
+          "rows": 4
+        },
+        {
+          "path": "/api/users/87440/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 16.17,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/91182/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 17.118,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/95201/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 32.297,
+          "status": 200,
+          "rows": 75
+        },
+        {
+          "path": "/api/users/100035/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 8.418,
+          "status": 200,
+          "rows": 46
+        },
+        {
+          "path": "/api/users/100545/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 6.371,
+          "status": 200,
+          "rows": 12
+        },
+        {
+          "path": "/api/users/103449/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 29.595,
+          "status": 200,
+          "rows": 75
+        },
+        {
+          "path": "/api/users/104813/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 12.998,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/105572/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 7.524,
+          "status": 200,
+          "rows": 49
+        },
+        {
+          "path": "/api/users/106668/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 12.436,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/106867/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 12.168,
+          "status": 200,
+          "rows": 151
+        },
+        {
+          "path": "/api/users/108923/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 8.124,
+          "status": 200,
+          "rows": 85
+        },
+        {
+          "path": "/api/users/110085/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 10.688,
+          "status": 200,
+          "rows": 125
+        },
+        {
+          "path": "/api/users/112474/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 8.129,
+          "status": 200,
+          "rows": 60
+        },
+        {
+          "path": "/api/users/112826/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 19.988,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/113199/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 16.048,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/113242/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 6.707,
+          "status": 200,
+          "rows": 27
+        },
+        {
+          "path": "/api/users/113293/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 10.691,
+          "status": 200,
+          "rows": 121
+        },
+        {
+          "path": "/api/users/119426/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 10.172,
+          "status": 200,
+          "rows": 101
+        },
+        {
+          "path": "/api/users/126561/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.903,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/128114/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 13.048,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/129611/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 12.86,
+          "status": 200,
+          "rows": 193
+        },
+        {
+          "path": "/api/users/132723/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 116.096,
+          "status": 200,
+          "rows": 31
+        },
+        {
+          "path": "/api/users/134607/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 112.686,
+          "status": 200,
+          "rows": 29
+        },
+        {
+          "path": "/api/users/140285/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 51.731,
+          "status": 200,
+          "rows": 116
+        },
+        {
+          "path": "/api/users/141114/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.197,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/142182/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 8.59,
+          "status": 200,
+          "rows": 88
+        },
+        {
+          "path": "/api/users/147188/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 18.174,
+          "status": 200,
+          "rows": 50
+        },
+        {
+          "path": "/api/users/151855/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 30.344,
+          "status": 200,
+          "rows": 68
+        },
+        {
+          "path": "/api/users/153956/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 6.604,
+          "status": 200,
+          "rows": 11
+        },
+        {
+          "path": "/api/users/156903/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 11.104,
+          "status": 200,
+          "rows": 117
+        },
+        {
+          "path": "/api/users/158600/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 14.585,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/users/164822/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 9.069,
+          "status": 200,
+          "rows": 10
+        },
+        {
+          "path": "/api/users/184421/trajectory",
+          "parameters": {
+            "limit": 200
+          },
+          "ms": 7.071,
+          "status": 200,
+          "rows": 25
+        }
+      ]
+    },
+    "region": {
+      "count": 100,
+      "errors": 0,
+      "p50_ms": 61.248000000000005,
+      "p95_ms": 525.771,
+      "runs": [
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "2.973585,50.540252,3.123585,50.690252",
+            "start": "2009-10-09T00:00:00Z",
+            "end": "2009-10-10T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 11.61,
+          "status": 200,
+          "rows": 29
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.478563,37.711479,-122.328563,37.861479",
+            "start": "2010-04-12T00:00:00Z",
+            "end": "2010-04-13T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 342.692,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.831954,30.170253,-97.681954,30.320253",
+            "start": "2010-02-07T00:00:00Z",
+            "end": "2010-02-08T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 525.771,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-77.140212,38.835391,-76.990212,38.985391",
+            "start": "2010-01-29T00:00:00Z",
+            "end": "2010-01-30T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 107.635,
+          "status": 200,
+          "rows": 92
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-95.291582,38.867984,-95.141582,39.017984",
+            "start": "2010-09-10T00:00:00Z",
+            "end": "2010-09-11T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 20.833,
+          "status": 200,
+          "rows": 25
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-77.375201,38.712824,-77.225201,38.862824",
+            "start": "2010-08-04T00:00:00Z",
+            "end": "2010-08-05T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 12.995,
+          "status": 200,
+          "rows": 15
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-78.880103,37.301978,-78.730103,37.451978",
+            "start": "2010-10-09T00:00:00Z",
+            "end": "2010-10-10T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 7.046,
+          "status": 200,
+          "rows": 9
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-87.691691,41.787338,-87.541691,41.937338",
+            "start": "2010-10-21T00:00:00Z",
+            "end": "2010-10-22T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 92.342,
+          "status": 200,
+          "rows": 38
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-82.146301,28.996048,-81.996301,29.146048",
+            "start": "2010-09-03T00:00:00Z",
+            "end": "2010-09-04T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 9.622,
+          "status": 200,
+          "rows": 13
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-86.744338,33.34365,-86.594338,33.49365",
+            "start": "2010-05-22T00:00:00Z",
+            "end": "2010-05-23T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 18.782,
+          "status": 200,
+          "rows": 3
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.275958,32.753344,-97.125958,32.903344",
+            "start": "2010-09-02T00:00:00Z",
+            "end": "2010-09-03T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 110.994,
+          "status": 200,
+          "rows": 116
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-87.934475,42.081259,-87.784475,42.231259",
+            "start": "2010-09-06T00:00:00Z",
+            "end": "2010-09-07T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 10.428,
+          "status": 200,
+          "rows": 12
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.741731,45.456575,-122.591731,45.606575",
+            "start": "2010-09-05T00:00:00Z",
+            "end": "2010-09-06T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 127.277,
+          "status": 200,
+          "rows": 128
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-121.965264,37.256334,-121.815264,37.406334",
+            "start": "2010-08-12T00:00:00Z",
+            "end": "2010-08-13T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 79.48,
+          "status": 200,
+          "rows": 125
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-86.879714,33.424806,-86.729714,33.574806",
+            "start": "2010-10-07T00:00:00Z",
+            "end": "2010-10-08T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 27.674,
+          "status": 200,
+          "rows": 16
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-115.250686,35.992868,-115.100686,36.142868",
+            "start": "2010-09-03T00:00:00Z",
+            "end": "2010-09-04T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 268.069,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.395297,30.034416,-97.245297,30.184416",
+            "start": "2010-07-12T00:00:00Z",
+            "end": "2010-07-13T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 10.151,
+          "status": 200,
+          "rows": 4
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-115.425313,36.084405,-115.275313,36.234405",
+            "start": "2010-02-11T00:00:00Z",
+            "end": "2010-02-12T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 15.4,
+          "status": 200,
+          "rows": 6
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-117.227628,32.673058,-117.077628,32.823058",
+            "start": "2010-09-04T00:00:00Z",
+            "end": "2010-09-05T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 93.268,
+          "status": 200,
+          "rows": 156
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.462545,37.53987,-122.312545,37.68987",
+            "start": "2010-09-02T00:00:00Z",
+            "end": "2010-09-03T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 104.013,
+          "status": 200,
+          "rows": 54
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.512713,37.699914,-122.362713,37.849914",
+            "start": "2010-05-01T00:00:00Z",
+            "end": "2010-05-02T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 334.104,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.819782,30.340585,-97.669782,30.490585",
+            "start": "2010-08-26T00:00:00Z",
+            "end": "2010-08-27T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 211.479,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.809002,31.016523,-97.659002,31.166523",
+            "start": "2009-12-19T00:00:00Z",
+            "end": "2009-12-20T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 13.657,
+          "status": 200,
+          "rows": 20
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-87.706652,41.810162,-87.556652,41.960162",
+            "start": "2009-12-25T00:00:00Z",
+            "end": "2009-12-26T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 95.469,
+          "status": 200,
+          "rows": 29
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "116.483724,39.832412,116.633724,39.982412",
+            "start": "2010-10-01T00:00:00Z",
+            "end": "2010-10-02T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 8.384,
+          "status": 200,
+          "rows": 1
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "5.257189,60.310097,5.407189,60.460097",
+            "start": "2010-06-15T00:00:00Z",
+            "end": "2010-06-16T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 33.921,
+          "status": 200,
+          "rows": 56
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.093999,32.967534,-96.943999,33.117534",
+            "start": "2010-09-11T00:00:00Z",
+            "end": "2010-09-12T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 103.191,
+          "status": 200,
+          "rows": 97
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "11.138094,49.186747,11.288094,49.336747",
+            "start": "2010-08-30T00:00:00Z",
+            "end": "2010-08-31T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 6.948,
+          "status": 200,
+          "rows": 3
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "39.103421,21.479538,39.253421,21.629538",
+            "start": "2010-08-30T00:00:00Z",
+            "end": "2010-08-31T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 56.225,
+          "status": 200,
+          "rows": 150
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "11.329611,59.045812,11.479611,59.195812",
+            "start": "2010-08-05T00:00:00Z",
+            "end": "2010-08-06T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 10.102,
+          "status": 200,
+          "rows": 32
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "16.51428,49.134355,16.66428,49.284355",
+            "start": "2010-06-30T00:00:00Z",
+            "end": "2010-07-01T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 16.725,
+          "status": 200,
+          "rows": 28
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "11.004999,49.373471,11.154999,49.523471",
+            "start": "2010-09-26T00:00:00Z",
+            "end": "2010-09-27T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 21.579,
+          "status": 200,
+          "rows": 66
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "98.897725,18.715177,99.047725,18.865177",
+            "start": "2010-07-12T00:00:00Z",
+            "end": "2010-07-13T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 18.258,
+          "status": 200,
+          "rows": 25
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "7.336094,51.045953,7.486094,51.195953",
+            "start": "2010-09-06T00:00:00Z",
+            "end": "2010-09-07T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 7.548,
+          "status": 200,
+          "rows": 2
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-2.174888,51.822279,-2.024888,51.972279",
+            "start": "2010-06-30T00:00:00Z",
+            "end": "2010-07-01T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 8.702,
+          "status": 200,
+          "rows": 4
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "18.009853,59.270446,18.159853,59.420446",
+            "start": "2010-10-13T00:00:00Z",
+            "end": "2010-10-14T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 612.279,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-0.466974,51.579558,-0.316974,51.729558",
+            "start": "2010-05-15T00:00:00Z",
+            "end": "2010-05-16T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 117.585,
+          "status": 200,
+          "rows": 44
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "11.897646,51.40522,12.047646,51.55522",
+            "start": "2009-12-25T00:00:00Z",
+            "end": "2009-12-26T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 17.715,
+          "status": 200,
+          "rows": 18
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.430596,32.674154,-97.280596,32.824154",
+            "start": "2010-09-10T00:00:00Z",
+            "end": "2010-09-11T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 66.18,
+          "status": 200,
+          "rows": 68
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.179433,32.818749,-97.029433,32.968749",
+            "start": "2010-07-15T00:00:00Z",
+            "end": "2010-07-16T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 124.346,
+          "status": 200,
+          "rows": 115
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-81.420393,28.376286,-81.270393,28.526286",
+            "start": "2010-02-11T00:00:00Z",
+            "end": "2010-02-12T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 57.442,
+          "status": 200,
+          "rows": 53
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.826808,45.421443,-122.676808,45.571443",
+            "start": "2010-03-02T00:00:00Z",
+            "end": "2010-03-03T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 55.666,
+          "status": 200,
+          "rows": 60
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.816166,30.214394,-97.666166,30.364394",
+            "start": "2010-03-15T00:00:00Z",
+            "end": "2010-03-16T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 489.675,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-79.704132,43.550607,-79.554132,43.700607",
+            "start": "2010-05-28T00:00:00Z",
+            "end": "2010-05-29T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 18.128,
+          "status": 200,
+          "rows": 31
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-117.236593,32.631386,-117.086593,32.781386",
+            "start": "2010-07-25T00:00:00Z",
+            "end": "2010-07-26T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 68.541,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.417623,47.535026,-122.267623,47.685026",
+            "start": "2010-07-11T00:00:00Z",
+            "end": "2010-07-12T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 145.987,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-87.986506,42.970425,-87.836506,43.120425",
+            "start": "2010-04-12T00:00:00Z",
+            "end": "2010-04-13T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 42.833,
+          "status": 200,
+          "rows": 9
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.551004,48.674327,-122.401004,48.824327",
+            "start": "2009-12-03T00:00:00Z",
+            "end": "2009-12-04T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 42.448,
+          "status": 200,
+          "rows": 1
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-96.916819,32.951257,-96.766819,33.101257",
+            "start": "2010-10-08T00:00:00Z",
+            "end": "2010-10-09T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 109.595,
+          "status": 200,
+          "rows": 183
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-121.368117,44.04042,-121.218117,44.19042",
+            "start": "2010-06-26T00:00:00Z",
+            "end": "2010-06-27T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 10.002,
+          "status": 200,
+          "rows": 4
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-98.695695,29.511641,-98.545695,29.661641",
+            "start": "2010-09-21T00:00:00Z",
+            "end": "2010-09-22T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 27.254,
+          "status": 200,
+          "rows": 29
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "5.242295,50.862967,5.392295,51.012967",
+            "start": "2010-08-27T00:00:00Z",
+            "end": "2010-08-28T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 17.974,
+          "status": 200,
+          "rows": 48
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "10.71602,51.43015,10.86602,51.58015",
+            "start": "2010-08-20T00:00:00Z",
+            "end": "2010-08-21T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 8.873,
+          "status": 200,
+          "rows": 2
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "17.95895,59.258463,18.10895,59.408463",
+            "start": "2010-03-14T00:00:00Z",
+            "end": "2010-03-15T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 549.567,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-84.180604,9.85708,-84.030604,10.00708",
+            "start": "2010-08-27T00:00:00Z",
+            "end": "2010-08-28T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 9.706,
+          "status": 200,
+          "rows": 6
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "17.964604,59.265303,18.114604,59.415303",
+            "start": "2010-05-07T00:00:00Z",
+            "end": "2010-05-08T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 659.365,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-5.893473,54.519452,-5.743473,54.669452",
+            "start": "2010-02-14T00:00:00Z",
+            "end": "2010-02-15T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 39.918,
+          "status": 200,
+          "rows": 2
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.780099,38.250668,-122.630099,38.400668",
+            "start": "2010-04-04T00:00:00Z",
+            "end": "2010-04-05T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 13.976,
+          "status": 200,
+          "rows": 3
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-118.129692,33.987008,-117.979692,34.137008",
+            "start": "2010-08-01T00:00:00Z",
+            "end": "2010-08-02T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 27.44,
+          "status": 200,
+          "rows": 16
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-74.063017,40.674266,-73.913017,40.824266",
+            "start": "2010-05-23T00:00:00Z",
+            "end": "2010-05-24T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 298.576,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-0.207418,50.74561,-0.057418,50.89561",
+            "start": "2010-05-28T00:00:00Z",
+            "end": "2010-05-29T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 97.844,
+          "status": 200,
+          "rows": 31
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "26.020465,44.36784,26.170465,44.51784",
+            "start": "2010-01-27T00:00:00Z",
+            "end": "2010-01-28T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 72.678,
+          "status": 200,
+          "rows": 2
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-94.774361,38.915372,-94.624361,39.065372",
+            "start": "2010-09-05T00:00:00Z",
+            "end": "2010-09-06T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 120.289,
+          "status": 200,
+          "rows": 25
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-96.874754,32.732164,-96.724754,32.882164",
+            "start": "2010-03-21T00:00:00Z",
+            "end": "2010-03-22T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 144.299,
+          "status": 200,
+          "rows": 169
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "0.64425,51.45815,0.79425,51.60815",
+            "start": "2010-09-17T00:00:00Z",
+            "end": "2010-09-18T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 10.276,
+          "status": 200,
+          "rows": 2
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "13.344167,52.472484,13.494167,52.622484",
+            "start": "2010-08-26T00:00:00Z",
+            "end": "2010-08-27T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 66.0,
+          "status": 200,
+          "rows": 116
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.234821,37.372736,-122.084821,37.522736",
+            "start": "2010-05-18T00:00:00Z",
+            "end": "2010-05-19T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 65.054,
+          "status": 200,
+          "rows": 57
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "12.61314,55.97297,12.76314,56.12297",
+            "start": "2010-08-12T00:00:00Z",
+            "end": "2010-08-13T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 50.125,
+          "status": 200,
+          "rows": 160
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-74.060667,40.681392,-73.910667,40.831392",
+            "start": "2009-12-23T00:00:00Z",
+            "end": "2009-12-24T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 266.789,
+          "status": 200,
+          "rows": 169
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-97.406424,31.063845,-97.256424,31.213845",
+            "start": "2010-07-31T00:00:00Z",
+            "end": "2010-08-01T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 35.674,
+          "status": 200,
+          "rows": 5
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-119.978607,39.465167,-119.828607,39.615167",
+            "start": "2010-03-21T00:00:00Z",
+            "end": "2010-03-22T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 10.518,
+          "status": 200,
+          "rows": 6
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "15.513693,56.087064,15.663693,56.237064",
+            "start": "2010-02-01T00:00:00Z",
+            "end": "2010-02-02T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 38.312,
+          "status": 200,
+          "rows": 2
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "12.814049,58.962384,12.964048,59.112384",
+            "start": "2010-07-23T00:00:00Z",
+            "end": "2010-07-24T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 7.593,
+          "status": 200,
+          "rows": 1
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "17.95917,59.247249,18.10917,59.397249",
+            "start": "2010-06-05T00:00:00Z",
+            "end": "2010-06-06T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 868.085,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "10.677704,59.836278,10.827704,59.986278",
+            "start": "2010-10-15T00:00:00Z",
+            "end": "2010-10-16T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 141.694,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "12.058282,57.664258,12.208282,57.814258",
+            "start": "2010-08-13T00:00:00Z",
+            "end": "2010-08-14T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 41.129,
+          "status": 200,
+          "rows": 30
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-118.482168,33.868538,-118.332168,34.018538",
+            "start": "2010-04-26T00:00:00Z",
+            "end": "2010-04-27T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 185.576,
+          "status": 200,
+          "rows": 58
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "18.089263,59.234591,18.239263,59.384591",
+            "start": "2010-10-14T00:00:00Z",
+            "end": "2010-10-15T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 428.774,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "17.963392,59.209238,18.113392,59.359238",
+            "start": "2010-04-29T00:00:00Z",
+            "end": "2010-04-30T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 465.474,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "9.115261,45.389326,9.265261,45.539326",
+            "start": "2010-10-06T00:00:00Z",
+            "end": "2010-10-07T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 65.061,
+          "status": 200,
+          "rows": 50
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-123.193394,49.206969,-123.043394,49.356969",
+            "start": "2010-05-07T00:00:00Z",
+            "end": "2010-05-08T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 228.392,
+          "status": 200,
+          "rows": 87
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "14.733366,56.80169,14.883366,56.95169",
+            "start": "2010-08-29T00:00:00Z",
+            "end": "2010-08-30T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 22.056,
+          "status": 200,
+          "rows": 27
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "15.136483,59.203719,15.286483,59.353719",
+            "start": "2010-05-07T00:00:00Z",
+            "end": "2010-05-08T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 27.266,
+          "status": 200,
+          "rows": 20
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "17.231813,62.315096,17.381813,62.465096",
+            "start": "2010-09-17T00:00:00Z",
+            "end": "2010-09-18T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 137.87,
+          "status": 200,
+          "rows": 83
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-112.017637,33.356514,-111.867637,33.506515",
+            "start": "2010-05-22T00:00:00Z",
+            "end": "2010-05-23T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 69.752,
+          "status": 200,
+          "rows": 48
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-122.426853,47.550313,-122.276853,47.700313",
+            "start": "2010-03-06T00:00:00Z",
+            "end": "2010-03-07T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 178.092,
+          "status": 200,
+          "rows": 144
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "8.71653,54.327924,8.86653,54.477924",
+            "start": "2010-09-08T00:00:00Z",
+            "end": "2010-09-09T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 6.848,
+          "status": 200,
+          "rows": 2
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "9.320048,47.365684,9.470048,47.515684",
+            "start": "2010-10-18T00:00:00Z",
+            "end": "2010-10-19T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 37.653,
+          "status": 200,
+          "rows": 1
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-74.068843,40.611325,-73.918843,40.761325",
+            "start": "2009-12-18T00:00:00Z",
+            "end": "2009-12-19T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 570.925,
+          "status": 200,
+          "rows": 155
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-74.038051,40.704209,-73.888051,40.854209",
+            "start": "2010-04-16T00:00:00Z",
+            "end": "2010-04-17T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 286.975,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "11.900318,57.624986,12.050318,57.774986",
+            "start": "2010-08-26T00:00:00Z",
+            "end": "2010-08-27T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 228.113,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "16.306427,48.136675,16.456427,48.286675",
+            "start": "2010-08-26T00:00:00Z",
+            "end": "2010-08-27T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 107.52,
+          "status": 200,
+          "rows": 70
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "18.183462,59.254528,18.333462,59.404528",
+            "start": "2010-04-06T00:00:00Z",
+            "end": "2010-04-07T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 30.249,
+          "status": 200,
+          "rows": 5
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "9.056911,55.658858,9.206911,55.808858",
+            "start": "2010-08-03T00:00:00Z",
+            "end": "2010-08-04T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 22.111,
+          "status": 200,
+          "rows": 1
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "5.225538,50.93796,5.375538,51.08796",
+            "start": "2010-06-02T00:00:00Z",
+            "end": "2010-06-03T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 15.007,
+          "status": 200,
+          "rows": 7
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-77.163687,38.766358,-77.013687,38.916358",
+            "start": "2010-01-17T00:00:00Z",
+            "end": "2010-01-18T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 92.705,
+          "status": 200,
+          "rows": 61
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "18.044384,59.191986,18.194384,59.341986",
+            "start": "2010-08-04T00:00:00Z",
+            "end": "2010-08-05T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 495.169,
+          "status": 200,
+          "rows": 200
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-73.968405,42.696361,-73.818405,42.846361",
+            "start": "2010-07-10T00:00:00Z",
+            "end": "2010-07-11T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 33.86,
+          "status": 200,
+          "rows": 3
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "10.654918,59.84457,10.804918,59.99457",
+            "start": "2010-07-21T00:00:00Z",
+            "end": "2010-07-22T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 252.083,
+          "status": 200,
+          "rows": 121
+        },
+        {
+          "path": "/api/checkins/geo",
+          "parameters": {
+            "bbox": "-96.883693,32.712308,-96.733693,32.862308",
+            "start": "2010-03-21T00:00:00Z",
+            "end": "2010-03-22T00:00:00Z",
+            "limit": 200
+          },
+          "ms": 401.015,
+          "status": 200,
+          "rows": 136
+        }
+      ]
+    }
+  }
+}

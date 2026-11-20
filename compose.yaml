@@ -1,0 +1,57 @@
+name: gowalla-course
+
+x-mongo: &mongo
+  image: mongo:7.0
+  restart: unless-stopped
+
+services:
+  cfg:
+    <<: *mongo
+    command: [mongod, --configsvr, --replSet, cfg, --port, "27019", --bind_ip_all, --wiredTigerCacheSizeGB, "0.25"]
+    volumes:
+      - config_data:/data/configdb
+  shard1:
+    <<: *mongo
+    command: [mongod, --shardsvr, --replSet, shard1, --port, "27011", --bind_ip_all, --wiredTigerCacheSizeGB, "0.5"]
+    volumes:
+      - shard1_data:/data/db
+  shard2:
+    <<: *mongo
+    command: [mongod, --shardsvr, --replSet, shard2, --port, "27021", --bind_ip_all, --wiredTigerCacheSizeGB, "0.5"]
+    volumes:
+      - shard2_data:/data/db
+
+  replica-init:
+    image: mongo:7.0
+    depends_on: [cfg, shard1, shard2]
+    entrypoint: [mongosh, --nodb, --quiet, --file, /scripts/init_replicas.js]
+    volumes:
+      - ./db:/scripts:ro
+
+  mongos:
+    <<: *mongo
+    command: [mongos, --configdb, "cfg/cfg:27019", --bind_ip_all]
+    depends_on:
+      replica-init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:27017:27017"
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --eval, "quit(db.adminCommand({ping: 1}).ok === 1 ? 0 : 1)"]
+      interval: 3s
+      timeout: 4s
+      retries: 30
+
+  sharding-init:
+    image: mongo:7.0
+    depends_on:
+      mongos:
+        condition: service_healthy
+    entrypoint: [mongosh, "mongodb://mongos:27017/admin", --quiet, --file, /scripts/init_sharding.js]
+    volumes:
+      - ./db:/scripts:ro
+
+volumes:
+  config_data:
+  shard1_data:
+  shard2_data:

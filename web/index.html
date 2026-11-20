@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173a35">
+  <title>Gowalla 签到数据服务</title>
+  <link rel="stylesheet" href="/static/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/leaflet/leaflet.js" defer></script>
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <p class="brand">Gowalla</p>
+        <h1>签到数据服务</h1>
+      </div>
+      <div class="header-links">
+        <span id="service-status" role="status">检查服务…</span>
+        <a href="/docs">API 文档</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="overview" aria-label="数据概览">
+      <dl class="metrics">
+        <div><dt>入库签到</dt><dd id="checkin-count">—</dd></div>
+        <div><dt>签到用户</dt><dd id="user-count">—</dd></div>
+        <div><dt>签到地点</dt><dd id="location-count">—</dd></div>
+        <div><dt>清洗拒收</dt><dd id="reject-count">—</dd></div>
+      </dl>
+      <div class="dataset-info">
+        <span id="dataset-range"> UTC 时间范围待加载</span>
+        <a href="/api/quality">清洗报告</a>
+      </div>
+    </section>
+
+    <div class="workspace">
+      <aside class="controls" aria-label="查询条件和分片概览">
+        <form id="query-form">
+          <fieldset class="modes">
+            <legend>查询方式</legend>
+            <label><input type="radio" name="mode" value="trajectory" checked><span>用户轨迹</span></label>
+            <label><input type="radio" name="mode" value="region"><span>区域签到</span></label>
+          </fieldset>
+
+          <div id="user-fields" class="field">
+            <label for="user-id">用户 ID</label>
+            <input id="user-id" name="user" type="text" inputmode="numeric" pattern="[0-9]+" value="0" required>
+          </div>
+          <div id="region-fields" class="field" hidden>
+            <label for="bbox">经纬度范围（西、南、东、北）</label>
+            <input id="bbox" name="bbox" placeholder="-97.81,30.22,-97.74,30.30" disabled>
+            <div class="actions">
+              <button type="button" id="select-region" class="secondary">地图上选范围</button>
+              <button type="button" id="clear-region" class="text-button">清除</button>
+            </div>
+            <p id="selection-status" class="hint" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="start">开始时间 <small>UTC · 可选</small></label>
+            <input id="start" name="start" placeholder="2010-10-19T00:00:00Z" maxlength="20" spellcheck="false">
+          </div>
+          <div class="field">
+            <label for="end">结束时间 <small>UTC · 可选</small></label>
+            <input id="end" name="end" placeholder="2010-10-20T00:00:00Z" maxlength="20" spellcheck="false">
+          </div>
+          <button id="submit" type="submit" class="primary">查询</button>
+        </form>
+
+        <section class="shards" aria-labelledby="shard-heading">
+          <h2 id="shard-heading">分片持有文档数</h2>
+          <div class="shard-meter" id="shard-meter" aria-hidden="true"><span></span><span></span></div>
+          <dl id="shard-counts"><div><dt>shard1</dt><dd>—</dd></div><div><dt>shard2</dt><dd>—</dd></div></dl>
+        </section>
+      </aside>
+
+      <section class="results" aria-labelledby="results-heading">
+        <div class="results-heading">
+          <h2 id="results-heading">签到地图</h2>
+          <p id="result-status" role="status">请提交查询。</p>
+        </div>
+        <div id="map" role="region" aria-label="签到地图"></div>
+        <div class="table-scroll">
+          <table aria-label="查询到的签到">
+            <thead><tr><th>源文件行号</th><th>UTC 时间</th><th>用户 ID</th><th>地点 ID</th><th>经度</th><th>纬度</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="more"><button id="load-more" class="secondary" type="button" hidden>加载下一页</button></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

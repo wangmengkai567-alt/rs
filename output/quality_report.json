@@ -1,0 +1,23 @@
+{
+  "input_sha256": "4e02ea12586a1bfb986b468d78672ab256bab5e25559aca2cc23e1ecb55df1ea",
+  "input_count": 6442892,
+  "clean_count": 6442127,
+  "reject_count": 765,
+  "reason_counts": {
+    "BAD_STRUCT": 0,
+    "BAD_ID": 0,
+    "BAD_TIME": 0,
+    "BAD_COORD": 29,
+    "ZERO_COORD": 135,
+    "DUPLICATE": 601
+  },
+  "conflicting_keys": 0,
+  "user_count": 107069,
+  "location_count": 1280938,
+  "first_ts_utc": "2009-02-04T05:17:38Z",
+  "last_ts_utc": "2010-10-23T05:22:06Z",
+  "input_file": "Gowalla_totalCheckins.txt",
+  "rule_version": "1.1",
+  "clean_sha256": "4ca7d444fcbbc3c1badac2688e7a8f6b7c62018ef8d5d49b67643a788cc641e3",
+  "elapsed_seconds": 188.047
+}
