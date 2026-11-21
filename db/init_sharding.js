@@ -1,7 +1,7 @@
 const admin = db.getSiblingDB("admin");
 const plannedShards = {
-  shard1: "shard1/shard1:27011",
-  shard2: "shard2/shard2:27021",
+  shard1: "shard1/gowalla-shard1:27011",
+  shard2: "shard2/gowalla-shard2:27021",
 };
 const currentShards = admin.runCommand({listShards: 1}).shards;
 for (const shard of currentShards) {

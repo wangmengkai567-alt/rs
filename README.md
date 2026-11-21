@@ -1,56 +1,26 @@
 # Gowalla 签到数据服务
 
-课程作业实现。系统读取课程下发的签到文件，清洗后通过 MongoDB 路由写入两个分片。FastAPI 提供用户轨迹、区域签到、统计概览和质量报告，首页提供地图与查询表格。
+系统清洗课程下发的 Gowalla 签到数据，经 MongoDB 路由写入两台电脑各自的数据分片。FastAPI 提供用户轨迹、区域签到、统计概览和清洗报告。首页用 Leaflet 展示地图和查询结果。
 
-## 运行环境
+## 两台电脑部署与验收
 
-使用 Docker Desktop（Linux 容器）或支持 Docker Compose 的 Docker Engine，以及 uv。项目锁定 Python 3.11，数据库镜像为 MongoDB 7.0。数据库路由和 API 分别监听本机的 27017、8000 端口。首次启动需要联网下载镜像和 Python 依赖，地图底图由 OpenStreetMap 提供。
+A 机运行 `shard1`、配置服务器、`mongos` 和 FastAPI，B 机运行 `shard2`。两台电脑各自启动本地 Docker 引擎，使用同一局域网中的两个不同 IPv4 地址。A 机还需 uv，项目锁定 Python 3.11。两台电脑首次启动时会下载 MongoDB 7.0 镜像。
 
-在项目根目录执行以下命令。
+按[双机部署与验收手册](docs/双机部署与验收.md)配置地址，先启动 B 机，再启动 A 机。全量导入完成后，由 B 机导出本地存储证据，A 机将该证据与直连计数、路由计数和查询执行计划对账。
+
+## 在 A 机清洗、导入与启动
+
+完成双机集群初始化后，在 A 机项目根目录运行。清洗输入使用解压后的课程附件。
 
 ~~~powershell
 uv sync --locked
-docker compose up -d
-docker compose wait sharding-init
-~~~
-
-初始化任务创建三个单成员副本集，等主节点就绪后启动 mongos，再添加两个数据分片并为 gowalla.checkins 配置 user_id 哈希分片。可用 docker compose ps -a 查看初始化任务是否以状态码 0 结束。
-
-## 清洗、导入与启动
-
-将下发的归档解压到对应目录后运行。
-
-~~~powershell
 uv run --locked python -m cleaner.pipeline --input "测试数据loc-gowalla_totalCheckins.txt/Gowalla_totalCheckins.txt" --output output
 uv run --locked python -m db.import_checkins --input output/clean.tsv --report output/quality_report.json
 uv run --locked uvicorn api.main:app --host 127.0.0.1 --port 8000
 ~~~
 
-打开 [地图查询](http://127.0.0.1:8000/) 或 [API 文档](http://127.0.0.1:8000/docs)。清洗输出位于 output，包含 clean.tsv、reject.ndjson 和 quality_report.json。导入中断后，重新执行同一条导入命令。程序以 5,000 条为一批，最多并发写入四批，使用完整分片键和源文件行号匹配已写入记录。索引和计数核对通过后开放数据查询。
+打开 [地图查询](http://127.0.0.1:8000/) 或 [API 文档](http://127.0.0.1:8000/docs)。导入中断后，可重跑同一份清洗文件。程序使用完整分片键和源文件行号匹配已写记录，索引和计数核对通过后开放查询。
 
-## 验收
-
-在另一个 PowerShell 窗口运行以下命令，查看总记录数、两个分片的数据分布和两类查询的执行计划。
-
-~~~powershell
-docker compose cp db/verify_distribution.js mongos:/tmp/verify_distribution.js
-docker compose exec -T mongos mongosh --quiet --file /tmp/verify_distribution.js
-~~~
-
-- 清洗输入为 6,442,892 条，通过 6,442,127 条，拒收 765 条。原因分别为越界 29 条、双零坐标 135 条、重复 601 条。
-- 两片持有的记录数都应大于零，合计为 6,442,127。用户 0 的轨迹执行计划应只涉及一个分片，城市区域查询应访问两个分片。
-- 用户 0 的完整轨迹有 225 条。用奥斯汀范围 -97.81,30.22,-97.74,30.30 和 UTC 半开区间 [2010-10-19T23:55:27Z, 2010-10-19T23:55:28Z) 查询，应包含源文件第 1 行。
-
-### 本机全量实测
-
-| 分片 | 持有签到 |
-| --- | ---: |
-| shard1 | 3,230,580 |
-| shard2 | 3,211,547 |
-| 合计 | 6,442,127 |
-
-从同一清洗文件重跑导入后，匹配 1,190,000 条已写记录，新增 5,252,127 条。对用户轨迹和区域查询各发起 100 次请求，两类请求均无错误，P95 分别为 56.2 ms 和 525.8 ms。全量运行产物包括 [质量报告](output/quality_report.json)、[验收记录](output/acceptance.json) 和 [演示截图](output/preview.png)。
-
-结束演示后在运行 API 的窗口按 Ctrl+C，再执行 docker compose stop。下次可以重新执行 docker compose up -d，数据保存在 Compose 持久卷中。
+此前报告中的 3,230,580 与 3,211,547 条分片计数及查询耗时来自单机双容器实验。跨实体机结果以[双机部署与验收手册](docs/双机部署与验收.md)生成的记录为准。
 
 地图使用本地分发的 Leaflet 1.9.4，许可见 [Leaflet LICENSE](web/static/leaflet/LICENSE)。

@@ -1,0 +1,21 @@
+name: gowalla-course-b
+
+services:
+  shard2:
+    image: mongo:7.0
+    restart: unless-stopped
+    command: [mongod, --shardsvr, --replSet, shard2, --port, "27021", --bind_ip_all, --wiredTigerCacheSizeGB, "0.5"]
+    ports:
+      - "${GOWALLA_B_IP:?Set GOWALLA_B_IP in .env}:27021:27021"
+    networks:
+      default:
+        aliases: [gowalla-shard2]
+    extra_hosts:
+      gowalla-cfg: "${GOWALLA_A_IP:?Set GOWALLA_A_IP in .env}"
+      gowalla-shard1: "${GOWALLA_A_IP:?Set GOWALLA_A_IP in .env}"
+    volumes:
+      - shard2_data:/data/db
+      - ./db:/scripts:ro
+
+volumes:
+  shard2_data:
