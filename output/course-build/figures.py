@@ -15,7 +15,7 @@ assert sum(counts.values()) == report["quality"]["clean_count"]
 song = FontProperties(fname="C:/Windows/Fonts/simsun.ttc")
 latin = FontProperties(fname="C:/Windows/Fonts/times.ttf")
 ink, label = "#173730", "#344b46"
-green, blue = "#167466", "#346688"
+shard1_blue, shard2_orange = "#195382", "#c77c17"
 
 fig, ax = plt.subplots(figsize=(15.4/2.54, 5.9/2.54))
 fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
@@ -66,7 +66,7 @@ fig, ax = plt.subplots(figsize=(15.4/2.54, 4.55/2.54))
 fig.subplots_adjust(left=.15, right=.98, top=.91, bottom=.27)
 total = sum(counts.values())
 ax.barh([1,0], [counts["shard1"],counts["shard2"]], height=.43,
-        color=[green,blue], zorder=3)
+        color=[shard1_blue, shard2_orange], zorder=3)
 ax.set_xlim(0, 4_950_000)
 ax.set_ylim(-.52, 1.52)
 ax.set_yticks([1,0], ["shard1","shard2"], fontproperties=latin, fontsize=8)

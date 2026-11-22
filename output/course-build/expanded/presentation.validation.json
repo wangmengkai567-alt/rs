@@ -1,7 +1,7 @@
 {
   "schemaVersion": "presentation-finalization.v1",
-  "finalSha256": "cfbfa8136831e9aa5ad5092500d590aa32fb463092eefa42eaa1ba2d7da31512",
-  "byteCount": 901631,
+  "finalSha256": "44695e03bced773df186eab4d55b6442efa257f8b642f4cde7fc048f5ba20797",
+  "byteCount": 3948572,
   "packageIntegrity": {
     "chart_count": 0,
     "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
@@ -19,13 +19,13 @@
     "finding_count": 0,
     "findings": [],
     "font_policy": {
-      "checked_text_script_count": 130,
+      "checked_text_script_count": 129,
       "native_font_rendering_verified": false,
       "observed_font_families": [
         "Microsoft YaHei"
       ],
       "observed_font_use_counts": {
-        "Microsoft YaHei": 130
+        "Microsoft YaHei": 129
       },
       "passed": true,
       "performed": true
@@ -40,13 +40,13 @@
     "exitCode": 0,
     "findingCount": 0,
     "fontPolicy": {
-      "checked_text_script_count": 130,
+      "checked_text_script_count": 129,
       "native_font_rendering_verified": false,
       "observed_font_families": [
         "Microsoft YaHei"
       ],
       "observed_font_use_counts": {
-        "Microsoft YaHei": 130
+        "Microsoft YaHei": 129
       },
       "passed": true,
       "performed": true
@@ -60,13 +60,13 @@
     "scriptFonts": {},
     "referenceSha256": null,
     "referenceFontsVerifiedInEncodedText": false,
-    "checked_text_script_count": 130,
+    "checked_text_script_count": 129,
     "native_font_rendering_verified": false,
     "observed_font_families": [
       "Microsoft YaHei"
     ],
     "observed_font_use_counts": {
-      "Microsoft YaHei": 130
+      "Microsoft YaHei": 129
     },
     "passed": true,
     "performed": true
@@ -75,8 +75,7 @@
     "performed": true,
     "passed": true,
     "slideCount": 9,
-    "sha256": "cfbfa8136831e9aa5ad5092500d590aa32fb463092eefa42eaa1ba2d7da31512",
-    "runtimeNodeModules": "C:/Users/Dell/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+    "sha256": "44695e03bced773df186eab4d55b6442efa257f8b642f4cde7fc048f5ba20797",
     "nodeExecutable": "C:\\Users\\Dell\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe"
   },
   "nativeTableArithmetic": {
@@ -124,7 +123,7 @@
     "native_chart_count": 0,
     "native_powerpoint_verified": false,
     "passed": true,
-    "presentation_sha256": "cfbfa8136831e9aa5ad5092500d590aa32fb463092eefa42eaa1ba2d7da31512",
+    "presentation_sha256": "44695e03bced773df186eab4d55b6442efa257f8b642f4cde7fc048f5ba20797",
     "schema_version": "presentation-native-chart-titles.v1",
     "slide_count": 9,
     "source_text_emitted": false,
