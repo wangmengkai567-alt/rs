@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Annotated
 
+from bson import MaxKey, MinKey
 from fastapi import APIRouter, Depends, HTTPException, Path, Query, Request
 from fastapi.responses import JSONResponse
 from pymongo.errors import PyMongoError
@@ -13,7 +14,8 @@ from pymongo.errors import PyMongoError
 from cleaner.schema import MAX_INT64, parse_utc
 
 router = APIRouter(prefix="/api")
-ORDER = [("ts", -1), ("_id", -1)]
+ORDER = {"ts": -1, "_id": -1}
+QUERY_TIMEOUT_MS = 15_000
 
 
 def database(request: Request):
@@ -127,6 +129,30 @@ def encode_cursor(scope: str, document: dict) -> str:
     return base64.urlsafe_b64encode(payload.encode("ascii")).decode("ascii").rstrip("=")
 
 
+def read_shard_chunks(collection, session) -> list[dict]:
+    config = collection.database.client.config
+    metadata = config.collections.find_one(
+        {"_id": collection.full_name, "key": {"user_id": "hashed"}}, {"uuid": 1},
+        session=session, max_time_ms=QUERY_TIMEOUT_MS,
+    )
+    if metadata is None:
+        raise HTTPException(503, "签到集合的分片元数据不可用")
+    return list(config.chunks.find(
+        {"uuid": metadata["uuid"]}, {"min": 1, "max": 1, "shard": 1, "_id": 0},
+        session=session, max_time_ms=QUERY_TIMEOUT_MS,
+    ))
+
+
+def shard_for_hash(user_hash: int, chunks: list[dict]) -> str:
+    for chunk in chunks:
+        lower, upper = chunk["min"]["user_id"], chunk["max"]["user_id"]
+        if (isinstance(lower, MinKey) or lower <= user_hash) and (
+            isinstance(upper, MaxKey) or user_hash < upper
+        ):
+            return chunk["shard"]
+    raise HTTPException(503, "无法确定签到记录所属分片")
+
+
 def find_page(db: Database, page: Page, selector: dict, criteria: dict) -> dict:
     dataset = get_ready_dataset(db)
     boundaries = {"$gte": page.start, "$lt": page.end}
@@ -140,10 +166,22 @@ def find_page(db: Database, page: Page, selector: dict, criteria: dict) -> dict:
         timestamp, row = decode_cursor(page.cursor, scope)
         selector["$or"] = [{"ts": {"$lt": timestamp}}, {"ts": timestamp, "_id": {"$lt": row}}]
 
-    documents = list(
-        db.checkins.find(selector).sort(ORDER).limit(page.limit + 1).max_time_ms(15_000)
-    )
-    visible = documents[:page.limit]
+    collection = db.checkins
+    pipeline = [
+        {"$match": selector},
+        {"$sort": ORDER},
+        {"$limit": page.limit + 1},
+        {"$project": {
+            "_id": 1, "user_id": 1, "ts": 1, "loc.coordinates": 1, "location_id": 1,
+            "user_hash": {"$toHashedIndexKey": "$user_id"},
+        }},
+    ]
+    # Read the documents and chunk ownership at the same point in time during migrations.
+    with db.client.start_session(snapshot=True) as session:
+        documents = list(collection.aggregate(pipeline, session=session, maxTimeMS=QUERY_TIMEOUT_MS))
+        visible = documents[:page.limit]
+        chunks = read_shard_chunks(collection, session) if visible else []
+
     return {
         "items": [
             {
@@ -152,6 +190,7 @@ def find_page(db: Database, page: Page, selector: dict, criteria: dict) -> dict:
                 "ts_utc": format_utc(row["ts"]),
                 "coordinates": row["loc"]["coordinates"],
                 "location_id": row["location_id"],
+                "shard": shard_for_hash(row["user_hash"], chunks),
             }
             for row in visible
         ],

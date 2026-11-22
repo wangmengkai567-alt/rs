@@ -74,14 +74,21 @@
 
         <section class="shards" aria-labelledby="shard-heading">
           <h2 id="shard-heading">分片持有文档数</h2>
-          <div class="shard-meter" id="shard-meter" aria-hidden="true"><span></span><span></span></div>
-          <dl id="shard-counts"><div><dt>shard1</dt><dd>—</dd></div><div><dt>shard2</dt><dd>—</dd></div></dl>
+          <div class="shard-meter" id="shard-meter" aria-hidden="true"><span class="shard1"></span><span class="shard2"></span></div>
+          <dl id="shard-counts">
+            <div class="shard1"><dt>shard1</dt><dd>—</dd></div>
+            <div class="shard2"><dt>shard2</dt><dd>—</dd></div>
+          </dl>
         </section>
       </aside>
 
       <section class="results" aria-labelledby="results-heading">
         <div class="results-heading">
           <h2 id="results-heading">签到地图</h2>
+          <ul class="map-legend" aria-label="签到点所属分片">
+            <li class="shard1">shard1</li>
+            <li class="shard2">shard2</li>
+          </ul>
           <p id="result-status" role="status">请提交查询。</p>
         </div>
         <div id="map" role="region" aria-label="签到地图"></div>
