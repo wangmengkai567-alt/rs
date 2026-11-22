@@ -23,4 +23,22 @@ uv run --locked uvicorn api.main:app --host 127.0.0.1 --port 8000
 
 此前报告中的 3,230,580 与 3,211,547 条分片计数及查询耗时来自单机双容器实验。跨实体机结果以[双机部署与验收手册](docs/双机部署与验收.md)生成的记录为准。
 
+## 停止 Docker 服务
+
+演示结束后，先在 A 机的项目根目录执行。
+
+~~~powershell
+docker compose stop
+docker compose ps -a
+~~~
+
+再在 B 机的项目根目录执行。
+
+~~~powershell
+docker compose -f compose.peer.yaml stop
+docker compose -f compose.peer.yaml ps -a
+~~~
+
+数据库容器停止后会显示为 `Exited`，数据保存在两台电脑各自的 Docker 数据卷中。下次按启动顺序先启动 B 机，再启动 A 机。
+
 地图使用本地分发的 Leaflet 1.9.4，许可见 [Leaflet LICENSE](web/static/leaflet/LICENSE)。
