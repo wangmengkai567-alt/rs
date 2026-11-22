@@ -19,5 +19,5 @@
   "input_file": "Gowalla_totalCheckins.txt",
   "rule_version": "1.1",
   "clean_sha256": "4ca7d444fcbbc3c1badac2688e7a8f6b7c62018ef8d5d49b67643a788cc641e3",
-  "elapsed_seconds": 180.054
+  "elapsed_seconds": 71.709
 }
