@@ -50,7 +50,7 @@ docker compose exec -T mongos mongosh --quiet --file /tmp/verify_distribution.js
 | shard2 | 3,211,547 |
 | 合计 | 6,442,127 |
 
-从同一清洗文件重跑导入后，匹配 1,190,000 条已写记录，新增 5,252,127 条。对用户轨迹和区域查询各发起 100 次请求，两类请求均无错误，P95 分别为 56.2 ms 和 525.8 ms。全量运行产物包括 [质量报告](output/quality_report.json)、[验收记录](output/acceptance.json) 和 [演示截图](output/preview.png)。
+从同一清洗文件重跑导入后，匹配 1,190,000 条已写记录，新增 5,252,127 条。新版接口复测中，用户轨迹和区域查询各发起 100 次请求，失败分别为 0 次和 13 次。成功请求的 P95 分别为 472.9 ms 和 11618.9 ms。全量运行产物包括 [质量报告](output/quality_report.json)、[验收记录](output/acceptance.json) 和 [演示截图](output/preview.png)。
 
 结束演示后在运行 API 的窗口按 Ctrl+C，再执行 docker compose stop。下次可以重新执行 docker compose up -d，数据保存在 Compose 持久卷中。
 

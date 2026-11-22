@@ -6,7 +6,7 @@ import { Presentation, PresentationFile } from "@oai/artifact-tool";
 const root = process.cwd();
 const build = path.join(root, "output", "course-build", "expanded");
 const destination = path.join(root, "output", "course-build", "expanded-result");
-const skill = "C:/Users/Dell/.codex/plugins/cache/openai-primary-runtime/presentations/26.1118.11504/skills/presentations";
+const skill = "C:/Users/Dell/.codex/plugins/cache/openai-primary-runtime/presentations/26.1119.11507/skills/presentations";
 const python = "C:/Users/Dell/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe";
 const facts = JSON.parse(await fs.readFile(path.join(root, "output", "acceptance.json"), "utf8"));
 const q = facts.quality;
@@ -159,7 +159,7 @@ s.speakerNotes.text="建议用时 30 秒\n全量导入过程中实际中断了�
 
 s=slide("用户轨迹与分页验证");
 const trajectoryCounts=facts.verified.trajectory_counts;
-const route=facts.plans.trajectory.queryPlanner.winningPlan.shards[0].shardName;
+const route=facts.verified.trajectory_query_shards[0];
 table(s,"Verified trajectory counts",[
   ["用户 ID","完整签到条数"],["0",n(trajectoryCounts["0"])],["776",n(trajectoryCounts["776"])]
 ],72,178,624,231,[258,366],{fontSize:"23pt"});
@@ -171,30 +171,31 @@ text(s,"Shard routing proof","用户 0 的执行计划只访问 "+route,72,496,1
 s.speakerNotes.text="建议用时 30 秒\n轨迹接口按用户查签到。我们把每页设为七十一条，逐页读取用户零和用户七七六的完整记录，分别得到二百二十五条和两千一百七十四条。各页保持排序，没有重复源行号。用户零的执行计划只访问 shard1。";
 
 s=slide("奥斯汀区域查询演示");
+const demoResult = facts.verified.region_demo;
 text(s,"Austin query bounds","奥斯汀城市范围",72,185,325,46,{fontSize:"24pt",bold:true});
-text(s,"Selected period","1 秒 UTC 时间窗",72,249,325,42,{fontSize:"20pt",color:de.muted});
-text(s,"Source row evidence","源文件第 1 行",72,356,326,57,{fontSize:"28pt",bold:true,color:de.green});
-text(s,"User ID","用户 ID  0",72,429,325,44,{fontSize:"20pt"});
-text(s,"POI ID","地点 ID  22847",72,481,325,44,{fontSize:"20pt"});
+text(s,"Returned records",`首屏显示 ${n(demoResult.rows)} 条签到`,72,249,325,42,{fontSize:"20pt",color:de.muted});
+text(s,"First shard",`shard1  深蓝  ${n(demoResult.shard_counts.shard1)} 条`,72,338,326,52,{fontSize:"22pt",bold:true,color:"#195382"});
+text(s,"Second shard",`shard2  橙色  ${n(demoResult.shard_counts.shard2)} 条`,72,405,326,52,{fontSize:"22pt",bold:true,color:"#a2590d"});
+text(s,"Point details","点击签到点查看所属分片",72,481,325,44,{fontSize:"19pt"});
 const demo = new Uint8Array(await fs.readFile(path.join(build,"demo.png")));
 s.images.add({name:"Austin query screenshot",blob:demo,contentType:"image/png",
   position:{left:432,top:151,width:778,height:502.5},fit:"contain"});
-s.speakerNotes.text="建议用时 35 秒\n左边是这一例的核对重点，右边是本机系统运行时的截图。选取奥斯汀城区的一个范围，时间限制在 2010 年 10 月 19 日 23 点 55 分 27 秒开始的一秒。指一下图中选框里的签到点和底部列表。返回的是源文件第 1 行，用户 0，地点 22847。地图标记和结果列表指向同一条原始记录。区域查询的执行计划显示，两片共同参与这一请求。\n截图源于课程系统的实时请求，底图 © OpenStreetMap contributors。";
+s.speakerNotes.text=`建议用时 35 秒\n选取奥斯汀城区范围，时间留空。首屏有 ${demoResult.rows} 条签到，其中 ${demoResult.shard_counts.shard1} 条来自 shard1，${demoResult.shard_counts.shard2} 条来自 shard2。蓝橙配色与分片图例一致，点击签到点可以核对所属分片。把时间缩到原始同一秒时，查询仍返回源文件第 1 行，用户 0，地点 22847。\n截图来自单机双分片实测，底图 © OpenStreetMap contributors。`;
 
 s=slide("查询性能与结论");
 const track=facts.performance.trajectory, region=facts.performance.region;
 table(s,"Measured end-to-end latency",[
   ["查询","访问分片","P50","P95","失败请求"],
-  ["用户轨迹","1",track.p50_ms.toFixed(1)+" ms",track.p95_ms.toFixed(1)+" ms","0 / 100"],
-  ["区域签到","2",region.p50_ms.toFixed(1)+" ms",region.p95_ms.toFixed(1)+" ms","0 / 100"]
+  ["用户轨迹","1",track.p50_ms.toFixed(1)+" ms",track.p95_ms.toFixed(1)+" ms",`${track.errors} / ${track.count}`],
+  ["区域签到","2",region.p50_ms.toFixed(1)+" ms",region.p95_ms.toFixed(1)+" ms",`${region.errors} / ${region.count}`]
 ],72,174,1129,235,[244,210,208,224,243],{fontSize:"21pt"});
-text(s,"Measurement scope","本机预热后测量 HTTP 端到端耗时，每类 100 次请求。",72,429,1125,42,
+text(s,"Measurement scope","每类请求测量 100 次，延时分位数只统计成功请求。",72,429,1125,42,
   {fontSize:"19pt",color:de.muted});
 text(s,"Reconciled result","全量清洗、双分片存储和查询结果已对账",72,507,1130,52,
   {fontSize:"29pt",bold:true,color:de.dark});
 text(s,"Deployment limit","本次测试在一台主机上完成。多主机容错与并发负载有待验证。",72,582,1140,44,
   {fontSize:"18pt",color:de.muted});
-s.speakerNotes.text="建议用时 35 秒\n每类接口预热十次后发一百次请求。用户轨迹只访问一个分片，P95 是 56.2 毫秒。区域查询访问两片，P95 为 525.8 毫秒。两种负载的筛选条件和结果规模也不同，不能将延时差异完全归因于分片数。两类请求都没有错误。整个案例完成了清洗输出、实际分片记录与查询结果的对账。本次结果对应单机双分片部署，多主机故障和并发负载需要进一步测试。";
+s.speakerNotes.text=`建议用时 35 秒\n每类接口预热十次后发一百次请求。成功请求中，用户轨迹的 P95 为 ${track.p95_ms.toFixed(1)} 毫秒，区域签到的 P95 为 ${region.p95_ms.toFixed(1)} 毫秒。失败次数分别为 ${track.errors} 和 ${region.errors}，按失败请求单列。两类负载的筛选条件和命中规模也有差异。这里展示的是单机双分片实测。`;
 
 await fs.mkdir(destination,{recursive:true});
 for(let i=0;i<deck.slides.items.length;i++){
@@ -204,16 +205,31 @@ for(let i=0;i<deck.slides.items.length;i++){
 const draft=path.join(build,"presentation-draft.pptx");
 await (await PresentationFile.exportPptx(deck)).save(draft);
 const {finalizePresentation}=await import(pathToFileURL(path.join(skill,"container_tools","artifact_tool_utils.mjs")).href);
-const result=await finalizePresentation({
-  workspaceDir:root,candidatePath:draft,
-  finalPath:path.join(destination,"presentation-final.pptx"),
-  pythonExecutable:python,
-  integrityValidatorPath:path.join(skill,"container_tools","inspect_presentation_package_integrity.py"),
-  layoutValidatorPath:path.join(skill,"container_tools","inspect_presentation_layout_geometry.py"),
-  layoutArgs:["--expected-slide-size-emu","12192000,6858000","--validate-heading-fit",
-    "--require-native-table-slide","4","--require-native-table-slide","5","--require-native-table-slide","7","--require-native-table-slide","9"],
-  explicitTotalSlideCount:9,requiredNativeTableOwnerSlides:[4,5,7,9],
-  fontPolicy:{basis:"design",families:[font]},
-  verifyArtifactToolImport:true,receiptPath:path.join(build,"presentation.final.validation.json"),
-});
-console.log(result);
+const finalName="Gowalla签到数据管理系统_课程汇报_9页.pptx";
+const receiptName="presentation.final.validation.json";
+const stage=await fs.mkdtemp(path.join(build,".gowalla-deck-"));
+const candidateDirectory=path.join(stage,"deck");
+await fs.mkdir(candidateDirectory);
+const candidate=path.join(candidateDirectory,finalName);
+const receipt=path.join(stage,receiptName);
+try {
+  const result=await finalizePresentation({
+    workspaceDir:root,candidatePath:draft,finalPath:candidate,
+    pythonExecutable:python,
+    integrityValidatorPath:path.join(skill,"container_tools","inspect_presentation_package_integrity.py"),
+    layoutValidatorPath:path.join(skill,"container_tools","inspect_presentation_layout_geometry.py"),
+    layoutArgs:["--expected-slide-size-emu","12192000,6858000","--validate-heading-fit",
+      "--require-native-table-slide","4","--require-native-table-slide","5","--require-native-table-slide","7","--require-native-table-slide","9"],
+    explicitTotalSlideCount:9,requiredNativeTableOwnerSlides:[4,5,7,9],
+    fontPolicy:{basis:"design",families:[font]},
+    verifyArtifactToolImport:true,receiptPath:receipt,
+  });
+  await fs.rename(candidate,path.join(destination,finalName));
+  await fs.rename(receipt,path.join(build,receiptName));
+  console.log(result);
+} finally {
+  await fs.rm(candidate,{force:true});
+  await fs.rm(receipt,{force:true});
+  await fs.rmdir(candidateDirectory);
+  await fs.rmdir(stage);
+}

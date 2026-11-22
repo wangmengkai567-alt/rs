@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2026-11-19T14:20:20.712250+00:00",
+  "timestamp_utc": "2026-11-22T11:24:33.807879+00:00",
   "mongo_version": "7.0.48",
   "quality": {
     "input_sha256": "4e02ea12586a1bfb986b468d78672ab256bab5e25559aca2cc23e1ecb55df1ea",
@@ -59,535 +59,8 @@
   },
   "plans": {
     "trajectory": {
-      "queryPlanner": {
-        "mongosPlannerVersion": 1,
-        "winningPlan": {
-          "stage": "SINGLE_SHARD",
-          "shards": [
-            {
-              "shardName": "shard1",
-              "connectionString": "shard1/shard1:27011",
-              "serverInfo": {
-                "host": "88a078d2d674",
-                "port": 27011,
-                "version": "7.0.48",
-                "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
-              },
-              "namespace": "gowalla.checkins",
-              "indexFilterSet": false,
-              "parsedQuery": {
-                "user_id": {
-                  "$eq": 0
-                }
-              },
-              "queryHash": "6584F86E",
-              "planCacheKey": "82DC5FA0",
-              "optimizationTimeMillis": 0,
-              "maxIndexedOrSolutionsReached": false,
-              "maxIndexedAndSolutionsReached": false,
-              "maxScansToExplodeReached": false,
-              "winningPlan": {
-                "stage": "LIMIT",
-                "limitAmount": 201,
-                "inputStage": {
-                  "stage": "FETCH",
-                  "inputStage": {
-                    "stage": "IXSCAN",
-                    "keyPattern": {
-                      "user_id": 1,
-                      "ts": -1,
-                      "_id": -1
-                    },
-                    "indexName": "trajectory",
-                    "isMultiKey": false,
-                    "multiKeyPaths": {
-                      "user_id": [],
-                      "ts": [],
-                      "_id": []
-                    },
-                    "isUnique": false,
-                    "isSparse": false,
-                    "isPartial": false,
-                    "indexVersion": 2,
-                    "direction": "forward",
-                    "indexBounds": {
-                      "user_id": [
-                        "[0, 0]"
-                      ],
-                      "ts": [
-                        "[MaxKey, MinKey]"
-                      ],
-                      "_id": [
-                        "[MaxKey, MinKey]"
-                      ]
-                    }
-                  }
-                }
-              },
-              "rejectedPlans": [
-                {
-                  "stage": "SORT",
-                  "sortPattern": {
-                    "ts": -1,
-                    "_id": -1
-                  },
-                  "memLimit": 104857600,
-                  "limitAmount": 201,
-                  "type": "simple",
-                  "inputStage": {
-                    "stage": "FETCH",
-                    "filter": {
-                      "user_id": {
-                        "$eq": 0
-                      }
-                    },
-                    "inputStage": {
-                      "stage": "IXSCAN",
-                      "keyPattern": {
-                        "user_id": "hashed"
-                      },
-                      "indexName": "user_id_hashed",
-                      "isMultiKey": false,
-                      "isUnique": false,
-                      "isSparse": false,
-                      "isPartial": false,
-                      "indexVersion": 2,
-                      "direction": "forward",
-                      "indexBounds": {
-                        "user_id": [
-                          "[4854801880128277513, 4854801880128277513]"
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "executionStats": {
-        "nReturned": 201,
-        "executionTimeMillis": 1,
-        "totalKeysExamined": 201,
-        "totalDocsExamined": 201,
-        "executionStages": {
-          "stage": "SINGLE_SHARD",
-          "nReturned": 201,
-          "executionTimeMillis": 1,
-          "totalKeysExamined": 201,
-          "totalDocsExamined": 201,
-          "totalChildMillis": 0,
-          "shards": [
-            {
-              "shardName": "shard1",
-              "executionSuccess": true,
-              "nReturned": 201,
-              "executionTimeMillis": 0,
-              "totalKeysExamined": 201,
-              "totalDocsExamined": 201,
-              "executionStages": {
-                "stage": "LIMIT",
-                "nReturned": 201,
-                "executionTimeMillisEstimate": 0,
-                "works": 202,
-                "advanced": 201,
-                "needTime": 0,
-                "needYield": 0,
-                "saveState": 0,
-                "restoreState": 0,
-                "isEOF": 1,
-                "limitAmount": 201,
-                "inputStage": {
-                  "stage": "FETCH",
-                  "nReturned": 201,
-                  "executionTimeMillisEstimate": 0,
-                  "works": 201,
-                  "advanced": 201,
-                  "needTime": 0,
-                  "needYield": 0,
-                  "saveState": 0,
-                  "restoreState": 0,
-                  "isEOF": 0,
-                  "docsExamined": 201,
-                  "alreadyHasObj": 0,
-                  "inputStage": {
-                    "stage": "IXSCAN",
-                    "nReturned": 201,
-                    "executionTimeMillisEstimate": 0,
-                    "works": 201,
-                    "advanced": 201,
-                    "needTime": 0,
-                    "needYield": 0,
-                    "saveState": 0,
-                    "restoreState": 0,
-                    "isEOF": 0,
-                    "keyPattern": {
-                      "user_id": 1,
-                      "ts": -1,
-                      "_id": -1
-                    },
-                    "indexName": "trajectory",
-                    "isMultiKey": false,
-                    "multiKeyPaths": {
-                      "user_id": [],
-                      "ts": [],
-                      "_id": []
-                    },
-                    "isUnique": false,
-                    "isSparse": false,
-                    "isPartial": false,
-                    "indexVersion": 2,
-                    "direction": "forward",
-                    "indexBounds": {
-                      "user_id": [
-                        "[0, 0]"
-                      ],
-                      "ts": [
-                        "[MaxKey, MinKey]"
-                      ],
-                      "_id": [
-                        "[MaxKey, MinKey]"
-                      ]
-                    },
-                    "keysExamined": 201,
-                    "seeks": 1,
-                    "dupsTested": 0,
-                    "dupsDropped": 0
-                  }
-                }
-              },
-              "allPlansExecution": [
-                {
-                  "nReturned": 101,
-                  "executionTimeMillisEstimate": 0,
-                  "totalKeysExamined": 101,
-                  "totalDocsExamined": 101,
-                  "score": 2.0002,
-                  "executionStages": {
-                    "stage": "LIMIT",
-                    "nReturned": 101,
-                    "executionTimeMillisEstimate": 0,
-                    "works": 101,
-                    "advanced": 101,
-                    "needTime": 0,
-                    "needYield": 0,
-                    "saveState": 0,
-                    "restoreState": 0,
-                    "isEOF": 0,
-                    "limitAmount": 201,
-                    "inputStage": {
-                      "stage": "FETCH",
-                      "nReturned": 101,
-                      "executionTimeMillisEstimate": 0,
-                      "works": 101,
-                      "advanced": 101,
-                      "needTime": 0,
-                      "needYield": 0,
-                      "saveState": 0,
-                      "restoreState": 0,
-                      "isEOF": 0,
-                      "docsExamined": 101,
-                      "alreadyHasObj": 0,
-                      "inputStage": {
-                        "stage": "IXSCAN",
-                        "nReturned": 101,
-                        "executionTimeMillisEstimate": 0,
-                        "works": 101,
-                        "advanced": 101,
-                        "needTime": 0,
-                        "needYield": 0,
-                        "saveState": 0,
-                        "restoreState": 0,
-                        "isEOF": 0,
-                        "keyPattern": {
-                          "user_id": 1,
-                          "ts": -1,
-                          "_id": -1
-                        },
-                        "indexName": "trajectory",
-                        "isMultiKey": false,
-                        "multiKeyPaths": {
-                          "user_id": [],
-                          "ts": [],
-                          "_id": []
-                        },
-                        "isUnique": false,
-                        "isSparse": false,
-                        "isPartial": false,
-                        "indexVersion": 2,
-                        "direction": "forward",
-                        "indexBounds": {
-                          "user_id": [
-                            "[0, 0]"
-                          ],
-                          "ts": [
-                            "[MaxKey, MinKey]"
-                          ],
-                          "_id": [
-                            "[MaxKey, MinKey]"
-                          ]
-                        },
-                        "keysExamined": 101,
-                        "seeks": 1,
-                        "dupsTested": 0,
-                        "dupsDropped": 0
-                      }
-                    }
-                  }
-                },
-                {
-                  "nReturned": 0,
-                  "executionTimeMillisEstimate": 0,
-                  "totalKeysExamined": 101,
-                  "totalDocsExamined": 101,
-                  "score": 1.0001,
-                  "executionStages": {
-                    "stage": "SORT",
-                    "nReturned": 0,
-                    "executionTimeMillisEstimate": 0,
-                    "works": 101,
-                    "advanced": 0,
-                    "needTime": 101,
-                    "needYield": 0,
-                    "saveState": 1,
-                    "restoreState": 0,
-                    "isEOF": 0,
-                    "sortPattern": {
-                      "ts": -1,
-                      "_id": -1
-                    },
-                    "memLimit": 104857600,
-                    "limitAmount": 201,
-                    "type": "simple",
-                    "totalDataSizeSorted": 0,
-                    "usedDisk": false,
-                    "spills": 0,
-                    "spilledDataStorageSize": 0,
-                    "inputStage": {
-                      "stage": "FETCH",
-                      "filter": {
-                        "user_id": {
-                          "$eq": 0
-                        }
-                      },
-                      "nReturned": 101,
-                      "executionTimeMillisEstimate": 0,
-                      "works": 101,
-                      "advanced": 101,
-                      "needTime": 0,
-                      "needYield": 0,
-                      "saveState": 1,
-                      "restoreState": 0,
-                      "isEOF": 0,
-                      "docsExamined": 101,
-                      "alreadyHasObj": 0,
-                      "inputStage": {
-                        "stage": "IXSCAN",
-                        "nReturned": 101,
-                        "executionTimeMillisEstimate": 0,
-                        "works": 101,
-                        "advanced": 101,
-                        "needTime": 0,
-                        "needYield": 0,
-                        "saveState": 1,
-                        "restoreState": 0,
-                        "isEOF": 0,
-                        "keyPattern": {
-                          "user_id": "hashed"
-                        },
-                        "indexName": "user_id_hashed",
-                        "isMultiKey": false,
-                        "isUnique": false,
-                        "isSparse": false,
-                        "isPartial": false,
-                        "indexVersion": 2,
-                        "direction": "forward",
-                        "indexBounds": {
-                          "user_id": [
-                            "[4854801880128277513, 4854801880128277513]"
-                          ]
-                        },
-                        "keysExamined": 101,
-                        "seeks": 1,
-                        "dupsTested": 0,
-                        "dupsDropped": 0
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        "allPlansExecution": [
-          {
-            "shardName": "shard1",
-            "allPlans": [
-              {
-                "nReturned": 101,
-                "executionTimeMillisEstimate": 0,
-                "totalKeysExamined": 101,
-                "totalDocsExamined": 101,
-                "score": 2.0002,
-                "executionStages": {
-                  "stage": "LIMIT",
-                  "nReturned": 101,
-                  "executionTimeMillisEstimate": 0,
-                  "works": 101,
-                  "advanced": 101,
-                  "needTime": 0,
-                  "needYield": 0,
-                  "saveState": 0,
-                  "restoreState": 0,
-                  "isEOF": 0,
-                  "limitAmount": 201,
-                  "inputStage": {
-                    "stage": "FETCH",
-                    "nReturned": 101,
-                    "executionTimeMillisEstimate": 0,
-                    "works": 101,
-                    "advanced": 101,
-                    "needTime": 0,
-                    "needYield": 0,
-                    "saveState": 0,
-                    "restoreState": 0,
-                    "isEOF": 0,
-                    "docsExamined": 101,
-                    "alreadyHasObj": 0,
-                    "inputStage": {
-                      "stage": "IXSCAN",
-                      "nReturned": 101,
-                      "executionTimeMillisEstimate": 0,
-                      "works": 101,
-                      "advanced": 101,
-                      "needTime": 0,
-                      "needYield": 0,
-                      "saveState": 0,
-                      "restoreState": 0,
-                      "isEOF": 0,
-                      "keyPattern": {
-                        "user_id": 1,
-                        "ts": -1,
-                        "_id": -1
-                      },
-                      "indexName": "trajectory",
-                      "isMultiKey": false,
-                      "multiKeyPaths": {
-                        "user_id": [],
-                        "ts": [],
-                        "_id": []
-                      },
-                      "isUnique": false,
-                      "isSparse": false,
-                      "isPartial": false,
-                      "indexVersion": 2,
-                      "direction": "forward",
-                      "indexBounds": {
-                        "user_id": [
-                          "[0, 0]"
-                        ],
-                        "ts": [
-                          "[MaxKey, MinKey]"
-                        ],
-                        "_id": [
-                          "[MaxKey, MinKey]"
-                        ]
-                      },
-                      "keysExamined": 101,
-                      "seeks": 1,
-                      "dupsTested": 0,
-                      "dupsDropped": 0
-                    }
-                  }
-                }
-              },
-              {
-                "nReturned": 0,
-                "executionTimeMillisEstimate": 0,
-                "totalKeysExamined": 101,
-                "totalDocsExamined": 101,
-                "score": 1.0001,
-                "executionStages": {
-                  "stage": "SORT",
-                  "nReturned": 0,
-                  "executionTimeMillisEstimate": 0,
-                  "works": 101,
-                  "advanced": 0,
-                  "needTime": 101,
-                  "needYield": 0,
-                  "saveState": 1,
-                  "restoreState": 0,
-                  "isEOF": 0,
-                  "sortPattern": {
-                    "ts": -1,
-                    "_id": -1
-                  },
-                  "memLimit": 104857600,
-                  "limitAmount": 201,
-                  "type": "simple",
-                  "totalDataSizeSorted": 0,
-                  "usedDisk": false,
-                  "spills": 0,
-                  "spilledDataStorageSize": 0,
-                  "inputStage": {
-                    "stage": "FETCH",
-                    "filter": {
-                      "user_id": {
-                        "$eq": 0
-                      }
-                    },
-                    "nReturned": 101,
-                    "executionTimeMillisEstimate": 0,
-                    "works": 101,
-                    "advanced": 101,
-                    "needTime": 0,
-                    "needYield": 0,
-                    "saveState": 1,
-                    "restoreState": 0,
-                    "isEOF": 0,
-                    "docsExamined": 101,
-                    "alreadyHasObj": 0,
-                    "inputStage": {
-                      "stage": "IXSCAN",
-                      "nReturned": 101,
-                      "executionTimeMillisEstimate": 0,
-                      "works": 101,
-                      "advanced": 101,
-                      "needTime": 0,
-                      "needYield": 0,
-                      "saveState": 1,
-                      "restoreState": 0,
-                      "isEOF": 0,
-                      "keyPattern": {
-                        "user_id": "hashed"
-                      },
-                      "indexName": "user_id_hashed",
-                      "isMultiKey": false,
-                      "isUnique": false,
-                      "isSparse": false,
-                      "isPartial": false,
-                      "indexVersion": 2,
-                      "direction": "forward",
-                      "indexBounds": {
-                        "user_id": [
-                          "[4854801880128277513, 4854801880128277513]"
-                        ]
-                      },
-                      "keysExamined": 101,
-                      "seeks": 1,
-                      "dupsTested": 0,
-                      "dupsDropped": 0
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
       "serverInfo": {
-        "host": "0d8d096639d1",
+        "host": "ed6ab351c12a",
         "port": 27017,
         "version": "7.0.48",
         "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
@@ -603,49 +76,281 @@
         "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
         "internalQueryFrameworkControl": "forceClassicEngine"
       },
-      "command": {
-        "find": "checkins",
-        "filter": {
-          "user_id": 0
-        },
-        "sort": {
-          "ts": -1,
-          "_id": -1
-        },
-        "limit": 201,
-        "singleBatch": true,
-        "lsid": {
-          "id": {
-            "$binary": {
-              "base64": "53G7gGHiReyhH0LQ3yK4ww==",
-              "subType": "04"
+      "splitPipeline": null,
+      "shards": {
+        "shard1": {
+          "host": "shard1:27011",
+          "stages": [
+            {
+              "$cursor": {
+                "queryPlanner": {
+                  "namespace": "gowalla.checkins",
+                  "indexFilterSet": false,
+                  "parsedQuery": {
+                    "user_id": {
+                      "$eq": 0
+                    }
+                  },
+                  "queryHash": "32722CE9",
+                  "planCacheKey": "67E0A814",
+                  "optimizationTimeMillis": 152,
+                  "maxIndexedOrSolutionsReached": false,
+                  "maxIndexedAndSolutionsReached": false,
+                  "maxScansToExplodeReached": false,
+                  "winningPlan": {
+                    "stage": "LIMIT",
+                    "limitAmount": 201,
+                    "inputStage": {
+                      "stage": "PROJECTION_DEFAULT",
+                      "transformBy": {
+                        "_id": 1,
+                        "loc.coordinates": 1,
+                        "location_id": 1,
+                        "ts": 1,
+                        "user_id": 1
+                      },
+                      "inputStage": {
+                        "stage": "FETCH",
+                        "inputStage": {
+                          "stage": "IXSCAN",
+                          "keyPattern": {
+                            "user_id": 1,
+                            "ts": -1,
+                            "_id": -1
+                          },
+                          "indexName": "trajectory",
+                          "isMultiKey": false,
+                          "multiKeyPaths": {
+                            "user_id": [],
+                            "ts": [],
+                            "_id": []
+                          },
+                          "isUnique": false,
+                          "isSparse": false,
+                          "isPartial": false,
+                          "indexVersion": 2,
+                          "direction": "forward",
+                          "indexBounds": {
+                            "user_id": [
+                              "[0, 0]"
+                            ],
+                            "ts": [
+                              "[MaxKey, MinKey]"
+                            ],
+                            "_id": [
+                              "[MaxKey, MinKey]"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rejectedPlans": [
+                    {
+                      "stage": "PROJECTION_DEFAULT",
+                      "transformBy": {
+                        "_id": 1,
+                        "loc.coordinates": 1,
+                        "location_id": 1,
+                        "ts": 1,
+                        "user_id": 1
+                      },
+                      "inputStage": {
+                        "stage": "SORT",
+                        "sortPattern": {
+                          "ts": -1,
+                          "_id": -1
+                        },
+                        "memLimit": 104857600,
+                        "limitAmount": 201,
+                        "type": "simple",
+                        "inputStage": {
+                          "stage": "FETCH",
+                          "filter": {
+                            "user_id": {
+                              "$eq": 0
+                            }
+                          },
+                          "inputStage": {
+                            "stage": "IXSCAN",
+                            "keyPattern": {
+                              "user_id": "hashed"
+                            },
+                            "indexName": "user_id_hashed",
+                            "isMultiKey": false,
+                            "isUnique": false,
+                            "isSparse": false,
+                            "isPartial": false,
+                            "indexVersion": 2,
+                            "direction": "forward",
+                            "indexBounds": {
+                              "user_id": [
+                                "[4854801880128277513, 4854801880128277513]"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "executionStats": {
+                  "executionSuccess": true,
+                  "nReturned": 201,
+                  "executionTimeMillis": 156,
+                  "totalKeysExamined": 201,
+                  "totalDocsExamined": 201,
+                  "executionStages": {
+                    "stage": "LIMIT",
+                    "nReturned": 201,
+                    "executionTimeMillisEstimate": 0,
+                    "works": 202,
+                    "advanced": 201,
+                    "needTime": 0,
+                    "needYield": 0,
+                    "saveState": 3,
+                    "restoreState": 3,
+                    "isEOF": 1,
+                    "limitAmount": 201,
+                    "inputStage": {
+                      "stage": "PROJECTION_DEFAULT",
+                      "nReturned": 201,
+                      "executionTimeMillisEstimate": 0,
+                      "works": 201,
+                      "advanced": 201,
+                      "needTime": 0,
+                      "needYield": 0,
+                      "saveState": 3,
+                      "restoreState": 3,
+                      "isEOF": 0,
+                      "transformBy": {
+                        "_id": 1,
+                        "loc.coordinates": 1,
+                        "location_id": 1,
+                        "ts": 1,
+                        "user_id": 1
+                      },
+                      "inputStage": {
+                        "stage": "FETCH",
+                        "nReturned": 201,
+                        "executionTimeMillisEstimate": 0,
+                        "works": 201,
+                        "advanced": 201,
+                        "needTime": 0,
+                        "needYield": 0,
+                        "saveState": 3,
+                        "restoreState": 3,
+                        "isEOF": 0,
+                        "docsExamined": 201,
+                        "alreadyHasObj": 0,
+                        "inputStage": {
+                          "stage": "IXSCAN",
+                          "nReturned": 201,
+                          "executionTimeMillisEstimate": 0,
+                          "works": 201,
+                          "advanced": 201,
+                          "needTime": 0,
+                          "needYield": 0,
+                          "saveState": 3,
+                          "restoreState": 3,
+                          "isEOF": 0,
+                          "keyPattern": {
+                            "user_id": 1,
+                            "ts": -1,
+                            "_id": -1
+                          },
+                          "indexName": "trajectory",
+                          "isMultiKey": false,
+                          "multiKeyPaths": {
+                            "user_id": [],
+                            "ts": [],
+                            "_id": []
+                          },
+                          "isUnique": false,
+                          "isSparse": false,
+                          "isPartial": false,
+                          "indexVersion": 2,
+                          "direction": "forward",
+                          "indexBounds": {
+                            "user_id": [
+                              "[0, 0]"
+                            ],
+                            "ts": [
+                              "[MaxKey, MinKey]"
+                            ],
+                            "_id": [
+                              "[MaxKey, MinKey]"
+                            ]
+                          },
+                          "keysExamined": 201,
+                          "seeks": 1,
+                          "dupsTested": 0,
+                          "dupsDropped": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "nReturned": 201,
+              "executionTimeMillisEstimate": 0
+            },
+            {
+              "$project": {
+                "_id": true,
+                "user_id": true,
+                "ts": true,
+                "location_id": true,
+                "loc": {
+                  "coordinates": true
+                },
+                "user_hash": {
+                  "$toHashedIndexKey": "$user_id"
+                }
+              },
+              "nReturned": 201,
+              "executionTimeMillisEstimate": 0
             }
-          }
-        },
-        "$clusterTime": {
-          "clusterTime": {
-            "$timestamp": {
-              "t": 1795097948,
-              "i": 1
+          ]
+        }
+      },
+      "command": {
+        "aggregate": "checkins",
+        "pipeline": [
+          {
+            "$match": {
+              "user_id": 0
             }
           },
-          "signature": {
-            "hash": {
-              "$binary": {
-                "base64": "AAAAAAAAAAAAAAAAAAAAAAAAAAA=",
-                "subType": "00"
+          {
+            "$sort": {
+              "ts": -1,
+              "_id": -1
+            }
+          },
+          {
+            "$limit": 201
+          },
+          {
+            "$project": {
+              "_id": 1,
+              "user_id": 1,
+              "ts": 1,
+              "loc.coordinates": 1,
+              "location_id": 1,
+              "user_hash": {
+                "$toHashedIndexKey": "$user_id"
               }
-            },
-            "keyId": 0
+            }
           }
-        },
-        "$db": "gowalla"
+        ],
+        "cursor": {}
       },
       "ok": 1.0,
       "$clusterTime": {
         "clusterTime": {
           "$timestamp": {
-            "t": 1795097948,
+            "t": 1795346128,
             "i": 1
           }
         },
@@ -661,476 +366,410 @@
       },
       "operationTime": {
         "$timestamp": {
-          "t": 1795097948,
+          "t": 1795346128,
           "i": 1
         }
       }
     },
     "region": {
-      "queryPlanner": {
-        "mongosPlannerVersion": 1,
-        "winningPlan": {
-          "stage": "SHARD_MERGE_SORT",
-          "shards": [
-            {
-              "shardName": "shard1",
-              "connectionString": "shard1/shard1:27011",
-              "serverInfo": {
-                "host": "88a078d2d674",
-                "port": 27011,
-                "version": "7.0.48",
-                "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
-              },
-              "namespace": "gowalla.checkins",
-              "indexFilterSet": false,
-              "parsedQuery": {
-                "$and": [
-                  {
-                    "ts": {
-                      "$lt": {
-                        "$date": "2010-10-19T23:55:28Z"
-                      }
-                    }
-                  },
-                  {
-                    "ts": {
-                      "$gte": {
-                        "$date": "2010-10-19T23:55:27Z"
-                      }
-                    }
-                  },
-                  {
-                    "loc": {
-                      "$geoWithin": {
-                        "$geometry": {
-                          "type": "Polygon",
-                          "coordinates": [
-                            [
-                              [
-                                -97.81,
-                                30.22
-                              ],
-                              [
-                                -97.74,
-                                30.22
-                              ],
-                              [
-                                -97.74,
-                                30.3
-                              ],
-                              [
-                                -97.81,
-                                30.3
-                              ],
-                              [
-                                -97.81,
-                                30.22
-                              ]
-                            ]
-                          ]
-                        }
-                      }
-                    }
-                  }
-                ]
-              },
-              "queryHash": "5BB4E242",
-              "planCacheKey": "B0C8A5FF",
-              "optimizationTimeMillis": 0,
-              "maxIndexedOrSolutionsReached": false,
-              "maxIndexedAndSolutionsReached": false,
-              "maxScansToExplodeReached": false,
-              "winningPlan": {
-                "stage": "SORT",
-                "sortPattern": {
-                  "ts": -1,
-                  "_id": -1
-                },
-                "memLimit": 104857600,
-                "limitAmount": 201,
-                "type": "simple",
-                "inputStage": {
-                  "stage": "SHARDING_FILTER",
-                  "inputStage": {
-                    "stage": "FETCH",
-                    "filter": {
-                      "$and": [
-                        {
-                          "loc": {
-                            "$geoWithin": {
-                              "$geometry": {
-                                "type": "Polygon",
-                                "coordinates": [
-                                  [
-                                    [
-                                      -97.81,
-                                      30.22
-                                    ],
-                                    [
-                                      -97.74,
-                                      30.22
-                                    ],
-                                    [
-                                      -97.74,
-                                      30.3
-                                    ],
-                                    [
-                                      -97.81,
-                                      30.3
-                                    ],
-                                    [
-                                      -97.81,
-                                      30.22
-                                    ]
-                                  ]
-                                ]
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "ts": {
-                            "$lt": {
-                              "$date": "2010-10-19T23:55:28Z"
-                            }
-                          }
-                        },
-                        {
-                          "ts": {
-                            "$gte": {
-                              "$date": "2010-10-19T23:55:27Z"
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    "inputStage": {
-                      "stage": "IXSCAN",
-                      "keyPattern": {
-                        "loc": "2dsphere"
-                      },
-                      "indexName": "region",
-                      "isMultiKey": false,
-                      "multiKeyPaths": {
-                        "loc": []
-                      },
-                      "isUnique": false,
-                      "isSparse": false,
-                      "isPartial": false,
-                      "indexVersion": 2,
-                      "direction": "forward",
-                      "indexBounds": {
-                        "loc": [
-                          "[-8773012074117726208, -8773012074117726208]",
-                          "[-8771886174210883584, -8771886174210883584]",
-                          "[-8771692660164395008, -8771692660164395008]",
-                          "[-8771688262117883904, -8771688262117883904]",
-                          "[-8771687987239976960, -8771687987239976960]",
-                          "[-8771687987239976959, -8771687849801023489]",
-                          "[-8771687849801023487, -8771687815441285121]",
-                          "[-8771687781081546752, -8771687781081546752]",
-                          "[-8771687678002331647, -8771687643642593281]",
-                          "[-8771687643642593280, -8771687643642593280]",
-                          "[-8771687643642593279, -8771687609282854913]",
-                          "[-8771687574923116543, -8771687437484163073]",
-                          "[-8771687437484163072, -8771687437484163072]",
-                          "[-8771687437484163071, -8771687300045209601]",
-                          "[-8771687300045209599, -8771687162606256129]",
-                          "[-8771687162606256128, -8771687162606256128]",
-                          "[-8771687162606256127, -8771686612850442241]",
-                          "[-8771686612850442239, -8771686475411488769]",
-                          "[-8771686475411488767, -8771686337972535297]",
-                          "[-8771686337972535296, -8771686337972535296]",
-                          "[-8771675067978350592, -8771675067978350592]",
-                          "[-8771663797984165888, -8771663797984165888]",
-                          "[-8771663591825735680, -8771663591825735680]",
-                          "[-8771663540286128128, -8771663540286128128]",
-                          "[-8771663527401226240, -8771663527401226240]",
-                          "[-8771663525253742591, -8771663523106258945]",
-                          "[-8771663523106258943, -8771663385667305473]",
-                          "[-8771663385667305471, -8771663248228352001]",
-                          "[-8771663248228352000, -8771663248228352000]",
-                          "[-8771662973350445056, -8771662973350445056]",
-                          "[-8771661873838817280, -8771661873838817280]",
-                          "[-8771657475792306176, -8771657475792306176]",
-                          "[-8771604699234172928, -8771604699234172928]",
-                          "[-8768508474490355712, -8768508474490355712]",
-                          "[-8765412249746538496, -8765412249746538496]",
-                          "[-8765359473188405248, -8765359473188405248]",
-                          "[-8765355075141894144, -8765355075141894144]",
-                          "[-8765353975630266368, -8765353975630266368]",
-                          "[-8765353700752359424, -8765353700752359424]",
-                          "[-8765353700752359423, -8765353563313405953]",
-                          "[-8765353563313405951, -8765353554723471361]",
-                          "[-8765353546133536768, -8765353546133536768]",
-                          "[-8765353494593929216, -8765353494593929216]",
-                          "[-8765341881002360832, -8765341881002360832]",
-                          "[-8765330336130269183, -8765329786374455297]",
-                          "[-8765329786374455296, -8765329786374455296]",
-                          "[-8765329786374455295, -8765329648935501825]",
-                          "[-8765329648935501823, -8765329511496548353]",
-                          "[-8765329511496548352, -8765329511496548352]",
-                          "[-8765329511496548351, -8765329374057594881]",
-                          "[-8765329339697856511, -8765329305338118145]",
-                          "[-8765329305338118144, -8765329305338118144]",
-                          "[-8765328686862827520, -8765328686862827520]",
-                          "[-8765324288816316416, -8765324288816316416]",
-                          "[-8765130774769827840, -8765130774769827840]",
-                          "[-8718968878589280256, -8718968878589280256]"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "rejectedPlans": []
-            },
-            {
-              "shardName": "shard2",
-              "connectionString": "shard2/shard2:27021",
-              "serverInfo": {
-                "host": "47a6e30f44e1",
-                "port": 27021,
-                "version": "7.0.48",
-                "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
-              },
-              "namespace": "gowalla.checkins",
-              "indexFilterSet": false,
-              "parsedQuery": {
-                "$and": [
-                  {
-                    "ts": {
-                      "$lt": {
-                        "$date": "2010-10-19T23:55:28Z"
-                      }
-                    }
-                  },
-                  {
-                    "ts": {
-                      "$gte": {
-                        "$date": "2010-10-19T23:55:27Z"
-                      }
-                    }
-                  },
-                  {
-                    "loc": {
-                      "$geoWithin": {
-                        "$geometry": {
-                          "type": "Polygon",
-                          "coordinates": [
-                            [
-                              [
-                                -97.81,
-                                30.22
-                              ],
-                              [
-                                -97.74,
-                                30.22
-                              ],
-                              [
-                                -97.74,
-                                30.3
-                              ],
-                              [
-                                -97.81,
-                                30.3
-                              ],
-                              [
-                                -97.81,
-                                30.22
-                              ]
-                            ]
-                          ]
-                        }
-                      }
-                    }
-                  }
-                ]
-              },
-              "queryHash": "5BB4E242",
-              "planCacheKey": "B0C8A5FF",
-              "optimizationTimeMillis": 0,
-              "maxIndexedOrSolutionsReached": false,
-              "maxIndexedAndSolutionsReached": false,
-              "maxScansToExplodeReached": false,
-              "winningPlan": {
-                "stage": "SORT",
-                "sortPattern": {
-                  "ts": -1,
-                  "_id": -1
-                },
-                "memLimit": 104857600,
-                "limitAmount": 201,
-                "type": "simple",
-                "inputStage": {
-                  "stage": "SHARDING_FILTER",
-                  "inputStage": {
-                    "stage": "FETCH",
-                    "filter": {
-                      "$and": [
-                        {
-                          "loc": {
-                            "$geoWithin": {
-                              "$geometry": {
-                                "type": "Polygon",
-                                "coordinates": [
-                                  [
-                                    [
-                                      -97.81,
-                                      30.22
-                                    ],
-                                    [
-                                      -97.74,
-                                      30.22
-                                    ],
-                                    [
-                                      -97.74,
-                                      30.3
-                                    ],
-                                    [
-                                      -97.81,
-                                      30.3
-                                    ],
-                                    [
-                                      -97.81,
-                                      30.22
-                                    ]
-                                  ]
-                                ]
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "ts": {
-                            "$lt": {
-                              "$date": "2010-10-19T23:55:28Z"
-                            }
-                          }
-                        },
-                        {
-                          "ts": {
-                            "$gte": {
-                              "$date": "2010-10-19T23:55:27Z"
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    "inputStage": {
-                      "stage": "IXSCAN",
-                      "keyPattern": {
-                        "loc": "2dsphere"
-                      },
-                      "indexName": "region",
-                      "isMultiKey": false,
-                      "multiKeyPaths": {
-                        "loc": []
-                      },
-                      "isUnique": false,
-                      "isSparse": false,
-                      "isPartial": false,
-                      "indexVersion": 2,
-                      "direction": "forward",
-                      "indexBounds": {
-                        "loc": [
-                          "[-8773012074117726208, -8773012074117726208]",
-                          "[-8771886174210883584, -8771886174210883584]",
-                          "[-8771692660164395008, -8771692660164395008]",
-                          "[-8771688262117883904, -8771688262117883904]",
-                          "[-8771687987239976960, -8771687987239976960]",
-                          "[-8771687987239976959, -8771687849801023489]",
-                          "[-8771687849801023487, -8771687815441285121]",
-                          "[-8771687781081546752, -8771687781081546752]",
-                          "[-8771687678002331647, -8771687643642593281]",
-                          "[-8771687643642593280, -8771687643642593280]",
-                          "[-8771687643642593279, -8771687609282854913]",
-                          "[-8771687574923116543, -8771687437484163073]",
-                          "[-8771687437484163072, -8771687437484163072]",
-                          "[-8771687437484163071, -8771687300045209601]",
-                          "[-8771687300045209599, -8771687162606256129]",
-                          "[-8771687162606256128, -8771687162606256128]",
-                          "[-8771687162606256127, -8771686612850442241]",
-                          "[-8771686612850442239, -8771686475411488769]",
-                          "[-8771686475411488767, -8771686337972535297]",
-                          "[-8771686337972535296, -8771686337972535296]",
-                          "[-8771675067978350592, -8771675067978350592]",
-                          "[-8771663797984165888, -8771663797984165888]",
-                          "[-8771663591825735680, -8771663591825735680]",
-                          "[-8771663540286128128, -8771663540286128128]",
-                          "[-8771663527401226240, -8771663527401226240]",
-                          "[-8771663525253742591, -8771663523106258945]",
-                          "[-8771663523106258943, -8771663385667305473]",
-                          "[-8771663385667305471, -8771663248228352001]",
-                          "[-8771663248228352000, -8771663248228352000]",
-                          "[-8771662973350445056, -8771662973350445056]",
-                          "[-8771661873838817280, -8771661873838817280]",
-                          "[-8771657475792306176, -8771657475792306176]",
-                          "[-8771604699234172928, -8771604699234172928]",
-                          "[-8768508474490355712, -8768508474490355712]",
-                          "[-8765412249746538496, -8765412249746538496]",
-                          "[-8765359473188405248, -8765359473188405248]",
-                          "[-8765355075141894144, -8765355075141894144]",
-                          "[-8765353975630266368, -8765353975630266368]",
-                          "[-8765353700752359424, -8765353700752359424]",
-                          "[-8765353700752359423, -8765353563313405953]",
-                          "[-8765353563313405951, -8765353554723471361]",
-                          "[-8765353546133536768, -8765353546133536768]",
-                          "[-8765353494593929216, -8765353494593929216]",
-                          "[-8765341881002360832, -8765341881002360832]",
-                          "[-8765330336130269183, -8765329786374455297]",
-                          "[-8765329786374455296, -8765329786374455296]",
-                          "[-8765329786374455295, -8765329648935501825]",
-                          "[-8765329648935501823, -8765329511496548353]",
-                          "[-8765329511496548352, -8765329511496548352]",
-                          "[-8765329511496548351, -8765329374057594881]",
-                          "[-8765329339697856511, -8765329305338118145]",
-                          "[-8765329305338118144, -8765329305338118144]",
-                          "[-8765328686862827520, -8765328686862827520]",
-                          "[-8765324288816316416, -8765324288816316416]",
-                          "[-8765130774769827840, -8765130774769827840]",
-                          "[-8718968878589280256, -8718968878589280256]"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "rejectedPlans": []
-            }
-          ]
-        }
+      "serverInfo": {
+        "host": "ed6ab351c12a",
+        "port": 27017,
+        "version": "7.0.48",
+        "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
       },
-      "executionStats": {
-        "nReturned": 1,
-        "executionTimeMillis": 871,
-        "totalKeysExamined": 206300,
-        "totalDocsExamined": 206238,
-        "executionStages": {
-          "stage": "SHARD_MERGE_SORT",
-          "nReturned": 1,
-          "executionTimeMillis": 871,
-          "totalKeysExamined": 206300,
-          "totalDocsExamined": 206238,
-          "totalChildMillis": 1585,
-          "shards": [
-            {
-              "shardName": "shard1",
-              "executionSuccess": true,
+      "serverParameters": {
+        "internalQueryFacetBufferSizeBytes": 104857600,
+        "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+        "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+        "internalDocumentSourceGroupMaxMemoryBytes": 104857600,
+        "internalQueryMaxBlockingSortMemoryUsageBytes": 104857600,
+        "internalQueryProhibitBlockingMergeOnMongoS": 0,
+        "internalQueryMaxAddToSetBytes": 104857600,
+        "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
+        "internalQueryFrameworkControl": "forceClassicEngine"
+      },
+      "mergeType": "mongos",
+      "splitPipeline": {
+        "shardsPart": [
+          {
+            "$match": {
+              "$and": [
+                {
+                  "loc": {
+                    "$geoWithin": {
+                      "$geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                          [
+                            [
+                              -97.81,
+                              30.22
+                            ],
+                            [
+                              -97.74,
+                              30.22
+                            ],
+                            [
+                              -97.74,
+                              30.3
+                            ],
+                            [
+                              -97.81,
+                              30.3
+                            ],
+                            [
+                              -97.81,
+                              30.22
+                            ]
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "ts": {
+                    "$gte": {
+                      "$date": "2010-10-19T23:55:27Z"
+                    }
+                  }
+                },
+                {
+                  "ts": {
+                    "$lt": {
+                      "$date": "2010-10-19T23:55:28Z"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "$sort": {
+              "sortKey": {
+                "ts": -1,
+                "_id": -1
+              },
+              "limit": 201
+            }
+          },
+          {
+            "$project": {
+              "_id": true,
+              "location_id": true,
+              "ts": true,
+              "user_id": true,
+              "loc": {
+                "coordinates": true
+              }
+            }
+          }
+        ],
+        "mergerPart": [
+          {
+            "$mergeCursors": {
+              "lsid": {
+                "id": {
+                  "$binary": {
+                    "base64": "2ZB4IBCWRc2E94PZRGMpTg==",
+                    "subType": "04"
+                  }
+                },
+                "uid": {
+                  "$binary": {
+                    "base64": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+                    "subType": "00"
+                  }
+                }
+              },
+              "sort": {
+                "ts": -1,
+                "_id": -1
+              },
+              "compareWholeSortKey": false,
+              "tailableMode": "normal",
+              "nss": "gowalla.checkins",
+              "allowPartialResults": false,
+              "recordRemoteOpWaitTime": false
+            }
+          },
+          {
+            "$limit": 201
+          },
+          {
+            "$project": {
+              "_id": true,
+              "user_id": true,
+              "ts": true,
+              "location_id": true,
+              "loc": {
+                "coordinates": true
+              },
+              "user_hash": {
+                "$toHashedIndexKey": "$user_id"
+              }
+            }
+          }
+        ]
+      },
+      "shards": {
+        "shard1": {
+          "host": "shard1:27011",
+          "queryPlanner": {
+            "namespace": "gowalla.checkins",
+            "indexFilterSet": false,
+            "parsedQuery": {
+              "$and": [
+                {
+                  "ts": {
+                    "$lt": {
+                      "$date": "2010-10-19T23:55:28Z"
+                    }
+                  }
+                },
+                {
+                  "ts": {
+                    "$gte": {
+                      "$date": "2010-10-19T23:55:27Z"
+                    }
+                  }
+                },
+                {
+                  "loc": {
+                    "$geoWithin": {
+                      "$geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                          [
+                            [
+                              -97.81,
+                              30.22
+                            ],
+                            [
+                              -97.74,
+                              30.22
+                            ],
+                            [
+                              -97.74,
+                              30.3
+                            ],
+                            [
+                              -97.81,
+                              30.3
+                            ],
+                            [
+                              -97.81,
+                              30.22
+                            ]
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "queryHash": "3CD7D7E9",
+            "planCacheKey": "A621C767",
+            "optimizationTimeMillis": 2,
+            "optimizedPipeline": true,
+            "maxIndexedOrSolutionsReached": false,
+            "maxIndexedAndSolutionsReached": false,
+            "maxScansToExplodeReached": false,
+            "winningPlan": {
+              "stage": "PROJECTION_DEFAULT",
+              "transformBy": {
+                "_id": true,
+                "location_id": true,
+                "ts": true,
+                "user_id": true,
+                "loc": {
+                  "coordinates": true
+                }
+              },
+              "inputStage": {
+                "stage": "SORT",
+                "sortPattern": {
+                  "ts": -1,
+                  "_id": -1
+                },
+                "memLimit": 104857600,
+                "limitAmount": 201,
+                "type": "simple",
+                "inputStage": {
+                  "stage": "SHARDING_FILTER",
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "filter": {
+                      "$and": [
+                        {
+                          "loc": {
+                            "$geoWithin": {
+                              "$geometry": {
+                                "type": "Polygon",
+                                "coordinates": [
+                                  [
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ]
+                                  ]
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$lt": {
+                              "$date": "2010-10-19T23:55:28Z"
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$gte": {
+                              "$date": "2010-10-19T23:55:27Z"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "keyPattern": {
+                        "loc": "2dsphere"
+                      },
+                      "indexName": "region",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "loc": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "loc": [
+                          "[-8773012074117726208, -8773012074117726208]",
+                          "[-8771886174210883584, -8771886174210883584]",
+                          "[-8771692660164395008, -8771692660164395008]",
+                          "[-8771688262117883904, -8771688262117883904]",
+                          "[-8771687987239976960, -8771687987239976960]",
+                          "[-8771687987239976959, -8771687849801023489]",
+                          "[-8771687849801023487, -8771687815441285121]",
+                          "[-8771687781081546752, -8771687781081546752]",
+                          "[-8771687678002331647, -8771687643642593281]",
+                          "[-8771687643642593280, -8771687643642593280]",
+                          "[-8771687643642593279, -8771687609282854913]",
+                          "[-8771687574923116543, -8771687437484163073]",
+                          "[-8771687437484163072, -8771687437484163072]",
+                          "[-8771687437484163071, -8771687300045209601]",
+                          "[-8771687300045209599, -8771687162606256129]",
+                          "[-8771687162606256128, -8771687162606256128]",
+                          "[-8771687162606256127, -8771686612850442241]",
+                          "[-8771686612850442239, -8771686475411488769]",
+                          "[-8771686475411488767, -8771686337972535297]",
+                          "[-8771686337972535296, -8771686337972535296]",
+                          "[-8771675067978350592, -8771675067978350592]",
+                          "[-8771663797984165888, -8771663797984165888]",
+                          "[-8771663591825735680, -8771663591825735680]",
+                          "[-8771663540286128128, -8771663540286128128]",
+                          "[-8771663527401226240, -8771663527401226240]",
+                          "[-8771663525253742591, -8771663523106258945]",
+                          "[-8771663523106258943, -8771663385667305473]",
+                          "[-8771663385667305471, -8771663248228352001]",
+                          "[-8771663248228352000, -8771663248228352000]",
+                          "[-8771662973350445056, -8771662973350445056]",
+                          "[-8771661873838817280, -8771661873838817280]",
+                          "[-8771657475792306176, -8771657475792306176]",
+                          "[-8771604699234172928, -8771604699234172928]",
+                          "[-8768508474490355712, -8768508474490355712]",
+                          "[-8765412249746538496, -8765412249746538496]",
+                          "[-8765359473188405248, -8765359473188405248]",
+                          "[-8765355075141894144, -8765355075141894144]",
+                          "[-8765353975630266368, -8765353975630266368]",
+                          "[-8765353700752359424, -8765353700752359424]",
+                          "[-8765353700752359423, -8765353563313405953]",
+                          "[-8765353563313405951, -8765353554723471361]",
+                          "[-8765353546133536768, -8765353546133536768]",
+                          "[-8765353494593929216, -8765353494593929216]",
+                          "[-8765341881002360832, -8765341881002360832]",
+                          "[-8765330336130269183, -8765329786374455297]",
+                          "[-8765329786374455296, -8765329786374455296]",
+                          "[-8765329786374455295, -8765329648935501825]",
+                          "[-8765329648935501823, -8765329511496548353]",
+                          "[-8765329511496548352, -8765329511496548352]",
+                          "[-8765329511496548351, -8765329374057594881]",
+                          "[-8765329339697856511, -8765329305338118145]",
+                          "[-8765329305338118144, -8765329305338118144]",
+                          "[-8765328686862827520, -8765328686862827520]",
+                          "[-8765324288816316416, -8765324288816316416]",
+                          "[-8765130774769827840, -8765130774769827840]",
+                          "[-8718968878589280256, -8718968878589280256]"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "rejectedPlans": []
+          },
+          "executionStats": {
+            "executionSuccess": true,
+            "nReturned": 1,
+            "executionTimeMillis": 448,
+            "totalKeysExamined": 99413,
+            "totalDocsExamined": 99382,
+            "executionStages": {
+              "stage": "PROJECTION_DEFAULT",
               "nReturned": 1,
-              "executionTimeMillis": 715,
-              "totalKeysExamined": 99413,
-              "totalDocsExamined": 99382,
-              "executionStages": {
+              "executionTimeMillisEstimate": 157,
+              "works": 99415,
+              "advanced": 1,
+              "needTime": 99413,
+              "needYield": 0,
+              "saveState": 100,
+              "restoreState": 100,
+              "isEOF": 1,
+              "transformBy": {
+                "_id": true,
+                "location_id": true,
+                "ts": true,
+                "user_id": true,
+                "loc": {
+                  "coordinates": true
+                }
+              },
+              "inputStage": {
                 "stage": "SORT",
                 "nReturned": 1,
-                "executionTimeMillisEstimate": 430,
+                "executionTimeMillisEstimate": 157,
                 "works": 99415,
                 "advanced": 1,
                 "needTime": 99413,
                 "needYield": 0,
-                "saveState": 99,
-                "restoreState": 99,
+                "saveState": 100,
+                "restoreState": 100,
                 "isEOF": 1,
                 "sortPattern": {
                   "ts": -1,
@@ -1146,13 +785,13 @@
                 "inputStage": {
                   "stage": "SHARDING_FILTER",
                   "nReturned": 1,
-                  "executionTimeMillisEstimate": 430,
+                  "executionTimeMillisEstimate": 157,
                   "works": 99413,
                   "advanced": 1,
                   "needTime": 99411,
                   "needYield": 0,
-                  "saveState": 99,
-                  "restoreState": 99,
+                  "saveState": 100,
+                  "restoreState": 100,
                   "isEOF": 1,
                   "chunkSkips": 0,
                   "inputStage": {
@@ -1209,26 +848,26 @@
                       ]
                     },
                     "nReturned": 1,
-                    "executionTimeMillisEstimate": 430,
+                    "executionTimeMillisEstimate": 156,
                     "works": 99413,
                     "advanced": 1,
                     "needTime": 99411,
                     "needYield": 0,
-                    "saveState": 99,
-                    "restoreState": 99,
+                    "saveState": 100,
+                    "restoreState": 100,
                     "isEOF": 1,
                     "docsExamined": 99382,
                     "alreadyHasObj": 0,
                     "inputStage": {
                       "stage": "IXSCAN",
                       "nReturned": 99382,
-                      "executionTimeMillisEstimate": 11,
+                      "executionTimeMillisEstimate": 8,
                       "works": 99413,
                       "advanced": 99382,
                       "needTime": 30,
                       "needYield": 0,
-                      "saveState": 99,
-                      "restoreState": 99,
+                      "saveState": 100,
+                      "restoreState": 100,
                       "isEOF": 1,
                       "keyPattern": {
                         "loc": "2dsphere"
@@ -1310,20 +949,260 @@
                     }
                   }
                 }
-              },
-              "allPlansExecution": []
+              }
+            }
+          }
+        },
+        "shard2": {
+          "host": "shard2:27021",
+          "queryPlanner": {
+            "namespace": "gowalla.checkins",
+            "indexFilterSet": false,
+            "parsedQuery": {
+              "$and": [
+                {
+                  "ts": {
+                    "$lt": {
+                      "$date": "2010-10-19T23:55:28Z"
+                    }
+                  }
+                },
+                {
+                  "ts": {
+                    "$gte": {
+                      "$date": "2010-10-19T23:55:27Z"
+                    }
+                  }
+                },
+                {
+                  "loc": {
+                    "$geoWithin": {
+                      "$geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                          [
+                            [
+                              -97.81,
+                              30.22
+                            ],
+                            [
+                              -97.74,
+                              30.22
+                            ],
+                            [
+                              -97.74,
+                              30.3
+                            ],
+                            [
+                              -97.81,
+                              30.3
+                            ],
+                            [
+                              -97.81,
+                              30.22
+                            ]
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
             },
-            {
-              "shardName": "shard2",
-              "executionSuccess": true,
+            "queryHash": "3CD7D7E9",
+            "planCacheKey": "A621C767",
+            "optimizationTimeMillis": 1,
+            "optimizedPipeline": true,
+            "maxIndexedOrSolutionsReached": false,
+            "maxIndexedAndSolutionsReached": false,
+            "maxScansToExplodeReached": false,
+            "winningPlan": {
+              "stage": "PROJECTION_DEFAULT",
+              "transformBy": {
+                "_id": true,
+                "location_id": true,
+                "ts": true,
+                "user_id": true,
+                "loc": {
+                  "coordinates": true
+                }
+              },
+              "inputStage": {
+                "stage": "SORT",
+                "sortPattern": {
+                  "ts": -1,
+                  "_id": -1
+                },
+                "memLimit": 104857600,
+                "limitAmount": 201,
+                "type": "simple",
+                "inputStage": {
+                  "stage": "SHARDING_FILTER",
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "filter": {
+                      "$and": [
+                        {
+                          "loc": {
+                            "$geoWithin": {
+                              "$geometry": {
+                                "type": "Polygon",
+                                "coordinates": [
+                                  [
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.22
+                                    ],
+                                    [
+                                      -97.74,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.3
+                                    ],
+                                    [
+                                      -97.81,
+                                      30.22
+                                    ]
+                                  ]
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$lt": {
+                              "$date": "2010-10-19T23:55:28Z"
+                            }
+                          }
+                        },
+                        {
+                          "ts": {
+                            "$gte": {
+                              "$date": "2010-10-19T23:55:27Z"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "keyPattern": {
+                        "loc": "2dsphere"
+                      },
+                      "indexName": "region",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "loc": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "loc": [
+                          "[-8773012074117726208, -8773012074117726208]",
+                          "[-8771886174210883584, -8771886174210883584]",
+                          "[-8771692660164395008, -8771692660164395008]",
+                          "[-8771688262117883904, -8771688262117883904]",
+                          "[-8771687987239976960, -8771687987239976960]",
+                          "[-8771687987239976959, -8771687849801023489]",
+                          "[-8771687849801023487, -8771687815441285121]",
+                          "[-8771687781081546752, -8771687781081546752]",
+                          "[-8771687678002331647, -8771687643642593281]",
+                          "[-8771687643642593280, -8771687643642593280]",
+                          "[-8771687643642593279, -8771687609282854913]",
+                          "[-8771687574923116543, -8771687437484163073]",
+                          "[-8771687437484163072, -8771687437484163072]",
+                          "[-8771687437484163071, -8771687300045209601]",
+                          "[-8771687300045209599, -8771687162606256129]",
+                          "[-8771687162606256128, -8771687162606256128]",
+                          "[-8771687162606256127, -8771686612850442241]",
+                          "[-8771686612850442239, -8771686475411488769]",
+                          "[-8771686475411488767, -8771686337972535297]",
+                          "[-8771686337972535296, -8771686337972535296]",
+                          "[-8771675067978350592, -8771675067978350592]",
+                          "[-8771663797984165888, -8771663797984165888]",
+                          "[-8771663591825735680, -8771663591825735680]",
+                          "[-8771663540286128128, -8771663540286128128]",
+                          "[-8771663527401226240, -8771663527401226240]",
+                          "[-8771663525253742591, -8771663523106258945]",
+                          "[-8771663523106258943, -8771663385667305473]",
+                          "[-8771663385667305471, -8771663248228352001]",
+                          "[-8771663248228352000, -8771663248228352000]",
+                          "[-8771662973350445056, -8771662973350445056]",
+                          "[-8771661873838817280, -8771661873838817280]",
+                          "[-8771657475792306176, -8771657475792306176]",
+                          "[-8771604699234172928, -8771604699234172928]",
+                          "[-8768508474490355712, -8768508474490355712]",
+                          "[-8765412249746538496, -8765412249746538496]",
+                          "[-8765359473188405248, -8765359473188405248]",
+                          "[-8765355075141894144, -8765355075141894144]",
+                          "[-8765353975630266368, -8765353975630266368]",
+                          "[-8765353700752359424, -8765353700752359424]",
+                          "[-8765353700752359423, -8765353563313405953]",
+                          "[-8765353563313405951, -8765353554723471361]",
+                          "[-8765353546133536768, -8765353546133536768]",
+                          "[-8765353494593929216, -8765353494593929216]",
+                          "[-8765341881002360832, -8765341881002360832]",
+                          "[-8765330336130269183, -8765329786374455297]",
+                          "[-8765329786374455296, -8765329786374455296]",
+                          "[-8765329786374455295, -8765329648935501825]",
+                          "[-8765329648935501823, -8765329511496548353]",
+                          "[-8765329511496548352, -8765329511496548352]",
+                          "[-8765329511496548351, -8765329374057594881]",
+                          "[-8765329339697856511, -8765329305338118145]",
+                          "[-8765329305338118144, -8765329305338118144]",
+                          "[-8765328686862827520, -8765328686862827520]",
+                          "[-8765324288816316416, -8765324288816316416]",
+                          "[-8765130774769827840, -8765130774769827840]",
+                          "[-8718968878589280256, -8718968878589280256]"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "rejectedPlans": []
+          },
+          "executionStats": {
+            "executionSuccess": true,
+            "nReturned": 0,
+            "executionTimeMillis": 452,
+            "totalKeysExamined": 106887,
+            "totalDocsExamined": 106856,
+            "executionStages": {
+              "stage": "PROJECTION_DEFAULT",
               "nReturned": 0,
-              "executionTimeMillis": 870,
-              "totalKeysExamined": 106887,
-              "totalDocsExamined": 106856,
-              "executionStages": {
+              "executionTimeMillisEstimate": 157,
+              "works": 106888,
+              "advanced": 0,
+              "needTime": 106887,
+              "needYield": 0,
+              "saveState": 108,
+              "restoreState": 108,
+              "isEOF": 1,
+              "transformBy": {
+                "_id": true,
+                "location_id": true,
+                "ts": true,
+                "user_id": true,
+                "loc": {
+                  "coordinates": true
+                }
+              },
+              "inputStage": {
                 "stage": "SORT",
                 "nReturned": 0,
-                "executionTimeMillisEstimate": 531,
+                "executionTimeMillisEstimate": 154,
                 "works": 106888,
                 "advanced": 0,
                 "needTime": 106887,
@@ -1345,7 +1224,7 @@
                 "inputStage": {
                   "stage": "SHARDING_FILTER",
                   "nReturned": 0,
-                  "executionTimeMillisEstimate": 531,
+                  "executionTimeMillisEstimate": 154,
                   "works": 106887,
                   "advanced": 0,
                   "needTime": 106886,
@@ -1408,7 +1287,7 @@
                       ]
                     },
                     "nReturned": 0,
-                    "executionTimeMillisEstimate": 531,
+                    "executionTimeMillisEstimate": 154,
                     "works": 106887,
                     "advanced": 0,
                     "needTime": 106886,
@@ -1421,7 +1300,7 @@
                     "inputStage": {
                       "stage": "IXSCAN",
                       "nReturned": 106856,
-                      "executionTimeMillisEstimate": 32,
+                      "executionTimeMillisEstimate": 26,
                       "works": 106887,
                       "advanced": 106856,
                       "needTime": 30,
@@ -1509,120 +1388,86 @@
                     }
                   }
                 }
-              },
-              "allPlansExecution": []
+              }
             }
-          ]
-        },
-        "allPlansExecution": [
-          {
-            "shardName": "shard1",
-            "allPlans": []
-          },
-          {
-            "shardName": "shard2",
-            "allPlans": []
           }
-        ]
-      },
-      "serverInfo": {
-        "host": "0d8d096639d1",
-        "port": 27017,
-        "version": "7.0.48",
-        "gitVersion": "6937736f0539a5d4c8edb2970255b9369cb385a5"
-      },
-      "serverParameters": {
-        "internalQueryFacetBufferSizeBytes": 104857600,
-        "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
-        "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
-        "internalDocumentSourceGroupMaxMemoryBytes": 104857600,
-        "internalQueryMaxBlockingSortMemoryUsageBytes": 104857600,
-        "internalQueryProhibitBlockingMergeOnMongoS": 0,
-        "internalQueryMaxAddToSetBytes": 104857600,
-        "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
-        "internalQueryFrameworkControl": "forceClassicEngine"
+        }
       },
       "command": {
-        "find": "checkins",
-        "filter": {
-          "loc": {
-            "$geoWithin": {
-              "$geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                  [
-                    [
-                      -97.81,
-                      30.22
-                    ],
-                    [
-                      -97.74,
-                      30.22
-                    ],
-                    [
-                      -97.74,
-                      30.3
-                    ],
-                    [
-                      -97.81,
-                      30.3
-                    ],
-                    [
-                      -97.81,
-                      30.22
+        "aggregate": "checkins",
+        "pipeline": [
+          {
+            "$match": {
+              "loc": {
+                "$geoWithin": {
+                  "$geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                      [
+                        [
+                          -97.81,
+                          30.22
+                        ],
+                        [
+                          -97.74,
+                          30.22
+                        ],
+                        [
+                          -97.74,
+                          30.3
+                        ],
+                        [
+                          -97.81,
+                          30.3
+                        ],
+                        [
+                          -97.81,
+                          30.22
+                        ]
+                      ]
                     ]
-                  ]
-                ]
+                  }
+                }
+              },
+              "ts": {
+                "$gte": {
+                  "$date": "2010-10-19T23:55:27Z"
+                },
+                "$lt": {
+                  "$date": "2010-10-19T23:55:28Z"
+                }
               }
             }
           },
-          "ts": {
-            "$gte": {
-              "$date": "2010-10-19T23:55:27Z"
-            },
-            "$lt": {
-              "$date": "2010-10-19T23:55:28Z"
-            }
-          }
-        },
-        "sort": {
-          "ts": -1,
-          "_id": -1
-        },
-        "limit": 201,
-        "singleBatch": true,
-        "lsid": {
-          "id": {
-            "$binary": {
-              "base64": "53G7gGHiReyhH0LQ3yK4ww==",
-              "subType": "04"
-            }
-          }
-        },
-        "$clusterTime": {
-          "clusterTime": {
-            "$timestamp": {
-              "t": 1795097948,
-              "i": 1
+          {
+            "$sort": {
+              "ts": -1,
+              "_id": -1
             }
           },
-          "signature": {
-            "hash": {
-              "$binary": {
-                "base64": "AAAAAAAAAAAAAAAAAAAAAAAAAAA=",
-                "subType": "00"
+          {
+            "$limit": 201
+          },
+          {
+            "$project": {
+              "_id": 1,
+              "user_id": 1,
+              "ts": 1,
+              "loc.coordinates": 1,
+              "location_id": 1,
+              "user_hash": {
+                "$toHashedIndexKey": "$user_id"
               }
-            },
-            "keyId": 0
+            }
           }
-        },
-        "$db": "gowalla"
+        ],
+        "cursor": {}
       },
       "ok": 1.0,
       "$clusterTime": {
         "clusterTime": {
           "$timestamp": {
-            "t": 1795097948,
+            "t": 1795346128,
             "i": 1
           }
         },
@@ -1638,7 +1483,7 @@
       },
       "operationTime": {
         "$timestamp": {
-          "t": 1795097948,
+          "t": 1795346128,
           "i": 1
         }
       }
@@ -1651,923 +1496,1238 @@
     },
     "region_contains_source_line_1": true,
     "invalid_parameters_return_422": true,
-    "cross_query_cursor_rejected": true
+    "cross_query_cursor_rejected": true,
+    "trajectory_query_shards": [
+      "shard1"
+    ],
+    "region_query_shards": [
+      "shard1",
+      "shard2"
+    ],
+    "region_demo": {
+      "bbox": "-97.81,30.22,-97.74,30.30",
+      "rows": 200,
+      "shard_counts": {
+        "shard1": 86,
+        "shard2": 114
+      }
+    }
   },
   "performance": {
     "selection": "100 uniformly sampled clean file rows, seed 20261119",
     "trajectory": {
       "count": 100,
       "errors": 0,
-      "p50_ms": 13.9305,
-      "p95_ms": 56.185,
+      "p50_ms": 216.8465,
+      "p95_ms": 472.91715,
       "runs": [
         {
           "path": "/api/users/120/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.851,
+          "ms": 342.996,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/191/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 39.703,
+          "ms": 460.552,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/366/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.891,
+          "ms": 279.284,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/534/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 12.967,
+          "ms": 155.465,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/591/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 58.617,
+          "ms": 263.336,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/719/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 39.379,
+          "ms": 215.492,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/1234/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.508,
+          "ms": 117.503,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/1444/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 12.708,
+          "ms": 288.231,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/1516/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.614,
+          "ms": 102.558,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/1660/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 33.232,
+          "ms": 333.942,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/1695/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.143,
+          "ms": 132.488,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/1806/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.75,
+          "ms": 182.832,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/1986/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.833,
+          "ms": 190.112,
           "status": 200,
-          "rows": 175
+          "rows": 175,
+          "shard_counts": {
+            "shard2": 175
+          }
         },
         {
           "path": "/api/users/2193/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.513,
+          "ms": 270.428,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/2629/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.385,
+          "ms": 290.118,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/3106/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.958,
+          "ms": 445.79,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/3171/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 12.974,
+          "ms": 161.389,
           "status": 200,
-          "rows": 183
+          "rows": 183,
+          "shard_counts": {
+            "shard1": 183
+          }
         },
         {
           "path": "/api/users/3416/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 25.621,
+          "ms": 184.164,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/4883/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 31.441,
+          "ms": 321.83,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/5556/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 15.862,
+          "ms": 294.125,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/7557/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.609,
+          "ms": 290.941,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/8720/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 8.949,
+          "ms": 325.04,
           "status": 200,
-          "rows": 100
+          "rows": 100,
+          "shard_counts": {
+            "shard1": 100
+          }
         },
         {
           "path": "/api/users/10222/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.065,
+          "ms": 163.525,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/10410/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.499,
+          "ms": 258.718,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/10570/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 19.562,
+          "ms": 281.123,
           "status": 200,
-          "rows": 22
+          "rows": 22,
+          "shard_counts": {
+            "shard2": 22
+          }
         },
         {
           "path": "/api/users/12740/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.701,
+          "ms": 564.684,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/13356/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 62.104,
+          "ms": 185.186,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/14421/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 12.16,
+          "ms": 358.722,
           "status": 200,
-          "rows": 95
+          "rows": 95,
+          "shard_counts": {
+            "shard2": 95
+          }
         },
         {
           "path": "/api/users/14428/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 15.066,
+          "ms": 143.208,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/14858/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.484,
+          "ms": 345.447,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/14938/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 28.809,
+          "ms": 504.919,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/14988/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.32,
+          "ms": 455.41,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/15216/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 9.053,
+          "ms": 377.207,
           "status": 200,
-          "rows": 76
+          "rows": 76,
+          "shard_counts": {
+            "shard2": 76
+          }
         },
         {
           "path": "/api/users/16177/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 9.217,
+          "ms": 297.905,
           "status": 200,
-          "rows": 100
+          "rows": 100,
+          "shard_counts": {
+            "shard2": 100
+          }
         },
         {
           "path": "/api/users/18218/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.673,
+          "ms": 236.491,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/18931/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 29.924,
+          "ms": 238.463,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/19470/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.703,
+          "ms": 173.854,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/19947/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 32.294,
+          "ms": 280.254,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/20405/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 29.76,
+          "ms": 218.806,
           "status": 200,
-          "rows": 125
+          "rows": 125,
+          "shard_counts": {
+            "shard1": 125
+          }
         },
         {
           "path": "/api/users/22589/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 25.609,
+          "ms": 240.035,
           "status": 200,
-          "rows": 75
+          "rows": 75,
+          "shard_counts": {
+            "shard1": 75
+          }
         },
         {
           "path": "/api/users/26502/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 10.786,
+          "ms": 474.022,
           "status": 200,
-          "rows": 106
+          "rows": 106,
+          "shard_counts": {
+            "shard2": 106
+          }
         },
         {
           "path": "/api/users/27185/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 6.898,
+          "ms": 276.836,
           "status": 200,
-          "rows": 25
+          "rows": 25,
+          "shard_counts": {
+            "shard2": 25
+          }
         },
         {
           "path": "/api/users/29242/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.794,
+          "ms": 306.929,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/29505/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.678,
+          "ms": 472.859,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/33007/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 11.4,
+          "ms": 227.14,
           "status": 200,
-          "rows": 116
+          "rows": 116,
+          "shard_counts": {
+            "shard1": 116
+          }
         },
         {
           "path": "/api/users/34341/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 19.617,
+          "ms": 324.56,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/37996/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 29.797,
+          "ms": 93.622,
           "status": 200,
-          "rows": 87
+          "rows": 87,
+          "shard_counts": {
+            "shard1": 87
+          }
         },
         {
           "path": "/api/users/38895/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 6.894,
+          "ms": 371.615,
           "status": 200,
-          "rows": 5
+          "rows": 5,
+          "shard_counts": {
+            "shard2": 5
+          }
         },
         {
           "path": "/api/users/43110/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 23.354,
+          "ms": 145.505,
           "status": 200,
-          "rows": 100
+          "rows": 100,
+          "shard_counts": {
+            "shard2": 100
+          }
         },
         {
           "path": "/api/users/46910/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 12.383,
+          "ms": 522.582,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/48587/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 6.557,
+          "ms": 227.872,
           "status": 200,
-          "rows": 48
+          "rows": 48,
+          "shard_counts": {
+            "shard2": 48
+          }
         },
         {
           "path": "/api/users/48907/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 147.814,
+          "ms": 316.199,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/52106/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 22.587,
+          "ms": 182.443,
           "status": 200,
-          "rows": 100
+          "rows": 100,
+          "shard_counts": {
+            "shard1": 100
+          }
         },
         {
           "path": "/api/users/52766/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 7.556,
+          "ms": 361.856,
           "status": 200,
-          "rows": 50
+          "rows": 50,
+          "shard_counts": {
+            "shard2": 50
+          }
         },
         {
           "path": "/api/users/55597/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 19.039,
+          "ms": 173.101,
           "status": 200,
-          "rows": 75
+          "rows": 75,
+          "shard_counts": {
+            "shard2": 75
+          }
         },
         {
           "path": "/api/users/56593/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 10.202,
+          "ms": 243.821,
           "status": 200,
-          "rows": 75
+          "rows": 75,
+          "shard_counts": {
+            "shard1": 75
+          }
         },
         {
           "path": "/api/users/59643/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 18.706,
+          "ms": 210.119,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/65174/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 7.402,
+          "ms": 114.941,
           "status": 200,
-          "rows": 25
+          "rows": 25,
+          "shard_counts": {
+            "shard1": 25
+          }
         },
         {
           "path": "/api/users/66923/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.73,
+          "ms": 155.648,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/71180/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 7.368,
+          "ms": 106.479,
           "status": 200,
-          "rows": 14
+          "rows": 14,
+          "shard_counts": {
+            "shard1": 14
+          }
         },
         {
           "path": "/api/users/72558/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 56.185,
+          "ms": 205.923,
           "status": 200,
-          "rows": 25
+          "rows": 25,
+          "shard_counts": {
+            "shard2": 25
+          }
         },
         {
           "path": "/api/users/72645/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 7.483,
+          "ms": 221.619,
           "status": 200,
-          "rows": 20
+          "rows": 20,
+          "shard_counts": {
+            "shard1": 20
+          }
         },
         {
           "path": "/api/users/72751/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 32.057,
+          "ms": 201.18,
           "status": 200,
-          "rows": 100
+          "rows": 100,
+          "shard_counts": {
+            "shard2": 100
+          }
         },
         {
           "path": "/api/users/73440/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.937,
+          "ms": 143.887,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/75087/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 31.304,
+          "ms": 168.583,
           "status": 200,
-          "rows": 79
+          "rows": 79,
+          "shard_counts": {
+            "shard2": 79
+          }
         },
         {
           "path": "/api/users/75528/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 7.639,
+          "ms": 157.067,
           "status": 200,
-          "rows": 50
+          "rows": 50,
+          "shard_counts": {
+            "shard1": 50
+          }
         },
         {
           "path": "/api/users/81277/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 20.711,
+          "ms": 133.998,
           "status": 200,
-          "rows": 4
+          "rows": 4,
+          "shard_counts": {
+            "shard2": 4
+          }
         },
         {
           "path": "/api/users/87440/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 16.17,
+          "ms": 490.161,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/91182/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 17.118,
+          "ms": 186.932,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/95201/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 32.297,
+          "ms": 270.405,
           "status": 200,
-          "rows": 75
+          "rows": 75,
+          "shard_counts": {
+            "shard2": 75
+          }
         },
         {
           "path": "/api/users/100035/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 8.418,
+          "ms": 143.596,
           "status": 200,
-          "rows": 46
+          "rows": 46,
+          "shard_counts": {
+            "shard1": 46
+          }
         },
         {
           "path": "/api/users/100545/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 6.371,
+          "ms": 193.595,
           "status": 200,
-          "rows": 12
+          "rows": 12,
+          "shard_counts": {
+            "shard1": 12
+          }
         },
         {
           "path": "/api/users/103449/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 29.595,
+          "ms": 220.1,
           "status": 200,
-          "rows": 75
+          "rows": 75,
+          "shard_counts": {
+            "shard1": 75
+          }
         },
         {
           "path": "/api/users/104813/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 12.998,
+          "ms": 151.287,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/105572/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 7.524,
+          "ms": 178.964,
           "status": 200,
-          "rows": 49
+          "rows": 49,
+          "shard_counts": {
+            "shard2": 49
+          }
         },
         {
           "path": "/api/users/106668/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 12.436,
+          "ms": 144.094,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/106867/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 12.168,
+          "ms": 213.676,
           "status": 200,
-          "rows": 151
+          "rows": 151,
+          "shard_counts": {
+            "shard2": 151
+          }
         },
         {
           "path": "/api/users/108923/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 8.124,
+          "ms": 137.185,
           "status": 200,
-          "rows": 85
+          "rows": 85,
+          "shard_counts": {
+            "shard2": 85
+          }
         },
         {
           "path": "/api/users/110085/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 10.688,
+          "ms": 226.569,
           "status": 200,
-          "rows": 125
+          "rows": 125,
+          "shard_counts": {
+            "shard1": 125
+          }
         },
         {
           "path": "/api/users/112474/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 8.129,
+          "ms": 280.854,
           "status": 200,
-          "rows": 60
+          "rows": 60,
+          "shard_counts": {
+            "shard1": 60
+          }
         },
         {
           "path": "/api/users/112826/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 19.988,
+          "ms": 263.301,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 200
+          }
         },
         {
           "path": "/api/users/113199/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 16.048,
+          "ms": 179.971,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/113242/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 6.707,
+          "ms": 141.89,
           "status": 200,
-          "rows": 27
+          "rows": 27,
+          "shard_counts": {
+            "shard2": 27
+          }
         },
         {
           "path": "/api/users/113293/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 10.691,
+          "ms": 192.659,
           "status": 200,
-          "rows": 121
+          "rows": 121,
+          "shard_counts": {
+            "shard1": 121
+          }
         },
         {
           "path": "/api/users/119426/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 10.172,
+          "ms": 138.611,
           "status": 200,
-          "rows": 101
+          "rows": 101,
+          "shard_counts": {
+            "shard2": 101
+          }
         },
         {
           "path": "/api/users/126561/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.903,
+          "ms": 113.437,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/128114/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 13.048,
+          "ms": 103.954,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/129611/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 12.86,
+          "ms": 193.314,
           "status": 200,
-          "rows": 193
+          "rows": 193,
+          "shard_counts": {
+            "shard2": 193
+          }
         },
         {
           "path": "/api/users/132723/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 116.096,
+          "ms": 284.273,
           "status": 200,
-          "rows": 31
+          "rows": 31,
+          "shard_counts": {
+            "shard1": 31
+          }
         },
         {
           "path": "/api/users/134607/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 112.686,
+          "ms": 218.201,
           "status": 200,
-          "rows": 29
+          "rows": 29,
+          "shard_counts": {
+            "shard1": 29
+          }
         },
         {
           "path": "/api/users/140285/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 51.731,
+          "ms": 140.343,
           "status": 200,
-          "rows": 116
+          "rows": 116,
+          "shard_counts": {
+            "shard2": 116
+          }
         },
         {
           "path": "/api/users/141114/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.197,
+          "ms": 111.87,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/142182/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 8.59,
+          "ms": 159.186,
           "status": 200,
-          "rows": 88
+          "rows": 88,
+          "shard_counts": {
+            "shard1": 88
+          }
         },
         {
           "path": "/api/users/147188/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 18.174,
+          "ms": 185.73,
           "status": 200,
-          "rows": 50
+          "rows": 50,
+          "shard_counts": {
+            "shard1": 50
+          }
         },
         {
           "path": "/api/users/151855/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 30.344,
+          "ms": 207.313,
           "status": 200,
-          "rows": 68
+          "rows": 68,
+          "shard_counts": {
+            "shard2": 68
+          }
         },
         {
           "path": "/api/users/153956/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 6.604,
+          "ms": 181.267,
           "status": 200,
-          "rows": 11
+          "rows": 11,
+          "shard_counts": {
+            "shard2": 11
+          }
         },
         {
           "path": "/api/users/156903/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 11.104,
+          "ms": 311.599,
           "status": 200,
-          "rows": 117
+          "rows": 117,
+          "shard_counts": {
+            "shard2": 117
+          }
         },
         {
           "path": "/api/users/158600/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 14.585,
+          "ms": 290.157,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard2": 200
+          }
         },
         {
           "path": "/api/users/164822/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 9.069,
+          "ms": 207.573,
           "status": 200,
-          "rows": 10
+          "rows": 10,
+          "shard_counts": {
+            "shard2": 10
+          }
         },
         {
           "path": "/api/users/184421/trajectory",
           "parameters": {
             "limit": 200
           },
-          "ms": 7.071,
+          "ms": 158.993,
           "status": 200,
-          "rows": 25
+          "rows": 25,
+          "shard_counts": {
+            "shard2": 25
+          }
         }
       ]
     },
     "region": {
       "count": 100,
-      "errors": 0,
-      "p50_ms": 61.248000000000005,
-      "p95_ms": 525.771,
+      "errors": 13,
+      "p50_ms": 1302.469,
+      "p95_ms": 11618.9378,
       "runs": [
         {
           "path": "/api/checkins/geo",
@@ -2577,9 +2737,12 @@
             "end": "2009-10-10T00:00:00Z",
             "limit": 200
           },
-          "ms": 11.61,
+          "ms": 579.985,
           "status": 200,
-          "rows": 29
+          "rows": 29,
+          "shard_counts": {
+            "shard1": 29
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2589,9 +2752,11 @@
             "end": "2010-04-13T00:00:00Z",
             "limit": 200
           },
-          "ms": 342.692,
-          "status": 200,
-          "rows": 200
+          "ms": 15119.336,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -2601,9 +2766,11 @@
             "end": "2010-02-08T00:00:00Z",
             "limit": 200
           },
-          "ms": 525.771,
-          "status": 200,
-          "rows": 200
+          "ms": 15172.704,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -2613,9 +2780,11 @@
             "end": "2010-01-30T00:00:00Z",
             "limit": 200
           },
-          "ms": 107.635,
-          "status": 200,
-          "rows": 92
+          "ms": 15432.942,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -2625,9 +2794,13 @@
             "end": "2010-09-11T00:00:00Z",
             "limit": 200
           },
-          "ms": 20.833,
+          "ms": 1055.918,
           "status": 200,
-          "rows": 25
+          "rows": 25,
+          "shard_counts": {
+            "shard1": 2,
+            "shard2": 23
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2637,9 +2810,13 @@
             "end": "2010-08-05T00:00:00Z",
             "limit": 200
           },
-          "ms": 12.995,
+          "ms": 27.685,
           "status": 200,
-          "rows": 15
+          "rows": 15,
+          "shard_counts": {
+            "shard1": 8,
+            "shard2": 7
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2649,9 +2826,12 @@
             "end": "2010-10-10T00:00:00Z",
             "limit": 200
           },
-          "ms": 7.046,
+          "ms": 60.832,
           "status": 200,
-          "rows": 9
+          "rows": 9,
+          "shard_counts": {
+            "shard2": 9
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2661,9 +2841,11 @@
             "end": "2010-10-22T00:00:00Z",
             "limit": 200
           },
-          "ms": 92.342,
-          "status": 200,
-          "rows": 38
+          "ms": 15012.009,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -2673,9 +2855,12 @@
             "end": "2010-09-04T00:00:00Z",
             "limit": 200
           },
-          "ms": 9.622,
+          "ms": 614.454,
           "status": 200,
-          "rows": 13
+          "rows": 13,
+          "shard_counts": {
+            "shard1": 13
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2685,9 +2870,12 @@
             "end": "2010-05-23T00:00:00Z",
             "limit": 200
           },
-          "ms": 18.782,
+          "ms": 1502.344,
           "status": 200,
-          "rows": 3
+          "rows": 3,
+          "shard_counts": {
+            "shard2": 3
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2697,9 +2885,11 @@
             "end": "2010-09-03T00:00:00Z",
             "limit": 200
           },
-          "ms": 110.994,
-          "status": 200,
-          "rows": 116
+          "ms": 15066.296,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -2709,9 +2899,13 @@
             "end": "2010-09-07T00:00:00Z",
             "limit": 200
           },
-          "ms": 10.428,
+          "ms": 2781.157,
           "status": 200,
-          "rows": 12
+          "rows": 12,
+          "shard_counts": {
+            "shard1": 9,
+            "shard2": 3
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2721,9 +2915,11 @@
             "end": "2010-09-06T00:00:00Z",
             "limit": 200
           },
-          "ms": 127.277,
-          "status": 200,
-          "rows": 128
+          "ms": 15161.038,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -2733,9 +2929,11 @@
             "end": "2010-08-13T00:00:00Z",
             "limit": 200
           },
-          "ms": 79.48,
-          "status": 200,
-          "rows": 125
+          "ms": 15024.296,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -2745,9 +2943,13 @@
             "end": "2010-10-08T00:00:00Z",
             "limit": 200
           },
-          "ms": 27.674,
+          "ms": 5266.748,
           "status": 200,
-          "rows": 16
+          "rows": 16,
+          "shard_counts": {
+            "shard1": 8,
+            "shard2": 8
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2757,9 +2959,11 @@
             "end": "2010-09-04T00:00:00Z",
             "limit": 200
           },
-          "ms": 268.069,
-          "status": 200,
-          "rows": 200
+          "ms": 15072.866,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -2769,9 +2973,12 @@
             "end": "2010-07-13T00:00:00Z",
             "limit": 200
           },
-          "ms": 10.151,
+          "ms": 1067.516,
           "status": 200,
-          "rows": 4
+          "rows": 4,
+          "shard_counts": {
+            "shard1": 4
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2781,9 +2988,13 @@
             "end": "2010-02-12T00:00:00Z",
             "limit": 200
           },
-          "ms": 15.4,
+          "ms": 3455.836,
           "status": 200,
-          "rows": 6
+          "rows": 6,
+          "shard_counts": {
+            "shard1": 5,
+            "shard2": 1
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2793,9 +3004,11 @@
             "end": "2010-09-05T00:00:00Z",
             "limit": 200
           },
-          "ms": 93.268,
-          "status": 200,
-          "rows": 156
+          "ms": 15027.951,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -2805,9 +3018,13 @@
             "end": "2010-09-03T00:00:00Z",
             "limit": 200
           },
-          "ms": 104.013,
+          "ms": 8302.137,
           "status": 200,
-          "rows": 54
+          "rows": 54,
+          "shard_counts": {
+            "shard1": 30,
+            "shard2": 24
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2817,9 +3034,13 @@
             "end": "2010-05-02T00:00:00Z",
             "limit": 200
           },
-          "ms": 334.104,
+          "ms": 11616.66,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 122,
+            "shard2": 78
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2829,9 +3050,13 @@
             "end": "2010-08-27T00:00:00Z",
             "limit": 200
           },
-          "ms": 211.479,
+          "ms": 14043.537,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 101,
+            "shard2": 99
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2841,9 +3066,13 @@
             "end": "2009-12-20T00:00:00Z",
             "limit": 200
           },
-          "ms": 13.657,
+          "ms": 1240.573,
           "status": 200,
-          "rows": 20
+          "rows": 20,
+          "shard_counts": {
+            "shard1": 18,
+            "shard2": 2
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2853,9 +3082,13 @@
             "end": "2009-12-26T00:00:00Z",
             "limit": 200
           },
-          "ms": 95.469,
+          "ms": 11978.543,
           "status": 200,
-          "rows": 29
+          "rows": 29,
+          "shard_counts": {
+            "shard1": 24,
+            "shard2": 5
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2865,9 +3098,12 @@
             "end": "2010-10-02T00:00:00Z",
             "limit": 200
           },
-          "ms": 8.384,
+          "ms": 790.608,
           "status": 200,
-          "rows": 1
+          "rows": 1,
+          "shard_counts": {
+            "shard2": 1
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2877,9 +3113,13 @@
             "end": "2010-06-16T00:00:00Z",
             "limit": 200
           },
-          "ms": 33.921,
+          "ms": 11619.914,
           "status": 200,
-          "rows": 56
+          "rows": 56,
+          "shard_counts": {
+            "shard1": 39,
+            "shard2": 17
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2889,9 +3129,13 @@
             "end": "2010-09-12T00:00:00Z",
             "limit": 200
           },
-          "ms": 103.191,
+          "ms": 8729.615,
           "status": 200,
-          "rows": 97
+          "rows": 97,
+          "shard_counts": {
+            "shard1": 23,
+            "shard2": 74
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2901,9 +3145,12 @@
             "end": "2010-08-31T00:00:00Z",
             "limit": 200
           },
-          "ms": 6.948,
+          "ms": 702.155,
           "status": 200,
-          "rows": 3
+          "rows": 3,
+          "shard_counts": {
+            "shard2": 3
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2913,9 +3160,13 @@
             "end": "2010-08-31T00:00:00Z",
             "limit": 200
           },
-          "ms": 56.225,
+          "ms": 6658.37,
           "status": 200,
-          "rows": 150
+          "rows": 150,
+          "shard_counts": {
+            "shard1": 114,
+            "shard2": 36
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2925,9 +3176,13 @@
             "end": "2010-08-06T00:00:00Z",
             "limit": 200
           },
-          "ms": 10.102,
+          "ms": 664.84,
           "status": 200,
-          "rows": 32
+          "rows": 32,
+          "shard_counts": {
+            "shard1": 2,
+            "shard2": 30
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2937,9 +3192,13 @@
             "end": "2010-07-01T00:00:00Z",
             "limit": 200
           },
-          "ms": 16.725,
+          "ms": 936.073,
           "status": 200,
-          "rows": 28
+          "rows": 28,
+          "shard_counts": {
+            "shard1": 24,
+            "shard2": 4
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2949,9 +3208,13 @@
             "end": "2010-09-27T00:00:00Z",
             "limit": 200
           },
-          "ms": 21.579,
+          "ms": 2819.901,
           "status": 200,
-          "rows": 66
+          "rows": 66,
+          "shard_counts": {
+            "shard1": 24,
+            "shard2": 42
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2961,9 +3224,13 @@
             "end": "2010-07-13T00:00:00Z",
             "limit": 200
           },
-          "ms": 18.258,
+          "ms": 2082.861,
           "status": 200,
-          "rows": 25
+          "rows": 25,
+          "shard_counts": {
+            "shard1": 6,
+            "shard2": 19
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2973,9 +3240,12 @@
             "end": "2010-09-07T00:00:00Z",
             "limit": 200
           },
-          "ms": 7.548,
+          "ms": 459.802,
           "status": 200,
-          "rows": 2
+          "rows": 2,
+          "shard_counts": {
+            "shard2": 2
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2985,9 +3255,12 @@
             "end": "2010-07-01T00:00:00Z",
             "limit": 200
           },
-          "ms": 8.702,
+          "ms": 825.59,
           "status": 200,
-          "rows": 4
+          "rows": 4,
+          "shard_counts": {
+            "shard1": 4
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -2997,9 +3270,11 @@
             "end": "2010-10-14T00:00:00Z",
             "limit": 200
           },
-          "ms": 612.279,
-          "status": 200,
-          "rows": 200
+          "ms": 15046.487,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -3009,9 +3284,13 @@
             "end": "2010-05-16T00:00:00Z",
             "limit": 200
           },
-          "ms": 117.585,
+          "ms": 4082.461,
           "status": 200,
-          "rows": 44
+          "rows": 44,
+          "shard_counts": {
+            "shard1": 1,
+            "shard2": 43
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3021,9 +3300,13 @@
             "end": "2009-12-26T00:00:00Z",
             "limit": 200
           },
-          "ms": 17.715,
+          "ms": 2133.709,
           "status": 200,
-          "rows": 18
+          "rows": 18,
+          "shard_counts": {
+            "shard1": 3,
+            "shard2": 15
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3033,9 +3316,13 @@
             "end": "2010-09-11T00:00:00Z",
             "limit": 200
           },
-          "ms": 66.18,
+          "ms": 5502.97,
           "status": 200,
-          "rows": 68
+          "rows": 68,
+          "shard_counts": {
+            "shard1": 35,
+            "shard2": 33
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3045,9 +3332,13 @@
             "end": "2010-07-16T00:00:00Z",
             "limit": 200
           },
-          "ms": 124.346,
+          "ms": 12220.814,
           "status": 200,
-          "rows": 115
+          "rows": 115,
+          "shard_counts": {
+            "shard1": 58,
+            "shard2": 57
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3057,9 +3348,13 @@
             "end": "2010-02-12T00:00:00Z",
             "limit": 200
           },
-          "ms": 57.442,
+          "ms": 8470.536,
           "status": 200,
-          "rows": 53
+          "rows": 53,
+          "shard_counts": {
+            "shard1": 13,
+            "shard2": 40
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3069,9 +3364,13 @@
             "end": "2010-03-03T00:00:00Z",
             "limit": 200
           },
-          "ms": 55.666,
+          "ms": 3862.588,
           "status": 200,
-          "rows": 60
+          "rows": 60,
+          "shard_counts": {
+            "shard1": 31,
+            "shard2": 29
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3081,9 +3380,13 @@
             "end": "2010-03-16T00:00:00Z",
             "limit": 200
           },
-          "ms": 489.675,
+          "ms": 11470.077,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 103,
+            "shard2": 97
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3093,9 +3396,13 @@
             "end": "2010-05-29T00:00:00Z",
             "limit": 200
           },
-          "ms": 18.128,
+          "ms": 2124.047,
           "status": 200,
-          "rows": 31
+          "rows": 31,
+          "shard_counts": {
+            "shard1": 25,
+            "shard2": 6
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3105,9 +3412,13 @@
             "end": "2010-07-26T00:00:00Z",
             "limit": 200
           },
-          "ms": 68.541,
+          "ms": 8673.278,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 83,
+            "shard2": 117
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3117,9 +3428,13 @@
             "end": "2010-07-12T00:00:00Z",
             "limit": 200
           },
-          "ms": 145.987,
+          "ms": 12869.97,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 100,
+            "shard2": 100
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3129,9 +3444,13 @@
             "end": "2010-04-13T00:00:00Z",
             "limit": 200
           },
-          "ms": 42.833,
+          "ms": 1302.469,
           "status": 200,
-          "rows": 9
+          "rows": 9,
+          "shard_counts": {
+            "shard1": 5,
+            "shard2": 4
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3141,9 +3460,12 @@
             "end": "2009-12-04T00:00:00Z",
             "limit": 200
           },
-          "ms": 42.448,
+          "ms": 981.508,
           "status": 200,
-          "rows": 1
+          "rows": 1,
+          "shard_counts": {
+            "shard2": 1
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3153,9 +3475,13 @@
             "end": "2010-10-09T00:00:00Z",
             "limit": 200
           },
-          "ms": 109.595,
+          "ms": 7149.491,
           "status": 200,
-          "rows": 183
+          "rows": 183,
+          "shard_counts": {
+            "shard1": 82,
+            "shard2": 101
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3165,9 +3491,13 @@
             "end": "2010-06-27T00:00:00Z",
             "limit": 200
           },
-          "ms": 10.002,
+          "ms": 582.278,
           "status": 200,
-          "rows": 4
+          "rows": 4,
+          "shard_counts": {
+            "shard1": 1,
+            "shard2": 3
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3177,9 +3507,13 @@
             "end": "2010-09-22T00:00:00Z",
             "limit": 200
           },
-          "ms": 27.254,
+          "ms": 1461.809,
           "status": 200,
-          "rows": 29
+          "rows": 29,
+          "shard_counts": {
+            "shard1": 7,
+            "shard2": 22
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3189,9 +3523,13 @@
             "end": "2010-08-28T00:00:00Z",
             "limit": 200
           },
-          "ms": 17.974,
+          "ms": 2954.187,
           "status": 200,
-          "rows": 48
+          "rows": 48,
+          "shard_counts": {
+            "shard1": 38,
+            "shard2": 10
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3201,9 +3539,12 @@
             "end": "2010-08-21T00:00:00Z",
             "limit": 200
           },
-          "ms": 8.873,
+          "ms": 536.03,
           "status": 200,
-          "rows": 2
+          "rows": 2,
+          "shard_counts": {
+            "shard1": 2
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3213,9 +3554,11 @@
             "end": "2010-03-15T00:00:00Z",
             "limit": 200
           },
-          "ms": 549.567,
-          "status": 200,
-          "rows": 200
+          "ms": 15027.292,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -3225,9 +3568,12 @@
             "end": "2010-08-28T00:00:00Z",
             "limit": 200
           },
-          "ms": 9.706,
+          "ms": 908.707,
           "status": 200,
-          "rows": 6
+          "rows": 6,
+          "shard_counts": {
+            "shard2": 6
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3237,9 +3583,11 @@
             "end": "2010-05-08T00:00:00Z",
             "limit": 200
           },
-          "ms": 659.365,
-          "status": 200,
-          "rows": 200
+          "ms": 15051.284,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -3249,9 +3597,13 @@
             "end": "2010-02-15T00:00:00Z",
             "limit": 200
           },
-          "ms": 39.918,
+          "ms": 1107.24,
           "status": 200,
-          "rows": 2
+          "rows": 2,
+          "shard_counts": {
+            "shard1": 1,
+            "shard2": 1
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3261,9 +3613,12 @@
             "end": "2010-04-05T00:00:00Z",
             "limit": 200
           },
-          "ms": 13.976,
+          "ms": 225.731,
           "status": 200,
-          "rows": 3
+          "rows": 3,
+          "shard_counts": {
+            "shard1": 3
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3273,9 +3628,13 @@
             "end": "2010-08-02T00:00:00Z",
             "limit": 200
           },
-          "ms": 27.44,
+          "ms": 2327.324,
           "status": 200,
-          "rows": 16
+          "rows": 16,
+          "shard_counts": {
+            "shard1": 11,
+            "shard2": 5
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3285,9 +3644,11 @@
             "end": "2010-05-24T00:00:00Z",
             "limit": 200
           },
-          "ms": 298.576,
-          "status": 200,
-          "rows": 200
+          "ms": 15105.652,
+          "status": 504,
+          "rows": 0,
+          "shard_counts": {},
+          "detail": "查询超时，请缩小空间或时间范围"
         },
         {
           "path": "/api/checkins/geo",
@@ -3297,9 +3658,13 @@
             "end": "2010-05-29T00:00:00Z",
             "limit": 200
           },
-          "ms": 97.844,
+          "ms": 1038.935,
           "status": 200,
-          "rows": 31
+          "rows": 31,
+          "shard_counts": {
+            "shard1": 16,
+            "shard2": 15
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3309,9 +3674,13 @@
             "end": "2010-01-28T00:00:00Z",
             "limit": 200
           },
-          "ms": 72.678,
+          "ms": 941.353,
           "status": 200,
-          "rows": 2
+          "rows": 2,
+          "shard_counts": {
+            "shard1": 1,
+            "shard2": 1
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3321,9 +3690,13 @@
             "end": "2010-09-06T00:00:00Z",
             "limit": 200
           },
-          "ms": 120.289,
+          "ms": 1794.865,
           "status": 200,
-          "rows": 25
+          "rows": 25,
+          "shard_counts": {
+            "shard1": 15,
+            "shard2": 10
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3333,9 +3706,13 @@
             "end": "2010-03-22T00:00:00Z",
             "limit": 200
           },
-          "ms": 144.299,
+          "ms": 4681.08,
           "status": 200,
-          "rows": 169
+          "rows": 169,
+          "shard_counts": {
+            "shard1": 84,
+            "shard2": 85
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3345,9 +3722,13 @@
             "end": "2010-09-18T00:00:00Z",
             "limit": 200
           },
-          "ms": 10.276,
+          "ms": 508.92,
           "status": 200,
-          "rows": 2
+          "rows": 2,
+          "shard_counts": {
+            "shard1": 1,
+            "shard2": 1
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3357,9 +3738,13 @@
             "end": "2010-08-27T00:00:00Z",
             "limit": 200
           },
-          "ms": 66.0,
+          "ms": 3921.048,
           "status": 200,
-          "rows": 116
+          "rows": 116,
+          "shard_counts": {
+            "shard1": 89,
+            "shard2": 27
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3369,9 +3754,13 @@
             "end": "2010-05-19T00:00:00Z",
             "limit": 200
           },
-          "ms": 65.054,
+          "ms": 1975.9,
           "status": 200,
-          "rows": 57
+          "rows": 57,
+          "shard_counts": {
+            "shard1": 30,
+            "shard2": 27
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3381,9 +3770,13 @@
             "end": "2010-08-13T00:00:00Z",
             "limit": 200
           },
-          "ms": 50.125,
+          "ms": 1794.131,
           "status": 200,
-          "rows": 160
+          "rows": 160,
+          "shard_counts": {
+            "shard1": 94,
+            "shard2": 66
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3393,9 +3786,13 @@
             "end": "2009-12-24T00:00:00Z",
             "limit": 200
           },
-          "ms": 266.789,
+          "ms": 6624.08,
           "status": 200,
-          "rows": 169
+          "rows": 169,
+          "shard_counts": {
+            "shard1": 86,
+            "shard2": 83
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3405,9 +3802,13 @@
             "end": "2010-08-01T00:00:00Z",
             "limit": 200
           },
-          "ms": 35.674,
+          "ms": 404.632,
           "status": 200,
-          "rows": 5
+          "rows": 5,
+          "shard_counts": {
+            "shard1": 1,
+            "shard2": 4
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3417,9 +3818,12 @@
             "end": "2010-03-22T00:00:00Z",
             "limit": 200
           },
-          "ms": 10.518,
+          "ms": 472.617,
           "status": 200,
-          "rows": 6
+          "rows": 6,
+          "shard_counts": {
+            "shard1": 6
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3429,9 +3833,12 @@
             "end": "2010-02-02T00:00:00Z",
             "limit": 200
           },
-          "ms": 38.312,
+          "ms": 836.788,
           "status": 200,
-          "rows": 2
+          "rows": 2,
+          "shard_counts": {
+            "shard1": 2
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3441,9 +3848,12 @@
             "end": "2010-07-24T00:00:00Z",
             "limit": 200
           },
-          "ms": 7.593,
+          "ms": 133.322,
           "status": 200,
-          "rows": 1
+          "rows": 1,
+          "shard_counts": {
+            "shard1": 1
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3453,9 +3863,13 @@
             "end": "2010-06-06T00:00:00Z",
             "limit": 200
           },
-          "ms": 868.085,
+          "ms": 5736.754,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 99,
+            "shard2": 101
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3465,9 +3879,13 @@
             "end": "2010-10-16T00:00:00Z",
             "limit": 200
           },
-          "ms": 141.694,
+          "ms": 1758.072,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 165,
+            "shard2": 35
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3477,9 +3895,13 @@
             "end": "2010-08-14T00:00:00Z",
             "limit": 200
           },
-          "ms": 41.129,
+          "ms": 1034.492,
           "status": 200,
-          "rows": 30
+          "rows": 30,
+          "shard_counts": {
+            "shard1": 8,
+            "shard2": 22
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3489,9 +3911,13 @@
             "end": "2010-04-27T00:00:00Z",
             "limit": 200
           },
-          "ms": 185.576,
+          "ms": 2106.409,
           "status": 200,
-          "rows": 58
+          "rows": 58,
+          "shard_counts": {
+            "shard1": 34,
+            "shard2": 24
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3501,9 +3927,13 @@
             "end": "2010-10-15T00:00:00Z",
             "limit": 200
           },
-          "ms": 428.774,
+          "ms": 2291.292,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 102,
+            "shard2": 98
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3513,9 +3943,13 @@
             "end": "2010-04-30T00:00:00Z",
             "limit": 200
           },
-          "ms": 465.474,
+          "ms": 936.501,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 90,
+            "shard2": 110
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3525,9 +3959,13 @@
             "end": "2010-10-07T00:00:00Z",
             "limit": 200
           },
-          "ms": 65.061,
+          "ms": 248.705,
           "status": 200,
-          "rows": 50
+          "rows": 50,
+          "shard_counts": {
+            "shard1": 28,
+            "shard2": 22
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3537,9 +3975,13 @@
             "end": "2010-05-08T00:00:00Z",
             "limit": 200
           },
-          "ms": 228.392,
+          "ms": 880.855,
           "status": 200,
-          "rows": 87
+          "rows": 87,
+          "shard_counts": {
+            "shard1": 62,
+            "shard2": 25
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3549,9 +3991,13 @@
             "end": "2010-08-30T00:00:00Z",
             "limit": 200
           },
-          "ms": 22.056,
+          "ms": 1044.353,
           "status": 200,
-          "rows": 27
+          "rows": 27,
+          "shard_counts": {
+            "shard1": 11,
+            "shard2": 16
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3561,9 +4007,13 @@
             "end": "2010-05-08T00:00:00Z",
             "limit": 200
           },
-          "ms": 27.266,
+          "ms": 305.851,
           "status": 200,
-          "rows": 20
+          "rows": 20,
+          "shard_counts": {
+            "shard1": 7,
+            "shard2": 13
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3573,9 +4023,13 @@
             "end": "2010-09-18T00:00:00Z",
             "limit": 200
           },
-          "ms": 137.87,
+          "ms": 81.592,
           "status": 200,
-          "rows": 83
+          "rows": 83,
+          "shard_counts": {
+            "shard1": 56,
+            "shard2": 27
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3585,9 +4039,13 @@
             "end": "2010-05-23T00:00:00Z",
             "limit": 200
           },
-          "ms": 69.752,
+          "ms": 1651.027,
           "status": 200,
-          "rows": 48
+          "rows": 48,
+          "shard_counts": {
+            "shard1": 18,
+            "shard2": 30
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3597,9 +4055,13 @@
             "end": "2010-03-07T00:00:00Z",
             "limit": 200
           },
-          "ms": 178.092,
+          "ms": 1371.967,
           "status": 200,
-          "rows": 144
+          "rows": 144,
+          "shard_counts": {
+            "shard1": 78,
+            "shard2": 66
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3609,9 +4071,12 @@
             "end": "2010-09-09T00:00:00Z",
             "limit": 200
           },
-          "ms": 6.848,
+          "ms": 288.854,
           "status": 200,
-          "rows": 2
+          "rows": 2,
+          "shard_counts": {
+            "shard2": 2
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3621,9 +4086,12 @@
             "end": "2010-10-19T00:00:00Z",
             "limit": 200
           },
-          "ms": 37.653,
+          "ms": 165.513,
           "status": 200,
-          "rows": 1
+          "rows": 1,
+          "shard_counts": {
+            "shard2": 1
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3633,9 +4101,13 @@
             "end": "2009-12-19T00:00:00Z",
             "limit": 200
           },
-          "ms": 570.925,
+          "ms": 2313.651,
           "status": 200,
-          "rows": 155
+          "rows": 155,
+          "shard_counts": {
+            "shard1": 88,
+            "shard2": 67
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3645,9 +4117,13 @@
             "end": "2010-04-17T00:00:00Z",
             "limit": 200
           },
-          "ms": 286.975,
+          "ms": 1109.887,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 51,
+            "shard2": 149
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3657,9 +4133,13 @@
             "end": "2010-08-27T00:00:00Z",
             "limit": 200
           },
-          "ms": 228.113,
+          "ms": 1838.485,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 127,
+            "shard2": 73
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3669,9 +4149,13 @@
             "end": "2010-08-27T00:00:00Z",
             "limit": 200
           },
-          "ms": 107.52,
+          "ms": 521.486,
           "status": 200,
-          "rows": 70
+          "rows": 70,
+          "shard_counts": {
+            "shard1": 19,
+            "shard2": 51
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3681,9 +4165,13 @@
             "end": "2010-04-07T00:00:00Z",
             "limit": 200
           },
-          "ms": 30.249,
+          "ms": 282.105,
           "status": 200,
-          "rows": 5
+          "rows": 5,
+          "shard_counts": {
+            "shard1": 2,
+            "shard2": 3
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3693,9 +4181,12 @@
             "end": "2010-08-04T00:00:00Z",
             "limit": 200
           },
-          "ms": 22.111,
+          "ms": 372.205,
           "status": 200,
-          "rows": 1
+          "rows": 1,
+          "shard_counts": {
+            "shard1": 1
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3705,9 +4196,13 @@
             "end": "2010-06-03T00:00:00Z",
             "limit": 200
           },
-          "ms": 15.007,
+          "ms": 259.747,
           "status": 200,
-          "rows": 7
+          "rows": 7,
+          "shard_counts": {
+            "shard1": 2,
+            "shard2": 5
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3717,9 +4212,13 @@
             "end": "2010-01-18T00:00:00Z",
             "limit": 200
           },
-          "ms": 92.705,
+          "ms": 1174.136,
           "status": 200,
-          "rows": 61
+          "rows": 61,
+          "shard_counts": {
+            "shard1": 19,
+            "shard2": 42
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3729,9 +4228,13 @@
             "end": "2010-08-05T00:00:00Z",
             "limit": 200
           },
-          "ms": 495.169,
+          "ms": 1836.733,
           "status": 200,
-          "rows": 200
+          "rows": 200,
+          "shard_counts": {
+            "shard1": 109,
+            "shard2": 91
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3741,9 +4244,13 @@
             "end": "2010-07-11T00:00:00Z",
             "limit": 200
           },
-          "ms": 33.86,
+          "ms": 273.998,
           "status": 200,
-          "rows": 3
+          "rows": 3,
+          "shard_counts": {
+            "shard1": 1,
+            "shard2": 2
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3753,9 +4260,13 @@
             "end": "2010-07-22T00:00:00Z",
             "limit": 200
           },
-          "ms": 252.083,
+          "ms": 305.748,
           "status": 200,
-          "rows": 121
+          "rows": 121,
+          "shard_counts": {
+            "shard1": 54,
+            "shard2": 67
+          }
         },
         {
           "path": "/api/checkins/geo",
@@ -3765,11 +4276,18 @@
             "end": "2010-03-22T00:00:00Z",
             "limit": 200
           },
-          "ms": 401.015,
+          "ms": 1497.165,
           "status": 200,
-          "rows": 136
+          "rows": 136,
+          "shard_counts": {
+            "shard1": 67,
+            "shard2": 69
+          }
         }
       ]
-    }
-  }
+    },
+    "latency_sample": "Successful HTTP requests; failures recorded separately"
+  },
+  "original_import_evidence_timestamp_utc": "2026-11-19T14:20:20.712250+00:00",
+  "deployment": "single-host dual-shard Docker Compose"
 }
