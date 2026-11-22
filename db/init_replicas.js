@@ -1,12 +1,7 @@
-if (!process.env.GOWALLA_A_IP || !process.env.GOWALLA_B_IP ||
-    process.env.GOWALLA_A_IP === process.env.GOWALLA_B_IP) {
-  throw new Error("Configure distinct LAN addresses for computers A and B");
-}
-
 const replicas = [
-  {name: "cfg", host: "gowalla-cfg:27019", configServer: true},
-  {name: "shard1", host: "gowalla-shard1:27011", configServer: false},
-  {name: "shard2", host: "gowalla-shard2:27021", configServer: false},
+  {name: "cfg", host: "cfg:27019", configServer: true},
+  {name: "shard1", host: "shard1:27011", configServer: false},
+  {name: "shard2", host: "shard2:27021", configServer: false},
 ];
 
 function connect(replica) {

@@ -1,57 +1,41 @@
-name: gowalla-course-a
+name: gowalla-course
 
 x-mongo: &mongo
   image: mongo:7.0
-  extra_hosts:
-    gowalla-shard2: "${GOWALLA_B_IP:?Set GOWALLA_B_IP in .env}"
+  restart: unless-stopped
 
 services:
   cfg:
     <<: *mongo
-    restart: unless-stopped
     command: [mongod, --configsvr, --replSet, cfg, --port, "27019", --bind_ip_all, --wiredTigerCacheSizeGB, "0.25"]
-    ports:
-      - "${GOWALLA_A_IP:?Set GOWALLA_A_IP in .env}:27019:27019"
-    networks:
-      default:
-        aliases: [gowalla-cfg]
     volumes:
       - config_data:/data/configdb
-
   shard1:
     <<: *mongo
-    restart: unless-stopped
     command: [mongod, --shardsvr, --replSet, shard1, --port, "27011", --bind_ip_all, --wiredTigerCacheSizeGB, "0.5"]
-    ports:
-      - "${GOWALLA_A_IP:?Set GOWALLA_A_IP in .env}:27011:27011"
-    networks:
-      default:
-        aliases: [gowalla-shard1]
     volumes:
       - shard1_data:/data/db
-      - ./db:/scripts:ro
+  shard2:
+    <<: *mongo
+    command: [mongod, --shardsvr, --replSet, shard2, --port, "27021", --bind_ip_all, --wiredTigerCacheSizeGB, "0.5"]
+    volumes:
+      - shard2_data:/data/db
 
   replica-init:
-    <<: *mongo
-    depends_on: [cfg, shard1]
-    environment:
-      GOWALLA_A_IP: "${GOWALLA_A_IP:?Set GOWALLA_A_IP in .env}"
-      GOWALLA_B_IP: "${GOWALLA_B_IP:?Set GOWALLA_B_IP in .env}"
+    image: mongo:7.0
+    depends_on: [cfg, shard1, shard2]
     entrypoint: [mongosh, --nodb, --quiet, --file, /scripts/init_replicas.js]
     volumes:
       - ./db:/scripts:ro
 
   mongos:
     <<: *mongo
-    restart: unless-stopped
-    command: [mongos, --configdb, "cfg/gowalla-cfg:27019", --bind_ip_all]
+    command: [mongos, --configdb, "cfg/cfg:27019", --bind_ip_all]
     depends_on:
       replica-init:
         condition: service_completed_successfully
     ports:
       - "127.0.0.1:27017:27017"
-    volumes:
-      - ./db:/scripts:ro
     healthcheck:
       test: [CMD, mongosh, --quiet, --eval, "quit(db.adminCommand({ping: 1}).ok === 1 ? 0 : 1)"]
       interval: 3s
@@ -59,7 +43,7 @@ services:
       retries: 30
 
   sharding-init:
-    <<: *mongo
+    image: mongo:7.0
     depends_on:
       mongos:
         condition: service_healthy
@@ -70,3 +54,4 @@ services:
 volumes:
   config_data:
   shard1_data:
+  shard2_data:
