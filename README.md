@@ -11,10 +11,11 @@
 ~~~powershell
 uv sync --locked
 docker compose up -d
-docker compose wait sharding-init
+docker wait (docker compose ps -a -q sharding-init)
+docker compose ps -a
 ~~~
 
-初始化任务创建三个单成员副本集，等主节点就绪后启动 mongos，再添加两个数据分片并为 gowalla.checkins 配置 user_id 哈希分片。可用 docker compose ps -a 查看初始化任务是否以状态码 0 结束。
+初始化任务先启动三个单成员副本集，再通过 mongos 添加两个数据分片并配置 user_id 哈希分片。docker wait 输出 0 表示 sharding-init 成功。docker compose ps -a 应显示 mongos 为 healthy。
 
 ## 清洗、导入与启动
 

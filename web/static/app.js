@@ -131,6 +131,7 @@ function renderPoints(query, fit) {
     const popup = document.createElement("div");
     for (const line of [
       "用户 " + item.user_id + " · 地点 " + item.location_id,
+      "所属分片 " + item.shard,
       item.ts_utc,
       lon.toFixed(6) + ", " + lat.toFixed(6),
     ]) {
@@ -138,11 +139,11 @@ function renderPoints(query, fit) {
       row.textContent = line;
       popup.append(row);
     }
-    L.circleMarker(point, {radius: 4, color: "#174d3f", fillColor: "#46ae8c", fillOpacity: .85,
-      weight: 1}).bindPopup(popup).addTo(queryPoints);
+    L.circleMarker(point, {className: "checkin-point " + item.shard, radius: 5, color: "#fff",
+      fillOpacity: .95, weight: 1}).bindPopup(popup).addTo(queryPoints);
   }
   if (query.mode === "trajectory" && points.length > 1) {
-    L.polyline([...points].reverse(), {color: "#207d6a", weight: 2}).addTo(queryPoints);
+    L.polyline([...points].reverse(), {color: "#207d6a", weight: 2}).addTo(queryPoints).bringToBack();
   }
   if (!fit) return;
 
